@@ -1,0 +1,114 @@
+#' @title po_transform
+#' @description estimate no. of missing rings by estimated distance to pith
+#'
+#' @param po \code{data.frame} of measured distance po in [??] with series
+#'   names in the first column and po in the second
+#' @param rwl rwl object containing series measured
+#' @param nyrs the first \code{1:nyrs} years will be used to calculate the mean growth
+#'   rate, default is 4
+#'
+#' @return a \code{data.frame} just as the input "po" with po as no. of tree rings
+#'
+#' @examples no examples available in the development version
+
+po_transform <- function(po, rwl, nyrs = 4){
+
+  #checking arguments:
+  if(!setequal(po[ ,1], names(rwl))){
+    stop('series names in po are not the same as provided in rwl')
+  }
+
+  for (p in as.character(po[ ,1])){
+    meanrw <- mean(na.omit(rwl[p])[1:nyrs, ])
+    po$meanrw[po$series == p] <- meanrw
+  }
+
+  po$po.new <- round(po$po / po$meanrw) + 1
+  out <- po[,c(1,4)]
+  out[ ,1] <- as.character(out[ ,1])
+  out[ ,1] <- as.integer(out[ ,2])
+  return(out)
+}
+
+
+#------------------------------
+
+#' @title po_find
+#' @description Estimate pith offset of series by finding the position with
+#'   minimum RSS to existing regional curve
+#' @param rwl rwl/data.frame object containing the tree ring series
+#' @param rc existing "regional curve"
+#' @param maxpo maximal po until which RSS gets calculated
+#' @param nyrs setting for the ffcsaps function used to smooth the series:
+#'   a number greater than 1, affecting the rigidity of the
+#'   spline.  When \code{\var{f}} is kept constant, a larger
+#'  \code{\var{nyrs}} produces a more rigid spline.  Defaults to
+#'  \code{length(\var{y})/2}.
+#' @param f  setting for the ffcsaps function used to smooth the series:
+#'   a number between 0 and 1 giving the frequency response at a
+#'   wavelength of \code{\var{nyrs}} years.  When \code{\var{nyrs}} is
+#'   kept constant, a smaller \code{\var{f}} produces a more rigid
+#'   spline: At one extreme, \code{\var{f} = 0} causes the function to
+#'   return the least-squares straight line fit to the data.  At the
+#'   other extreme, \code{\var{f} = 1} results in the natural spline,
+#'   i.e. the function outputs \code{\var{y}}.  The default value is
+#'   0.5.
+#' @param make.plot a \code{logical} indicating if a plot should be drawn
+#'
+#' @return a \code{data.frane} with the columns "series" and "po", containing
+#'   the series names and po estimations
+#'
+#' @examples #no examples added in the current development version - will be
+#'   added in future
+
+po_find=function(rwl, rc, maxpo = NULL, nyrs = NULL, f = NULL, make.plot = T){
+  rc <- na.omit(rc)
+  names(rc) <- 1:length(rc)
+
+  outdf <- data.frame(rwl = names(rwl), po = rep(NA, ncol(rwl)))
+
+  for (p in seq_along(rwl)){
+    prof <- na.omit(rwl[ ,p])
+    nyr <- length(prof)
+
+    if(is.null(nyrs)){
+      nyrs <- nyr / 2
+    }
+
+    if(is.null(f)){
+      f <- 0.5
+    }
+
+    profspline <- ffcsaps(prof, nyrs = nyrs, f = f)
+    names(profspline) <- seq_along(profspline)
+
+    out <- c()
+
+    if(is.null(maxpo)){
+      maxpo <- (length(rc) - 1)
+    }
+
+    for (s in 0:(maxpo - 1)){
+      names(profspline) <- (seq_along(profspline)) + s
+      is <- intersect(names(rc), names(profspline))
+      if(length(is) > 20){
+        # lines(names(profspline),profspline, col=s+2)
+        res <- rc[is] - profspline[is]
+        residsq <- sum(res ^ 2)
+        out[s + 1] <- residsq
+      }
+    }
+
+    po.new <- min(which(out == min(out)))
+    if(make.plot == T){
+      plot(rc, type = 'l', lwd = 3, main = paste0(names(rwl)[p], ' -new po'))
+      lines(po.new:(length(profspline) + po.new - 1), profspline)
+    }
+    outdf[p,2] <- po.new
+  }
+  return(outdf)
+}
+
+#-----------------------------------
+
+
