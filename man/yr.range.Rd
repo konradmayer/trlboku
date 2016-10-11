@@ -22,7 +22,7 @@ function yr.range from dplR, extracts the first and last year in
 \examples{
 library(dplR)
 data(ca533)
-yr.range(ca533[1], rownames(ca533))
+yr.range(ca533[ ,1], rownames(ca533))
 #[1] "1530" "1983"
 }
 

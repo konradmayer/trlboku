@@ -1,3 +1,6 @@
+#------------------------------
+#po_transform
+#------------------------------
 #' @title po_transform
 #' @description estimate no. of missing rings by estimated distance to pith
 #'
@@ -32,7 +35,8 @@ po_transform <- function(po, rwl, nyrs = 4){
 
 
 #------------------------------
-
+#po_find
+#------------------------------
 #' @title po_find
 #' @description Estimate pith offset of series by finding the position with
 #'   minimum RSS to existing regional curve
@@ -61,7 +65,17 @@ po_transform <- function(po, rwl, nyrs = 4){
 #' @examples #no examples added in the current development version - will be
 #'   added in future
 
-po_find=function(rwl, rc, maxpo = NULL, nyrs = NULL, f = NULL, make.plot = T){
+po_find <- function(rwl, rc, maxpo = NULL, nyrs = NULL, f = 0.5, make.plot = TRUE){
+  #argument checks:
+
+  if(!all(class(rwl) == c('rwl', 'data.frame'))){
+    stop('provide input object of class rwl')
+  }
+
+  if (!(is.numeric(rc) && length(rc) > 1)){
+    stof('provide valid regional curve (rc)')
+  }
+
   rc <- na.omit(rc)
   names(rc) <- 1:length(rc)
 
@@ -73,10 +87,6 @@ po_find=function(rwl, rc, maxpo = NULL, nyrs = NULL, f = NULL, make.plot = T){
 
     if(is.null(nyrs)){
       nyrs <- nyr / 2
-    }
-
-    if(is.null(f)){
-      f <- 0.5
     }
 
     profspline <- ffcsaps(prof, nyrs = nyrs, f = f)
@@ -100,7 +110,7 @@ po_find=function(rwl, rc, maxpo = NULL, nyrs = NULL, f = NULL, make.plot = T){
     }
 
     po.new <- min(which(out == min(out)))
-    if(make.plot == T){
+    if(make.plot == TRUE){
       plot(rc, type = 'l', lwd = 3, main = paste0(names(rwl)[p], ' -new po'))
       lines(po.new:(length(profspline) + po.new - 1), profspline)
     }
@@ -109,6 +119,6 @@ po_find=function(rwl, rc, maxpo = NULL, nyrs = NULL, f = NULL, make.plot = T){
   return(outdf)
 }
 
-#-----------------------------------
+
 
 
