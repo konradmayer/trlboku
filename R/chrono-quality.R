@@ -2,16 +2,16 @@
 #agegrowthplot
 #-------------------------
 #' @title agegrowthplot
-#' @description plots mean annual growth rate in a common interval (shown in
+#' @description Plots mean annual growth rate in a common interval (shown in
 #'   first plot) over tree age - a subset (eg. historic vs. recent trees,
 #'   a different site ect.) can be specified to get a different color in the plot.
-#' @param rwl an rwl object
+#' @param rwl an rwl object.
 #' @param po a data frame with series names in the first and pith offset values
-#'   (number of rings) in the second column
+#'   (number of rings) in the second column.
 #' @param subset provide a character string of names in rwl which get
-#'   a different color in the last plot
-#' @param subset.color color of the subset
-#' @param main optional plot title
+#'   a different color in the last plot.
+#' @param subset.color color of the subset.
+#' @param main optional plot title.
 #' @export
 #' @examples
 #' library("dplR")
@@ -59,14 +59,14 @@ agegrowthplot <- function(rwl, po, subset = NULL, subset.color = 'violet', main 
 #-------------------------
 
 #' @title stand_depth
-#' @description function adds a column containing the "stand_depth" to an existing
-#'   crn object
-#' @param crn chronology object as from dplR::chron()
-#' @param rwl rwl object
+#' @description This function adds a column containing the "stand_depth" to
+#'   an existing crn object.
+#' @param crn chronology object as from dplR::chron().
+#' @param rwl rwl object.
 #' @param stand integer vector of length = 2, marking the start and end of
 #'   site/stand specification within the series identifier e.g. c(1, 3) for
-#'   the stand "Abc" in the series identifier "AbcPA01a"
-#' @return a crn object with the column stand.depth added
+#'   the stand "Abc" in the series identifier "AbcPA01a".
+#' @return a crn object with the column stand.depth added.
 #' @export
 #' @examples # no example available in the development version
 stand_depth <- function(crn, rwl, stand = c(1, 3)){
@@ -94,18 +94,18 @@ stand_depth <- function(crn, rwl, stand = c(1, 3)){
 #stand_depth.plot
 #-------------------------
 #' @title stand_depth.plot
-#' @description plots a chronology with underlaying sample depth and
-#'   "stand depth" information
-#' @param stand_depth_object an object derived from \code{\link{stand_depth}}
+#' @description Plots a chronology with underlaying sample depth and
+#'   "stand depth" information.
+#' @param stand_depth_object an object derived from \code{\link{stand_depth}}.
 #' @param chrono column name or integer specifying the column index where
-#'   the chronology is stored in the stand_depth_object
+#'   the chronology is stored in the stand_depth_object.
 #' @param sample.depth column name or integer specifying the column index where
-#'   the sample depth is stored in the stand_depth_object
+#'   the sample depth is stored in the stand_depth_object.
 #' @param stand.depth column name or integer specifying the column index where
-#'   the stand depth is stored in the stand_depth_object
-#' @param main optional plot title
-#' @param col1 optional color for sample depth
-#' @param col2 optional color for stand depth
+#'   the stand depth is stored in the stand_depth_object.
+#' @param main optional plot title.
+#' @param col1 optional color for sample depth.
+#' @param col2 optional color for stand depth.
 #' @export
 #' @examples
 #' #will be added later

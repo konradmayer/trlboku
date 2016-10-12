@@ -7,20 +7,20 @@
 agegrowthplot(rwl, po, subset = NULL, subset.color = "violet", main = "")
 }
 \arguments{
-\item{rwl}{an rwl object}
+\item{rwl}{an rwl object.}
 
 \item{po}{a data frame with series names in the first and pith offset values
-(number of rings) in the second column}
+(number of rings) in the second column.}
 
 \item{subset}{provide a character string of names in rwl which get
-a different color in the last plot}
+a different color in the last plot.}
 
-\item{subset.color}{color of the subset}
+\item{subset.color}{color of the subset.}
 
-\item{main}{optional plot title}
+\item{main}{optional plot title.}
 }
 \description{
-plots mean annual growth rate in a common interval (shown in
+Plots mean annual growth rate in a common interval (shown in
   first plot) over tree age - a subset (eg. historic vs. recent trees,
   a different site ect.) can be specified to get a different color in the plot.
 }

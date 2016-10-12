@@ -7,11 +7,11 @@
 po_find(rwl, rc, maxpo = NULL, nyrs = NULL, f = 0.5, make.plot = TRUE)
 }
 \arguments{
-\item{rwl}{rwl/data.frame object containing the tree ring series}
+\item{rwl}{rwl/data.frame object containing the tree ring series.}
 
-\item{rc}{existing "regional curve"}
+\item{rc}{existing "regional curve".}
 
-\item{maxpo}{maximal po until which RSS gets calculated}
+\item{maxpo}{maximal po until which RSS gets calculated.}
 
 \item{nyrs}{setting for the ffcsaps function used to smooth the series:
  a number greater than 1, affecting the rigidity of the
@@ -29,15 +29,15 @@ other extreme, \code{\var{f} = 1} results in the natural spline,
 i.e. the function outputs \code{\var{y}}.  The default value is
 0.5.}
 
-\item{make.plot}{a \code{logical} indicating if a plot should be drawn}
+\item{make.plot}{a \code{logical} indicating if a plot should be drawn.}
 }
 \value{
 a \code{data.frane} with the columns "series" and "po", containing
-  the series names and po estimations
+  the series names and po estimations.
 }
 \description{
-Estimate pith offset of series by finding the position with
-  minimum RSS to existing regional curve
+Estimates pith offset of series by finding the position with
+  minimum RSS to existing regional curve.
 }
 \examples{
 #no examples added in the current development version - will be

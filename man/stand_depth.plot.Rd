@@ -9,26 +9,26 @@ stand_depth.plot(stand_depth_object, chrono = "crn",
   col1 = "red", col2 = "orange")
 }
 \arguments{
-\item{stand_depth_object}{an object derived from \code{\link{stand_depth}}}
+\item{stand_depth_object}{an object derived from \code{\link{stand_depth}}.}
 
 \item{chrono}{column name or integer specifying the column index where
-the chronology is stored in the stand_depth_object}
+the chronology is stored in the stand_depth_object.}
 
 \item{sample.depth}{column name or integer specifying the column index where
-the sample depth is stored in the stand_depth_object}
+the sample depth is stored in the stand_depth_object.}
 
 \item{stand.depth}{column name or integer specifying the column index where
-the stand depth is stored in the stand_depth_object}
+the stand depth is stored in the stand_depth_object.}
 
-\item{main}{optional plot title}
+\item{main}{optional plot title.}
 
-\item{col1}{optional color for sample depth}
+\item{col1}{optional color for sample depth.}
 
-\item{col2}{optional color for stand depth}
+\item{col2}{optional color for stand depth.}
 }
 \description{
-plots a chronology with underlaying sample depth and
-  "stand depth" information
+Plots a chronology with underlaying sample depth and
+  "stand depth" information.
 }
 \examples{
 #will be added later

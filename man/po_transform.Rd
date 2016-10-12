@@ -8,18 +8,18 @@ po_transform(po, rwl, nyrs = 4)
 }
 \arguments{
 \item{po}{\code{data.frame} of measured distance po (in the same unit as rwl!)
-with series names in the first column and po in the second}
+with series names in the first column and po in the second.}
 
-\item{rwl}{rwl object containing series measured}
+\item{rwl}{rwl object containing series measured.}
 
 \item{nyrs}{the first \code{1:nyrs} years will be used to calculate the mean growth
-rate, default is 4}
+rate, default is 4.}
 }
 \value{
-a \code{data.frame} just as the input "po" with po as no. of tree rings
+A \code{data.frame} just as the input "po" with po as no. of tree rings.
 }
 \description{
-estimate no. of missing rings by estimated distance to pith
+Estimates no. of missing rings by estimated distance to pith.
 }
 \examples{
 no examples available in the development version

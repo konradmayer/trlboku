@@ -7,20 +7,20 @@
 stand_depth(crn, rwl, stand = c(1, 3))
 }
 \arguments{
-\item{crn}{chronology object as from dplR::chron()}
+\item{crn}{chronology object as from dplR::chron().}
 
-\item{rwl}{rwl object}
+\item{rwl}{rwl object.}
 
 \item{stand}{integer vector of length = 2, marking the start and end of
 site/stand specification within the series identifier e.g. c(1, 3) for
-the stand "Abc" in the series identifier "AbcPA01a"}
+the stand "Abc" in the series identifier "AbcPA01a".}
 }
 \value{
-a crn object with the column stand.depth added
+a crn object with the column stand.depth added.
 }
 \description{
-function adds a column containing the "stand_depth" to an existing
-  crn object
+This function adds a column containing the "stand_depth" to
+  an existing crn object.
 }
 \examples{
 # no example available in the development version
