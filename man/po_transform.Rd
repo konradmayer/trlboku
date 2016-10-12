@@ -7,8 +7,8 @@
 po_transform(po, rwl, nyrs = 4)
 }
 \arguments{
-\item{po}{\code{data.frame} of measured distance po in [??] with series
-names in the first column and po in the second}
+\item{po}{\code{data.frame} of measured distance po (in the same unit as rwl!)
+with series names in the first column and po in the second}
 
 \item{rwl}{rwl object containing series measured}
 

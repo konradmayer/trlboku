@@ -28,6 +28,7 @@ plots mean annual growth rate in a common interval (shown in
 library("dplR")
 data("gp.rwl")
 data("gp.po")
+gp.po[ ,1] <- as.character(gp.po[ ,1])
 sub <- names(gp.rwl)[substr(names(gp.rwl), 3, 3) == "B"]
 agegrowthplot(gp.rwl, gp.po, subset = sub, main = 'my age-growth-plot')
 }

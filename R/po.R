@@ -4,14 +4,14 @@
 #' @title po_transform
 #' @description estimate no. of missing rings by estimated distance to pith
 #'
-#' @param po \code{data.frame} of measured distance po in [??] with series
-#'   names in the first column and po in the second
+#' @param po \code{data.frame} of measured distance po (in the same unit as rwl!)
+#'   with series names in the first column and po in the second
 #' @param rwl rwl object containing series measured
 #' @param nyrs the first \code{1:nyrs} years will be used to calculate the mean growth
 #'   rate, default is 4
 #'
 #' @return a \code{data.frame} just as the input "po" with po as no. of tree rings
-#'
+#' @export
 #' @examples no examples available in the development version
 
 po_transform <- function(po, rwl, nyrs = 4){
@@ -61,7 +61,7 @@ po_transform <- function(po, rwl, nyrs = 4){
 #'
 #' @return a \code{data.frane} with the columns "series" and "po", containing
 #'   the series names and po estimations
-#'
+#' @export
 #' @examples #no examples added in the current development version - will be
 #'   added in future
 

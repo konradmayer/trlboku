@@ -12,6 +12,7 @@
 #'   a different color in the last plot
 #' @param subset.color color of the subset
 #' @param main optional plot title
+#' @export
 #' @examples
 #' library("dplR")
 #' data("gp.rwl")
@@ -67,6 +68,7 @@ agegrowthplot <- function(rwl, po, subset = NULL, subset.color = 'violet', main 
 #'   site/stand specification within the series identifier e.g. c(1, 3) for
 #'   the stand "Abc" in the series identifier "AbcPA01a"
 #' @return a crn object with the column stand.depth added
+#' @export
 #' @examples # no example available in the development version
 stand_depth <- function(crn, rwl, stand = c(1, 3)){
   if (missing (crn)){
@@ -105,7 +107,7 @@ stand_depth <- function(crn, rwl, stand = c(1, 3)){
 #' @param main optional plot title
 #' @param col1 optional color for sample depth
 #' @param col2 optional color for stand depth
-#'
+#' @export
 #' @examples
 #' #will be added later
 stand_depth.plot <- function(stand_depth_object, chrono = "crn",
