@@ -58,7 +58,6 @@ agegrowthplot <- function(rwl, po, subset = NULL, subset.color = 'violet', main 
 #stand_depth
 #-------------------------
 
-
 #' @title stand_depth
 #' @description function adds a column containing the "stand_depth" to an existing
 #'   crn object
@@ -124,14 +123,12 @@ stand_depth.plot <- function(stand_depth_object, chrono = "crn",
     stop('input object provided is either no data.frame or with wrong dimensions')
   }
 
-  # this test throws an error even with correct input - fix later
-  # for (arg in c(chrono, sample.depth, stand.depth)){
-  #   if(!((arg %in% colnames(stand_depth_object)) || ifelse(is.numeric(arg),
-  #                                                          is.wholenumber(arg),FALSE))){
-  #     stop('arguments chrono, sample.depth, stand.depth must be either a column
-  #          name in stand_depth_object or an integer')
-  #   }
-  # }
+  for (arg in c(chrono, sample.depth, stand.depth)){
+    if(!((arg %in% colnames(stand_depth_object)) || arg %in% seq_along(stand_depth_object))){
+      stop('arguments chrono, sample.depth, stand.depth must be either a column
+          name in stand_depth_object or an integer')
+    }
+  }
 
   #ranges
   rng <- range(as.numeric(rownames(stand_depth_object)))

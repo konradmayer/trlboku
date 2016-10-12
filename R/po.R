@@ -17,19 +17,19 @@
 po_transform <- function(po, rwl, nyrs = 4){
 
   #checking arguments:
-  if(!setequal(po[ ,1], names(rwl))){
+  if(!setequal(po[ , 1], names(rwl))){
     stop('series names in po are not the same as provided in rwl')
   }
 
-  for (p in as.character(po[ ,1])){
+  for (p in as.character(po[ , 1])){
     meanrw <- mean(na.omit(rwl[p])[1:nyrs, ])
     po$meanrw[po$series == p] <- meanrw
   }
 
-  po$po.new <- round(po$po / po$meanrw) + 1
+  po$po.new <- round(po[ ,2] / po$meanrw) + 1
   out <- po[,c(1,4)]
-  out[ ,1] <- as.character(out[ ,1])
-  out[ ,1] <- as.integer(out[ ,2])
+  out[ , 1] <- as.character(out[ , 1])
+  out[ , 1] <- as.integer(out[ , 2])
   return(out)
 }
 
@@ -82,7 +82,7 @@ po_find <- function(rwl, rc, maxpo = NULL, nyrs = NULL, f = 0.5, make.plot = TRU
   outdf <- data.frame(rwl = names(rwl), po = rep(NA, ncol(rwl)))
 
   for (p in seq_along(rwl)){
-    prof <- na.omit(rwl[ ,p])
+    prof <- na.omit(rwl[ , p])
     nyr <- length(prof)
 
     if(is.null(nyrs)){
@@ -114,11 +114,54 @@ po_find <- function(rwl, rc, maxpo = NULL, nyrs = NULL, f = 0.5, make.plot = TRU
       plot(rc, type = 'l', lwd = 3, main = paste0(names(rwl)[p], ' -new po'))
       lines(po.new:(length(profspline) + po.new - 1), profspline)
     }
-    outdf[p,2] <- po.new
+    outdf[p, 2] <- po.new
   }
   return(outdf)
 }
 
+#------------------------------
+#sortByIndex
+#------------------------------
+#' @title sortByIndex
+#' @description sortByIndex from package dplR, shifts series to start with index 1,
+#'   maintaining the same vector length by adding NA values to the end
+#' @param x a numeric vector, representing an individual rwl series,
+#'   potentially containing NA values.
+#'
+#' @return a numeric vector with the same length as x.
+#' @examples
+#' x <- c(NA,NA,NA,1,2,3,4,5, NA, NA)
+#' sortByIndex(x)
+#' #[1]  1  2  3  4  5 NA NA NA NA NA
+sortByIndex <- function (x)
+{
+  lowerBound <- which.min(is.na(x))
+  c(x[lowerBound:length(x)], rep(NA, lowerBound - 1))
+}
+#------------------------------
+#to_cambial_age
+#------------------------------
 
+to.cambial.age <- function(rwl, po=NULL){
+  #check arguments
+  if (pis.null(po)){
+    po <- data.frame(series = names(rwl), po = 1)
+  }
 
+  if(!setequal(po[ , 1], names(rwl))){
+    stop('series names in po are not the same as provided in rwl')
+  }
+
+ #execute function
+  po.ordered <- po[po[ , 1] %in% names(rwl), ]
+
+  lengths <- (first_last(rwl)[ , 2] + po[ , 2]) - 1
+  rows <- max(lengths)
+  out <- data.frame(matrix(NA, ncol = length(rwl), nrow = rows))
+  for (i in 1:length(rwl)){
+    start <- (po.ordered[i,2])
+    out[start:lengths[i], i] <- na.omit(rwl[ , i])
+  }
+  return(out)
+}
 

@@ -1,24 +1,4 @@
 #--------------------------
-#sortByIndex
-#--------------------------
-#' @title sortByIndex
-#' @description sortByIndex from package dplR, shifts series to start with index 1,
-#'   maintaining the same vector length by adding NA values to the end
-#' @param x a numeric vector, representing an individual rwl series,
-#'   potentially containing NA values.
-#'
-#' @return a numeric vector with the same length as x.
-#' @examples
-#' x <- c(NA,NA,NA,1,2,3,4,5, NA, NA)
-#' sortByIndex(x)
-#' #[1]  1  2  3  4  5 NA NA NA NA NA
-sortByIndex <- function (x)
-{
-  lowerBound <- which.min(is.na(x))
-  c(x[lowerBound:length(x)], rep(NA, lowerBound - 1))
-}
-
-#--------------------------
 #yr.range
 #--------------------------
 #' @title yr.range
@@ -102,4 +82,33 @@ round_down <- function(x, to = 1000)
 #--------------------------
 #is.wholenumber
 #--------------------------
-is.wholenumber <- function(x, tol = .Machine$double.eps^0.5)  abs(x - round(x)) < tol
+is.wholenumber <- function(x) x %% 1 == 0
+
+#--------------------------
+#first_last
+#--------------------------
+#' @title first_last
+#' @description function to return the first and the last year of a tree ring series
+#' @param x a data.frame/rwl object
+#'
+#' @return a data.frame with series names in the first column as character strings,
+#'   and the first as well as the last years of the series in the second resp.
+#'   third column
+#' @export
+#' @examples
+#' library('dplR')
+#' data('gp.rwl')
+#' first_last(gp.rwl)
+first_last <- function(x){
+
+  if(!is.data.frame(x)){
+    stop('please provide a data.frame/rwl object')
+  }
+
+  tmp <- sapply(seq_along(x), FUN=function(i) as.double(yr.range(gp.rwl[ , i],
+                                                                 rownames(x))))
+  out <- data.frame(names(x), t(tmp))
+  names(out) <- c('series', 'first', 'last')
+  out$series <- as.character(out$series) #not elegant but works
+  return(out)
+}
