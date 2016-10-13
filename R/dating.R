@@ -48,3 +48,58 @@ new_date_end <- function(rwl, date.end){
   out <- dplR::combine.rwl(tmp)
   return(out)
 }
+
+
+#--------------------------
+#rwl_subout
+#--------------------------
+#' @title rwl_subout
+#' @description This function takes an rwl object as well as a csv as input and
+#'   subsets the rwl by the identifiers given in the first column of the csv.
+#'   The subset as well as the remaining series is saved using the basename
+#'   of the path provided with argument subset or as specified by out.nam.
+#'
+#' @param rwl a path to an rwl file (tucson format).
+#' @param subset a path to a csv file containing series names in the first column.
+#' @param header logic, indicates if subset csv file has column names
+#' @param out.nam character, optional string used for output file naming.
+#' @param logic, if \code{write.missing == TRUE} an output csv is written containing
+#'   series missing in rwl
+#' @export
+
+rwl_subout <- function(rwl, subset, header = FALSE, out.nam = NULL,
+                       write.missing = FALSE){
+  #get filename of subset file
+  if(is.null(out.nam)){
+    out.nam <- basename(subset)
+  }
+  on <- gsub('/', '', out.nam)
+
+  #read files
+  dat <- dplR::read.tucson(rwl)
+  subsetdf <- read.csv(subset, header = header, stringsAsFactors = F)
+
+  #check series names
+  if(sum(names(dat) %in% subsetdf[ ,1]) == 0){
+    stop('no identifier found in rwl')
+  }
+
+  #treat missing series
+  missing <- subsetdf[!(subsetdf[ ,1] %in% names(dat)), 1]
+
+  if(write.missing == TRUE && length(missing) > 0){
+    write.csv(missing,paste0("series of - \'",on,"\' missing in data.csv"))
+  }
+
+  if(length(missing) > 0){
+    warning(paste0(missing, ' - not included in rwl'))
+  }
+
+  #get subset
+  subs <- dat[names(dat) %in% subsetdf[ ,1]]
+  remaining <- dat[!(names(dat) %in% subsetdf[ ,1])]
+
+  #write files
+  write.tucson(subs, paste0("subset of - \'",on,"\' .rwl"))
+  write.tucson(remaining, paste0("all except - \'",on,"\' .rwl"))
+}
