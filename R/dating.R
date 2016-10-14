@@ -56,19 +56,31 @@ new_date_end <- function(rwl, date.end){
 #' @title rwl_subout
 #' @description This function takes an rwl object as well as a csv as input and
 #'   subsets the rwl by the identifiers given in the first column of the csv.
-#'   The subset as well as the remaining series is saved using the basename
-#'   of the path provided with argument subset or as specified by out.nam.
+#'   The subset as well as the remaining series are saved to disk as rwl file
+#'   using the basename of the path provided with argument subset or as
+#'   specified by out.nam.
 #'
-#' @param rwl a path to an rwl file (tucson format).
-#' @param subset a path to a csv file containing series names in the first column.
+#' @param rwl.file a path to an rwl file (tucson format).
+#' @param subset a path to a csv file containing series names (or site IDs if
+#'   \code{site.only == TRUE}) in the first column.
 #' @param header logic, indicates if subset csv file has column names
 #' @param out.nam character, optional string used for output file naming.
-#' @param logic, if \code{write.missing == TRUE} an output csv is written containing
-#'   series missing in rwl
+#' @param write.missing logic, if \code{write.missing == TRUE} an output csv is written containing
+#'   series identifiers missing in rwl
+#' @param site.only logic, if \code{TRUE} the subset is done based on the site
+#'   specification in stc
+#' @param stc parameter as defined in \code{\link[dplR]{read.ids}}, only used if
+#'   \code{site.only == TRUE}.
 #' @export
 
-rwl_subout <- function(rwl, subset, header = FALSE, out.nam = NULL,
-                       write.missing = FALSE){
+rwl_subout <- function(rwl.file, subset, header = FALSE, out.nam = NULL,
+                       write.missing = FALSE, site.only = FALSE, stc = NULL){
+
+  if (isTRUE(site.only) && is.null(stc)){
+    stop('please provide stc')
+  }
+
+
   #get filename of subset file
   if(is.null(out.nam)){
     out.nam <- basename(subset)
@@ -76,16 +88,28 @@ rwl_subout <- function(rwl, subset, header = FALSE, out.nam = NULL,
   on <- gsub('/', '', out.nam)
 
   #read files
-  dat <- dplR::read.tucson(rwl)
+  dat <- dplR::read.tucson(rwl.file)
   subsetdf <- read.csv(subset, header = header, stringsAsFactors = F)
 
+  #treat setting site.only
+  if (!(isTRUE(site.only) && all(nchar(subsetdf[,1]) == stc[1]))){
+    stop('site ids are not the same length as specified by stc')
+  }
+
+  if (isTRUE(site.only)){
+    nam <- substr(names(dat), 1, stc[1])
+  }else{
+    nam <- names(dat)
+  }
+
+
   #check series names
-  if(sum(names(dat) %in% subsetdf[ ,1]) == 0){
-    stop('no identifier found in rwl')
+  if(sum(nam %in% subsetdf[ ,1]) == 0){
+    stop('no identifier found in rwl.file')
   }
 
   #treat missing series
-  missing <- subsetdf[!(subsetdf[ ,1] %in% names(dat)), 1]
+  missing <- subsetdf[!(subsetdf[ ,1] %in% nam), 1]
 
   if(write.missing == TRUE && length(missing) > 0){
     write.csv(missing,paste0("series of - \'",on,"\' missing in data.csv"))
@@ -96,8 +120,8 @@ rwl_subout <- function(rwl, subset, header = FALSE, out.nam = NULL,
   }
 
   #get subset
-  subs <- dat[names(dat) %in% subsetdf[ ,1]]
-  remaining <- dat[!(names(dat) %in% subsetdf[ ,1])]
+  subs <- dat[nam %in% subsetdf[ ,1]]
+  remaining <- dat[!(nam %in% subsetdf[ ,1])]
 
   #write files
   write.tucson(subs, paste0("subset of - \'",on,"\' .rwl"))

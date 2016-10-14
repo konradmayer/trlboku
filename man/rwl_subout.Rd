@@ -4,25 +4,33 @@
 \alias{rwl_subout}
 \title{rwl_subout}
 \usage{
-rwl_subout(rwl, subset, header = FALSE, out.nam = NULL,
-  write.missing = FALSE)
+rwl_subout(rwl.file, subset, header = FALSE, out.nam = NULL,
+  write.missing = FALSE, site.only = FALSE, stc = NULL)
 }
 \arguments{
-\item{rwl}{a path to an rwl file (tucson format).}
+\item{rwl.file}{a path to an rwl file (tucson format).}
 
-\item{subset}{a path to a csv file containing series names in the first column.}
+\item{subset}{a path to a csv file containing series names (or site IDs if
+\code{site.only == TRUE}) in the first column.}
 
 \item{header}{logic, indicates if subset csv file has column names}
 
 \item{out.nam}{character, optional string used for output file naming.}
 
-\item{logic, }{if \code{write.missing == TRUE} an output csv is written containing
-series missing in rwl}
+\item{write.missing}{logic, if \code{write.missing == TRUE} an output csv is written containing
+series identifiers missing in rwl}
+
+\item{site.only}{logic, if \code{TRUE} the subset is done based on the site
+specification in stc}
+
+\item{stc}{parameter as defined in \code{\link[dplR]{read.ids}}, only used if
+\code{site.only == TRUE}.}
 }
 \description{
 This function takes an rwl object as well as a csv as input and
   subsets the rwl by the identifiers given in the first column of the csv.
-  The subset as well as the remaining series is saved using the basename
-  of the path provided with argument subset or as specified by out.nam.
+  The subset as well as the remaining series are saved to disk as rwl file
+  using the basename of the path provided with argument subset or as
+  specified by out.nam.
 }
 

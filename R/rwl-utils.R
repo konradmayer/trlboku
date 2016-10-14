@@ -60,7 +60,7 @@ first_last <- function(x){
 #series_length
 #--------------------------
 series_length <- function(x){
-sapply(x, FUN = function(y) length(na.omit(y)))
+  sapply(x, FUN = function(y) length(na.omit(y)))
 }
 #--------------------------
 #truncate_rwl
@@ -90,7 +90,59 @@ truncate_rwl <- function(x){
   return(x)
 }
 
-################################HIER WEITER
+#--------------------------
+#radius_rwl
+#--------------------------
+#' @title radius_rwl
+#' @description A function to get the cumulated tree ring widths
+#'   (approx. radius of the tree in the given year).
+#' @param rwl a rwl/data.frame object
+#' @return a rwl/data.frame object with cumulated tree ring widths for each
+#'   series (column)
+#' @export
+#' @examples
+#' library("dplR")
+#' data("gp.rwl")
+#' radius_rwl(gp.rwl)
+radius_rwl <- function(rwl){
+
+  if(!is.data.frame(rwl)){
+    stop('please provide input of class rwl or data.frame')
+  }
+
+  if(!all(apply(test, 2, is.double))){
+    stop('input contains non numeric values')
+  }
+
+  apply(rwl, 2, FUN= function(x) replace(x, !is.na(x), cumsum(na.omit(x))))
+}
+#--------------------------
+#age_rwl
+#--------------------------
+#' @title age_rwl
+#' @description A function returning an rwl/data.frame object with the same
+#'   dimensions as rwl with showing the cambial age instead of tree ring width
+#'   in the corresponding year.
+#' @param rwl a rwl/data.frame object
+#' @return a rwl/data.frame object with cambial age of the years of the series.
+#' @export
+#' @examples
+#' library("dplR")
+#' data("gp.rwl")
+#' age_rwl(gp.rwl)
+age_rwl <- function(rwl){
+
+  if(!is.data.frame(rwl)){
+    stop('please provide input of class rwl or data.frame')
+  }
+
+  if(!all(apply(test, 2, is.double))){
+    stop('input contains non numeric values')
+  }
+
+  rwl[!is.na(rwl)] <- 1
+  radius_rwl(rwl)
+}
 
 #--------------------------
 #avg_trees
@@ -99,7 +151,6 @@ truncate_rwl <- function(x){
 #' @description Averages series from multiple cores taken from the same tree/object.
 #' @param rwl a data.frame/rwl object.
 #' @param stc parameter as defined in \code{\link[dplR]{read.ids}}.
-#'
 #' @return a data frame/rwl object.
 #' @export
 #'
@@ -108,6 +159,15 @@ truncate_rwl <- function(x){
 #' data("gp.rwl")
 #' avg_trees(gp.rwl, stc = c(0,2,1))
 avg_trees <- function(rwl, stc = c(3, 4, 1)){
+  #argument checks:
+  if(!any(class(gp.rwl) %in% c('rwl', 'data.frame'))){
+    stop('please provide an object of class rwl or data.frame')
+  }
+
+  if (!(length(stc) == 3 && is.double(stc))){
+    stop('argument stc has to be double of length 3')
+  }
+
   ids <- dplR::read.ids(rwl, stc = stc)
   treeIds <- ids$tree
   unique.trees <- unique(treeIds)
@@ -125,7 +185,7 @@ avg_trees <- function(rwl, stc = c(3, 4, 1)){
     tmp[is.nan(tmp)] <- NA
     rwl.2[ , i] <- tmp
   }
-  names(rwl.2) <- unique(substr(names(rwl), stc[1] + 1, stc[2]))
-  class(rwl.2) <- class(rwl)
+  names(rwl.2) <- unique(substr(names(rwl), 1, stc[1] + stc[2]))
+  class(rwl.2) <- c('rwl', 'data.frame')
   return(rwl.2)
 }

@@ -1,5 +1,9 @@
+#---------------------------
+#custom barplots
+#---------------------------
+
 #' @title custom barplots
-#' @description  a custom barplots separated in in one init functions and two
+#' @description  A custom barplot separated in in one init function and two
 #'   different barplot functions so it can easily be added to other plots or
 #'   used in combination with points, lines and so on.
 #'@describeIn init_barplot draws an empty plot for rect_barplot and
@@ -112,4 +116,5 @@ rect_barplot <- function(x = names(y), y, width = 0.7, col = 'black'){
   tmp <- lapply(seq_along(y), FUN= function (z)
     rect(x2[z] - wh, 0, x2[z] + wh, y[z], col = col, border = NA))
 }
+
 

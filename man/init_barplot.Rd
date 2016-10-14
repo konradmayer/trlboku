@@ -35,7 +35,7 @@ used as x, if not it is only used as labels}
 \item{width}{specifies the box width (with = 1 leaves no space between the bars)}
 }
 \description{
-a custom barplots separated in in one init functions and two
+A custom barplot separated in in one init function and two
   different barplot functions so it can easily be added to other plots or
   used in combination with points, lines and so on.
 }
