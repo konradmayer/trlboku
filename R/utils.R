@@ -4,7 +4,7 @@
 #' @title trl_palette
 #' @description manipulate the color palette to contain a set of 25 colors
 #' @export
-trl_palette <- function(){
+trl_palette <- function() {
   c25 <- c("dodgerblue2","#E31A1C", # red
            "green4",
            "#6A3D9A", # purple
@@ -32,8 +32,7 @@ trl_palette <- function(){
 #' @examples
 #' round_up(1412, to = 1000)
 #' # [1] 2000
-round_up <- function(x, to = 1000)
-{
+round_up <- function(x, to = 1000) {
   to * (x %/% to + as.logical(x %% to))
 }
 
@@ -48,8 +47,7 @@ round_up <- function(x, to = 1000)
 #' @examples
 #' round_down(1412, to = 1000)
 #' # [1] 1000
-round_down <- function(x, to = 1000)
-{
+round_down <- function(x, to = 1000) {
   to * (x %/% to)
 }
 
@@ -57,4 +55,30 @@ round_down <- function(x, to = 1000)
 #is.wholenumber
 #--------------------------
 is.wholenumber <- function(x) x %% 1 == 0
+
+#--------------------------
+#is.wholenumber
+#--------------------------
+#' @title generalization of gsub
+#' @description a generalization of gsub which allows to do multiple
+#'   replacements at once as described in
+#'  \link{http://stackoverflow.com/questions/15253954/replace-multiple-arguments-with-gsub}
+#' @param myrepl a list containing character vectors of length two each with the
+#'   string to be replaced at the first and the replacement at the second index
+#' @param mystring a character vector where matches are sought, or an object
+#'   which can be coerced by as.character to a character vector.
+#'
+#' @return a character string
+#' @export
+#'
+#' @examples
+#' mystring = 'This is good'
+#' myrepl = list(c('o', 'a'), c('i', 'n'))
+#' mgsub(myrepl, mystring)
+mgsub <- function(myrepl, mystring) {
+  gsub2 <- function(l, x) {
+    do.call('gsub', list(x = x, pattern = l[1], replacement = l[2]))
+  }
+  Reduce(gsub2, myrepl, init = mystring, right = T)
+}
 

@@ -30,15 +30,15 @@
 #' init_barplot(x)
 #' lines_barplot(x, lwd = 3)
 init_barplot <- function(x = names(y), y, include0 = TRUE, ylab = '',
-                         xlab = '', main = 'barplot', las = 2){
+                         xlab = '', main = 'barplot', las = 2) {
 
-  if(missing(y)){
+  if(missing(y)) {
     y <- x
     x <- names(y)
   }
 
   #argument check
-  if(!is.double(y)){
+  if(!is.double(y)) {
     stop('y must be double')
   }
 
@@ -47,7 +47,7 @@ init_barplot <- function(x = names(y), y, include0 = TRUE, ylab = '',
 
   x2 <- x
 
-  if(!all(!is.na(suppressWarnings(as.double(c(x)))))){
+  if(!all(!is.na(suppressWarnings(as.double(c(x)))))) {
     x2 <- seq_along(y)
   }
 
@@ -67,20 +67,20 @@ init_barplot <- function(x = names(y), y, include0 = TRUE, ylab = '',
 lines_barplot <- function(x = names(y), y, lwd = 3 , col = 'black'){
 
   #also only one input when named for user convenience
-  if(missing(y)){
+  if(missing(y)) {
     y <- x
     x <- names(y)
   }
 
   #argument check
-  if(!is.double(y)){
+  if(!is.double(y)) {
     stop('y must be double')
   }
 
   #main function
 
   x2 <- suppressWarnings(as.double(c(x)))
-  if(!all(!is.na(x2))){
+  if(!all(!is.na(x2))) {
     x2 <- seq_along(y)
   }
 
@@ -94,13 +94,13 @@ lines_barplot <- function(x = names(y), y, lwd = 3 , col = 'black'){
 #' @export
 rect_barplot <- function(x = names(y), y, width = 0.7, col = 'black'){
   #also only one input when named for user convenience
-  if(missing(y)){
+  if(missing(y)) {
     y <- x
     x <- names(y)
   }
 
   #argument check
-  if(!is.double(y)){
+  if(!is.double(y)) {
     stop('y must be double')
   }
 
@@ -109,7 +109,7 @@ rect_barplot <- function(x = names(y), y, width = 0.7, col = 'black'){
   wh <- width / 2
 
   x2 <- suppressWarnings(as.double(c(x)))
-  if(!all(!is.na(x2))){
+  if(!all(!is.na(x2))) {
     x2 <- seq_along(y)
   }
 

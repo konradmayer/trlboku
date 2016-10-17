@@ -14,14 +14,14 @@
 #' @export
 #' @examples no examples available in the development version
 
-po_transform <- function(po, rwl, nyrs = 4){
+po_transform <- function(po, rwl, nyrs = 4) {
 
   #checking arguments:
-  if(!setequal(po[ , 1], names(rwl))){
+  if(!setequal(po[ , 1], names(rwl))) {
     stop('series names in po are not the same as provided in rwl')
   }
 
-  for (p in as.character(po[ , 1])){
+  for (p in as.character(po[ , 1])) {
     meanrw <- mean(na.omit(rwl[p])[1:nyrs, ])
     po$meanrw[po$series == p] <- meanrw
   }
@@ -68,11 +68,11 @@ po_transform <- function(po, rwl, nyrs = 4){
 po_find <- function(rwl, rc, maxpo = NULL, nyrs = NULL, f = 0.5, make.plot = TRUE){
   #argument checks:
 
-  if(!all(class(rwl) == c('rwl', 'data.frame'))){
+  if(!all(class(rwl) == c('rwl', 'data.frame'))) {
     stop('provide input object of class rwl')
   }
 
-  if (!(is.numeric(rc) && length(rc) > 1)){
+  if (!(is.numeric(rc) && length(rc) > 1)) {
     stof('provide valid regional curve (rc)')
   }
 
@@ -81,11 +81,11 @@ po_find <- function(rwl, rc, maxpo = NULL, nyrs = NULL, f = 0.5, make.plot = TRU
 
   outdf <- data.frame(rwl = names(rwl), po = rep(NA, ncol(rwl)))
 
-  for (p in seq_along(rwl)){
+  for (p in seq_along(rwl)) {
     prof <- na.omit(rwl[ , p])
     nyr <- length(prof)
 
-    if(is.null(nyrs)){
+    if(is.null(nyrs)) {
       nyrs <- nyr / 2
     }
 
@@ -94,14 +94,14 @@ po_find <- function(rwl, rc, maxpo = NULL, nyrs = NULL, f = 0.5, make.plot = TRU
 
     out <- c()
 
-    if(is.null(maxpo)){
+    if(is.null(maxpo)) {
       maxpo <- (length(rc) - 1)
     }
 
-    for (s in 0:(maxpo - 1)){
+    for (s in 0:(maxpo - 1)) {
       names(profspline) <- (seq_along(profspline)) + s
       is <- intersect(names(rc), names(profspline))
-      if(length(is) > 20){
+      if(length(is) > 20) {
         # lines(names(profspline),profspline, col=s+2)
         res <- rc[is] - profspline[is]
         residsq <- sum(res ^ 2)
@@ -110,7 +110,7 @@ po_find <- function(rwl, rc, maxpo = NULL, nyrs = NULL, f = 0.5, make.plot = TRU
     }
 
     po.new <- min(which(out == min(out)))
-    if(make.plot == TRUE){
+    if(make.plot == TRUE) {
       plot(rc, type = 'l', lwd = 3, main = paste0(names(rwl)[p], ' -new po'))
       lines(po.new:(length(profspline) + po.new - 1), profspline)
     }
@@ -133,8 +133,7 @@ po_find <- function(rwl, rc, maxpo = NULL, nyrs = NULL, f = 0.5, make.plot = TRU
 #' x <- c(NA,NA,NA,1,2,3,4,5, NA, NA)
 #' sortByIndex(x)
 #' #[1]  1  2  3  4  5 NA NA NA NA NA
-sortByIndex <- function (x)
-{
+sortByIndex <- function (x) {
   lowerBound <- which.min(is.na(x))
   c(x[lowerBound:length(x)], rep(NA, lowerBound - 1))
 }
@@ -157,13 +156,13 @@ sortByIndex <- function (x)
 #' data("gp.po")
 #' gp.po$series <- as.character(gp.po$series)
 #' to_cambial_age(gp.rwl, gp.po)
-to_cambial_age <- function(rwl, po = NULL){
+to_cambial_age <- function(rwl, po = NULL) {
   #check arguments
-  if (is.null(po)){
+  if (is.null(po)) {
     po <- data.frame(series = names(rwl), po = 1)
   }
 
-  if(!setequal(po[ , 1], names(rwl))){
+  if(!setequal(po[ , 1], names(rwl))) {
     stop('series names in po are not the same as provided in rwl')
   }
 

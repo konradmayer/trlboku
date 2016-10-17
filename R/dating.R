@@ -15,26 +15,26 @@
 #' de <- dplR::rwl.stats(gp.rwl)[ , c(1,3)] #construct a data frame of current date ends
 #' de[1:4, 2] <- 1600 #changing the date end of the first 4 series to 1600
 #' seg.plot(new_date_end(gp.rwl, de))
-new_date_end <- function(rwl, date.end){
+new_date_end <- function(rwl, date.end) {
   #argument check
-  if(missing(rwl) || missing(date.end)){
+  if(missing(rwl) || missing(date.end)) {
     stop('please provide rwl and date.end as input')
   }
 
-  if(!(is.data.frame(rwl) && is.data.frame(date.end))){
+  if(!(is.data.frame(rwl) && is.data.frame(date.end))) {
     stop('please provide input data with correct class')
   }
 
-  if(!(all(dim(rwl) > 0) && nrow(date.end) > 0 && ncol(date.end) == 2)){
+  if(!(all(dim(rwl) > 0) && nrow(date.end) > 0 && ncol(date.end) == 2)) {
     stop('please provide input data with correct dimensions')
   }
 
-  if(!setequal(date.end[ , 1], names(rwl))){
+  if(!setequal(date.end[ , 1], names(rwl))) {
     stop('series names in po are not the same as provided in rwl')
   }
   #execute function
   tmp <- list()
-  for (i in seq_along(date.end[,1])){
+  for (i in seq_along(date.end[,1])) {
     seriesname <- as.character(date.end[i, 1])
     dateend <- as.numeric(date.end[i, 2])
     series <- rwl[,seriesname]
@@ -74,15 +74,15 @@ new_date_end <- function(rwl, date.end){
 #' @export
 
 rwl_subout <- function(rwl.file, subset, header = FALSE, out.nam = NULL,
-                       write.missing = FALSE, site.only = FALSE, stc = NULL){
+                       write.missing = FALSE, site.only = FALSE, stc = NULL) {
 
-  if (isTRUE(site.only) && is.null(stc)){
+  if (isTRUE(site.only) && is.null(stc)) {
     stop('please provide stc')
   }
 
 
   #get filename of subset file
-  if(is.null(out.nam)){
+  if(is.null(out.nam)) {
     out.nam <- basename(subset)
   }
   on <- gsub('/', '', out.nam)
@@ -92,30 +92,30 @@ rwl_subout <- function(rwl.file, subset, header = FALSE, out.nam = NULL,
   subsetdf <- read.csv(subset, header = header, stringsAsFactors = F)
 
   #treat setting site.only
-  if (!(isTRUE(site.only) && all(nchar(subsetdf[,1]) == stc[1]))){
+  if (!(isTRUE(site.only) && all(nchar(subsetdf[,1]) == stc[1]))) {
     stop('site ids are not the same length as specified by stc')
   }
 
-  if (isTRUE(site.only)){
+  if (isTRUE(site.only)) {
     nam <- substr(names(dat), 1, stc[1])
-  }else{
+  } else {
     nam <- names(dat)
   }
 
 
   #check series names
-  if(sum(nam %in% subsetdf[ ,1]) == 0){
+  if(sum(nam %in% subsetdf[ ,1]) == 0) {
     stop('no identifier found in rwl.file')
   }
 
   #treat missing series
   missing <- subsetdf[!(subsetdf[ ,1] %in% nam), 1]
 
-  if(write.missing == TRUE && length(missing) > 0){
+  if(write.missing == TRUE && length(missing) > 0) {
     write.csv(missing,paste0("series of - \'",on,"\' missing in data.csv"))
   }
 
-  if(length(missing) > 0){
+  if(length(missing) > 0) {
     warning(paste0(missing, ' - not included in rwl'))
   }
 

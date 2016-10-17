@@ -14,8 +14,7 @@
 #' yr.range(ca533[ ,1], rownames(ca533))
 #' #[1] "1530" "1983"
 
-yr.range <- function (x, yr.vec = as.numeric(names(x)))
-{
+yr.range <- function (x, yr.vec = as.numeric(names(x))) {
   na.flag <- is.na(x)
   if (all(na.flag)) {
     res <- rep(NA, 2)
@@ -42,7 +41,7 @@ yr.range <- function (x, yr.vec = as.numeric(names(x)))
 #' library('dplR')
 #' data('gp.rwl')
 #' first_last(gp.rwl)
-first_last <- function(x){
+first_last <- function(x) {
 
   if(!is.data.frame(x)){
     stop('please provide a data.frame/rwl object')
@@ -59,7 +58,7 @@ first_last <- function(x){
 #--------------------------
 #series_length
 #--------------------------
-series_length <- function(x){
+series_length <- function(x) {
   sapply(x, FUN = function(y) length(na.omit(y)))
 }
 #--------------------------
@@ -78,13 +77,13 @@ series_length <- function(x){
 #' data("gp.rwl")
 #' subset <- gp.rwl[ ,1:10] #first value 1720, but rows start with 1570
 #' truncate_rwl(subset) #rows start with 1720
-truncate_rwl <- function(x){
+truncate_rwl <- function(x) {
 
-  while (all(is.na(x[1, ]))){
+  while (all(is.na(x[1, ]))) {
     x=x[-1, ]
   }
 
-  while (all(is.na(x[nrow(x), ]))){
+  while (all(is.na(x[nrow(x), ]))) {
     x=x[-nrow(x), ]
   }
   return(x)
@@ -104,13 +103,13 @@ truncate_rwl <- function(x){
 #' library("dplR")
 #' data("gp.rwl")
 #' radius_rwl(gp.rwl)
-radius_rwl <- function(rwl){
+radius_rwl <- function(rwl) {
 
-  if(!is.data.frame(rwl)){
+  if(!is.data.frame(rwl)) {
     stop('please provide input of class rwl or data.frame')
   }
 
-  if(!all(apply(test, 2, is.double))){
+  if(!all(apply(test, 2, is.double))) {
     stop('input contains non numeric values')
   }
 
@@ -130,9 +129,9 @@ radius_rwl <- function(rwl){
 #' library("dplR")
 #' data("gp.rwl")
 #' age_rwl(gp.rwl)
-age_rwl <- function(rwl){
+age_rwl <- function(rwl) {
 
-  if(!is.data.frame(rwl)){
+  if(!is.data.frame(rwl)) {
     stop('please provide input of class rwl or data.frame')
   }
 
@@ -158,13 +157,13 @@ age_rwl <- function(rwl){
 #' library("dplR")
 #' data("gp.rwl")
 #' avg_trees(gp.rwl, stc = c(0,2,1))
-avg_trees <- function(rwl, stc = c(3, 4, 1)){
+avg_trees <- function(rwl, stc = c(3, 4, 1)) {
   #argument checks:
-  if(!any(class(gp.rwl) %in% c('rwl', 'data.frame'))){
+  if(!any(class(gp.rwl) %in% c('rwl', 'data.frame'))) {
     stop('please provide an object of class rwl or data.frame')
   }
 
-  if (!(length(stc) == 3 && is.double(stc))){
+  if (!(length(stc) == 3 && is.double(stc))) {
     stop('argument stc has to be double of length 3')
   }
 

@@ -13,8 +13,7 @@ filled_contour <- function (x = seq(0, 1, length.out = nrow(z)),
                             col = color.palette(length(levels) - 1),
                             plot.title, plot.axes, key.title, key.axes,
                             asp = NA, xaxs = "i", yaxs = "i", las = 1,
-                            axes = TRUE, frame.plot = axes, ...)
-{
+                            axes = TRUE, frame.plot = axes, ...) {
   if (missing(z)) {
     if (!missing(x)) {
       if (is.list(x)) {

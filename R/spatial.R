@@ -20,12 +20,12 @@
 #'
 #' @return an object of class "Spatial".
 #' @export
-transform_projection <- function(spatial_object, epsg_new, epsg_old = NULL){
+transform_projection <- function(spatial_object, epsg_new, epsg_old = NULL) {
   #add argument checks here - how to test for S4 class "Spatial"?
   stopifnot(is.character(epsg_new) &&
               (is.character(epsg_old) || is.null(epsg_old)))
 
-  if(!is.null(epsg_old)){
+  if(!is.null(epsg_old)) {
     proj4string(spatial_object) <- CRS(paste0("+init=epsg:", epsg_old))
   }
 

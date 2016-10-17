@@ -20,13 +20,13 @@
 #' gp.po[ ,1] <- as.character(gp.po[ ,1])
 #' sub <- names(gp.rwl)[substr(names(gp.rwl), 3, 3) == "B"]
 #' agegrowthplot(gp.rwl, gp.po, subset = sub, main = 'my age-growth-plot')
-agegrowthplot <- function(rwl, po, subset = NULL, subset.color = 'violet', main = ''){
+agegrowthplot <- function(rwl, po, subset = NULL, subset.color = 'violet', main = '') {
   #check arguments
-  if(!all(class(rwl) == c('rwl', 'data.frame'))){
-    stop('provide input object of class rwl')
+  if (!is.data.frame(rwl)) {
+    stop("'rwl' must be a data.frame")
   }
 
-  if(!((dim(po)[2] == 2) && is.numeric(po[,2]) && is.character(po[,1]))){
+  if(!((dim(po)[2] == 2) && is.numeric(po[,2]) && is.character(po[,1]))) {
     stop('provide valid po object with series names as characters in first column
          and pith offset as integer values in the second')
   }
@@ -69,14 +69,24 @@ agegrowthplot <- function(rwl, po, subset = NULL, subset.color = 'violet', main 
 #' @return a crn object with the column stand.depth added.
 #' @export
 #' @examples # no example available in the development version
-stand_depth <- function(crn, rwl, stand = c(1, 3)){
-  if (missing (crn)){
+stand_depth <- function(crn, rwl, stand = c(1, 3)) {
+  if (missing (crn)) {
     stop('crn is missing')
   }
-  if (missing (rwl)){
+
+  if (!is.data.frame(crn)) {
+    stop("'crn' must be a data.frame")
+  }
+
+  if (missing (rwl)) {
     stop('rwl is missing')
   }
-  if(!all(rownames(crn) %in% rownames(rwl))){
+
+  if (!is.data.frame(rwl)) {
+    stop("'rwl' must be a data.frame")
+  }
+
+  if(!all(rownames(crn) %in% rownames(rwl))) {
     stop('rwl provided has less years than crn')
   }
 
@@ -112,19 +122,19 @@ stand_depth <- function(crn, rwl, stand = c(1, 3)){
 stand_depth.plot <- function(stand_depth_object, chrono = "crn",
                              sample.depth = 'samp.depth',
                              stand.depth = 'stand.depth', main = '',
-                             col1 = 'red', col2 = 'orange'){
+                             col1 = 'red', col2 = 'orange') {
   original_par <- par()
   on.exit(par(original_par))
   par(mar = c(5, 4, 4, 7))
 
   #check input
 
-  if (!(is.data.frame(stand_depth_object) && ncol(stand_depth_object) >= 3)){
+  if (!(is.data.frame(stand_depth_object) && ncol(stand_depth_object) >= 3)) {
     stop('input object provided is either no data.frame or with wrong dimensions')
   }
 
-  for (arg in c(chrono, sample.depth, stand.depth)){
-    if(!((arg %in% colnames(stand_depth_object)) || arg %in% seq_along(stand_depth_object))){
+  for (arg in c(chrono, sample.depth, stand.depth)) {
+    if(!((arg %in% colnames(stand_depth_object)) || arg %in% seq_along(stand_depth_object))) {
       stop('arguments chrono, sample.depth, stand.depth must be either a column
           name in stand_depth_object or an integer')
     }
