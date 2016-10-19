@@ -14,7 +14,7 @@ panel.cor <- function(w, z, ...) {
   ## on [0,1] and returns a color in the gradient in colorRange
   myColorRampFunc <- colorRamp(colorRange)
 
-  correlation <- cor(w, z) #here maybe add an "use" argument for data sets with missing values
+  correlation <- cor(w, z, use="complete.obs") #here maybe add an "use" argument for data sets with missing values
 
   ## because the func needs [0,1] and cor gives [-1,1], we need to
   ## shift and scale it

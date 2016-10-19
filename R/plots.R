@@ -10,7 +10,10 @@
 #'  lines_barplot
 #' @param x,y double, x also character possible, if only one argument is provided
 #'  it is taken as y and its names as x. If x can be converted to double it is
-#'  used as x, if not it is only used as labels
+#'  used as x, if not it is only used as labels.
+#' @param xlim,ylim limits for bith axis; if \code{NULL} they will be calculated
+#'   by the function. if \code{include0 == TRUE}, ylim[1] will be overwritten
+#'   with 0.
 #' @param include0 logic, if TRUE y axis includes origin
 #' @param ylab a title for the y axis
 #' @param xlab a title for the x axis
@@ -29,8 +32,9 @@
 #' # lines_barplot:
 #' init_barplot(x)
 #' lines_barplot(x, lwd = 3)
-init_barplot <- function(x = names(y), y, include0 = TRUE, ylab = '',
-                         xlab = '', main = 'barplot', las = 2) {
+init_barplot <- function(x = names(y), y, xlim = NULL, ylim = NULL,
+                         include0 = TRUE, ylab = '', xlab = '',
+                         main = 'barplot', las = 2) {
 
   if(missing(y)) {
     y <- x
@@ -38,8 +42,8 @@ init_barplot <- function(x = names(y), y, include0 = TRUE, ylab = '',
   }
 
   #argument check
-  if(!is.double(y)) {
-    stop('y must be double')
+  if(!is.numeric(y)) {
+    stop('y must be numeric')
   }
 
  #main function
@@ -51,8 +55,14 @@ init_barplot <- function(x = names(y), y, include0 = TRUE, ylab = '',
     x2 <- seq_along(y)
   }
 
-  xlim <- range(as.double(x2))
-  ylim <- range(y)
+  if(is.null(xlim)){
+  xlim <- range(as.double(x2), na.rm = TRUE)
+  }
+
+  if(is.null(ylim)){
+  ylim <- range(y, na.rm = TRUE)
+  }
+
   if(include0 == TRUE){ylim[1] <- 0}
   plot(NULL, xlim = xlim, ylim = ylim, main = main, xlab = xlab, ylab = ylab,
        xaxt = 'n')

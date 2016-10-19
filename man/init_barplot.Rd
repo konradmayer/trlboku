@@ -6,8 +6,8 @@
 \alias{rect_barplot}
 \title{custom barplots}
 \usage{
-init_barplot(x = names(y), y, include0 = TRUE, ylab = "", xlab = "",
-  main = "barplot", las = 2)
+init_barplot(x = names(y), y, xlim = NULL, ylim = NULL, include0 = TRUE,
+  ylab = "", xlab = "", main = "barplot", las = 2)
 
 lines_barplot(x = names(y), y, lwd = 3, col = "black")
 
@@ -16,7 +16,11 @@ rect_barplot(x = names(y), y, width = 0.7, col = "black")
 \arguments{
 \item{x, y}{double, x also character possible, if only one argument is provided
 it is taken as y and its names as x. If x can be converted to double it is
-used as x, if not it is only used as labels}
+used as x, if not it is only used as labels.}
+
+\item{xlim, ylim}{limits for bith axis; if \code{NULL} they will be calculated
+by the function. if \code{include0 == TRUE}, ylim[1] will be overwritten
+with 0.}
 
 \item{include0}{logic, if TRUE y axis includes origin}
 
