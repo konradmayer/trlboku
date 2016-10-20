@@ -58,6 +58,12 @@ first_last <- function(x) {
 #--------------------------
 #series_length
 #--------------------------
+#' series length
+#'
+#' @param x a data.frame/rwl object
+#'
+#' @return a numeric vector
+#' @export
 series_length <- function(x) {
   sapply(x, FUN = function(y) length(na.omit(y)))
 }
@@ -90,6 +96,41 @@ truncate_rwl <- function(x) {
 }
 
 #--------------------------
+#expand_apply.numeric
+#--------------------------
+#' @title expand_apply
+#' @description Apply function on expanding window.
+#' @param x a numeric vector, NA is allowed and will be omitted.
+#' @param FUN character, name of a function e.g. 'median'.
+
+#' @export
+#' x <- c(NA, NA, 1, 3, 2, 3, NA)
+#' expand_apply.numeric(x, 'median')
+
+expand_apply.numeric <- function(x, FUN = 'median') {
+out <- sapply(seq_along(x), function(y) do.call(FUN, list(na.omit(x[seq_len(y)]))))
+out[is.na(x)] <- NA
+return(out)
+}
+#--------------------------
+#expand_apply.data.frame
+#--------------------------
+#' @title expand_apply for data frames
+#' @apply Apply a function on expanding window for each column of a data frame.
+#' @param x a data.frame/rwl object
+#' @param FUN character, name of a function e.g. 'median'.
+#' @export
+#' @examples
+#' library('dplR')
+#' data('ca533')
+#' expand_apply.data.frame(ca533, 'median')
+
+expand_apply.data.frame <- function(x, FUN = 'median') {
+  x[] <- lapply(x, function(y) expand_apply.numeric(y, FUN))
+  return(x)
+}
+
+#--------------------------
 #radius_rwl
 #--------------------------
 #' @title radius_rwl
@@ -109,12 +150,13 @@ radius_rwl <- function(rwl) {
     stop('please provide input of class rwl or data.frame')
   }
 
-  if(!all(apply(test, 2, is.double))) {
+  if(!all(apply(rwl, 2, is.numeric))) {
     stop('input contains non numeric values')
   }
 
-  apply(rwl, 2, FUN= function(x) replace(x, !is.na(x), cumsum(na.omit(x))))
-}
+  expand_apply.data.frame(rwl, 'sum')
+
+  }
 #--------------------------
 #age_rwl
 #--------------------------
@@ -135,12 +177,11 @@ age_rwl <- function(rwl) {
     stop('please provide input of class rwl or data.frame')
   }
 
-  if(!all(apply(test, 2, is.double))){
+  if(!all(apply(rwl, 2, is.numeric))){
     stop('input contains non numeric values')
   }
 
-  rwl[!is.na(rwl)] <- 1
-  radius_rwl(rwl)
+  expand_apply.data.frame(rwl, 'length')
 }
 
 #--------------------------
@@ -163,8 +204,8 @@ avg_trees <- function(rwl, stc = c(3, 4, 1)) {
     stop('please provide an object of class rwl or data.frame')
   }
 
-  if (!(length(stc) == 3 && is.double(stc))) {
-    stop('argument stc has to be double of length 3')
+  if (!(length(stc) == 3 && is.numeric(stc))) {
+    stop('argument stc has to be numeric of length 3')
   }
 
   ids <- dplR::read.ids(rwl, stc = stc)
