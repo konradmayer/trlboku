@@ -1,3 +1,13 @@
+#' @title plot_bericht
+#' @description Produces a segment plot used in standard dating reports of the
+#'   BOKU tree ring lab based on the overview excel table.
+#' @param filename a path to a .xls file used for dating overview in the BOKU
+#'   tree ring lab.
+#' @param encoding encoding of the .xls file, defaults to 'WINDOWS-1252'
+#' @param set_lwd width of the segments
+#' @param multi adjusts the height of the output png image
+#' @export
+
 plot_bericht <- function(filename, encoding = 'WINDOWS-1252', set_lwd = 50,
                          multi = 0.7) {
   #create lookup table for allowed species and their assigned colors
