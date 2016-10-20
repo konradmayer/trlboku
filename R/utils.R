@@ -57,7 +57,7 @@ round_down <- function(x, to = 1000) {
 is.wholenumber <- function(x) x %% 1 == 0
 
 #--------------------------
-#is.wholenumber
+#mgsub
 #--------------------------
 #' @title generalization of gsub
 #' @description a generalization of gsub which allows to do multiple
@@ -80,5 +80,22 @@ mgsub <- function(myrepl, mystring) {
     do.call('gsub', list(x = x, pattern = l[1], replacement = l[2]))
   }
   Reduce(gsub2, myrepl, init = mystring, right = T)
+}
+
+
+#--------------------------
+#intersect_all
+#--------------------------
+#' @title intersect_all
+#' @description a generalization of intersect() to take more than two vectors as
+#'   input
+#' @param a a vector
+#' @param b a vector
+#' @param ... even more vectors
+#' @export
+#' @examples
+#' intersect_all(c(1,2,3,4), c(3,4,5), c(3,4,6,7))
+intersect_all <- function(a,b,...){
+  Reduce('intersect', list(a,b,...))
 }
 
