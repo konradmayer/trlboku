@@ -64,7 +64,10 @@ round_down <- function(x, to = 1000) {
 #--------------------------
 #is.wholenumber
 #--------------------------
-is.wholenumber <- function(x) x %% 1 == 0
+is.wholenumber <- function(x) {
+  if(is.factor(x)) { stop('x needs to be numeric') }
+  x %% 1 == 0
+}
 
 #--------------------------
 #mgsub
@@ -86,6 +89,11 @@ is.wholenumber <- function(x) x %% 1 == 0
 #' myrepl = list(c('o', 'a'), c('i', 'n'))
 #' mgsub(myrepl, mystring)
 mgsub <- function(myrepl, mystring) {
+
+  stopifnot(is.list(myrepl), is.character(mystring),
+            all(lapply(myrepl, length) == 2),
+            all(unlist(lapply(myrepl, is.character))))
+
   gsub2 <- function(l, x) {
     do.call('gsub', list(x = x, pattern = l[1], replacement = l[2]))
   }
