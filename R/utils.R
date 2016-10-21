@@ -33,6 +33,11 @@ trl_palette <- function() {
 #' round_up(1412, to = 1000)
 #' # [1] 2000
 round_up <- function(x, to = 1000) {
+
+  if(is.factor(x) || is.factor(to) || is.null(to)) {
+    stop('input must be numeric')
+  }
+
   to * (x %/% to + as.logical(x %% to))
 }
 
@@ -48,6 +53,11 @@ round_up <- function(x, to = 1000) {
 #' round_down(1412, to = 1000)
 #' # [1] 1000
 round_down <- function(x, to = 1000) {
+
+  if(is.factor(x) || is.factor(to) || is.null(to)) {
+    stop('input must be numeric')
+  }
+
   to * (x %/% to)
 }
 
