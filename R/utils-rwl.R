@@ -102,8 +102,8 @@ truncate_rwl <- function(x) {
 #' @description Apply function on expanding window.
 #' @param x a numeric vector, NA is allowed and will be omitted.
 #' @param FUN character, name of a function e.g. 'median'.
-
 #' @export
+#' @examples
 #' x <- c(NA, NA, 1, 3, 2, 3, NA)
 #' expand_apply.numeric(x, 'median')
 
@@ -116,7 +116,7 @@ return(out)
 #expand_apply.data.frame
 #--------------------------
 #' @title expand_apply for data frames
-#' @apply Apply a function on expanding window for each column of a data frame.
+#' @description Apply a function on expanding window for each column of a data frame.
 #' @param x a data.frame/rwl object
 #' @param FUN character, name of a function e.g. 'median'.
 #' @export

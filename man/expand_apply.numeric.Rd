@@ -14,4 +14,8 @@ expand_apply.numeric(x, FUN = "median")
 \description{
 Apply function on expanding window.
 }
+\examples{
+x <- c(NA, NA, 1, 3, 2, 3, NA)
+expand_apply.numeric(x, 'median')
+}
 

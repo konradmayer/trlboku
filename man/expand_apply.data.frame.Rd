@@ -11,6 +11,9 @@ expand_apply.data.frame(x, FUN = "median")
 
 \item{FUN}{character, name of a function e.g. 'median'.}
 }
+\description{
+Apply a function on expanding window for each column of a data frame.
+}
 \examples{
 library('dplR')
 data('ca533')
