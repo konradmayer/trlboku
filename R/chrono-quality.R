@@ -101,9 +101,9 @@ stand_depth <- function(crn, rwl, stand = c(1, 3)) {
 }
 
 #-------------------------
-#stand_depth.plot
+#stand_depth_plot
 #-------------------------
-#' @title stand_depth.plot
+#' @title stand_depth_plot
 #' @description Plots a chronology with underlaying sample depth and
 #'   "stand depth" information.
 #' @param stand_depth_object an object derived from \code{\link{stand_depth}}.
@@ -119,7 +119,7 @@ stand_depth <- function(crn, rwl, stand = c(1, 3)) {
 #' @export
 #' @examples
 #' #will be added later
-stand_depth.plot <- function(stand_depth_object, chrono = "crn",
+stand_depth_plot <- function(stand_depth_object, chrono = "crn",
                              sample.depth = 'samp.depth',
                              stand.depth = 'stand.depth', main = '',
                              col1 = 'red', col2 = 'orange') {
@@ -179,3 +179,181 @@ stand_depth.plot <- function(stand_depth_object, chrono = "crn",
   lines(rownames(stand_depth_object), stand_depth_object[ ,chrono])
 }
 
+#--------------------------
+#radius_class_plot
+#--------------------------
+
+#' @title Plot median growth rate or other parameters per radius class
+#' @description Plot median growth rate or other parameters per radius class to
+#'   evaluate trends in tree ring data and data composition.
+#' @param dat data of the investigated tree ring parameter (ring width,
+#'   earlywood width, leatewood with, ring density, etc.).
+#' @param rwdata ring width data to approximate the radius of individual trees.
+#' @param cutoff cut the data at given year - if NULL the whole range is used.
+#' @param classborders radii to set the borders of the radius classes.
+#' @param main plot title.
+#' @param unit y-axis label.
+#' @export
+#'
+#' @examples #not available in development version.
+radius_class_plot <- function (dat, rwdata, cutoff = NULL,
+                               classborders = c(0,50,80,100,150,200,Inf),
+                               main = '', unit = '[mm]'){
+
+  if (!is.data.frame(dat) || !is.data.frame(rwdata)) {
+    stop('dat and rwdata have to be of class data.frame')
+  }
+
+  if(!is.numeric(classborders)){
+    stop('please provide numeric classborders')
+  }
+
+  these_series <- intersect(names(dat), names(rwdata))
+  series_not_in_rwdata <- setdiff(names(dat), names(rwdata))
+
+  if(length(series_not_in_rwdata) > 0) {
+    warning("Some series of dat cannot be found in rwdata and are therefore not
+included in calculations:", series_not_in_rwdata, collapse = ', ')
+  }
+
+  if (is.null(cutoff)) {
+    cutoff <- as.numeric(rownames(dat)[1] - 1)
+  }
+
+  dat <- dat[as.numeric(rownames(dat)) > as.numeric(cutoff[1]), these_series]
+  rwdata <- rwdata[as.numeric(rownames(rwdata)) > as.numeric(cutoff[1]),
+                   these_series]
+
+  years <- rownames(dat)
+  cum_rw <- radius_rwl(rwdata)
+  growthrate <- expand_apply.data.frame(dat, 'median')
+
+  #find radius class
+  rclass <- lapply(seq_along(years), function(x)
+    cut(as.numeric(cum_rw[x, ]), breaks = classborders))
+
+  #calculate groth rate per class ans sample depth per class
+  growth_class <- as.data.frame(
+    Reduce('rbind', lapply(seq_along(years), function(i) {
+      tapply(as.numeric(growthrate[i, ]), rclass[i], 'median')
+    })))
+  rownames(growth_class) <- years
+
+  depth <- as.data.frame(
+    Reduce('rbind', lapply(seq_along(years), function(i) {
+      tapply(as.numeric(growthrate[i, ]), rclass[i], 'length')
+    })))
+  rownames(depth) <- years
+
+
+
+  #plot median growth per class
+  par(mfrow = c(2,1), mar = c(3,5,2,5))
+  plot(NULL, xlim = range(as.numeric(years)),
+       ylim = c(0, max(growth_class, na.rm = TRUE)), main = main, ylab = unit)
+
+  lapply(seq_along(growth_class), FUN = function(x) {
+    lines(years, growth_class[ , x], col = x, lwd = 2)
+  })
+
+  legend('top', lty = 1, lwd = 3,col = seq_along(growth_class),
+         legend = names(growth_class), ncol = ncol(growth_class),
+         bty = 'n', cex = 0.7)
+
+
+  #plot sample depth per class
+  plot(NULL, xlim = range(as.numeric(years)), ylim  = c(0, max(depth, na.rm=T)),
+       ylab = 'count')
+  title('sample depth', cex.main = 0.8)
+
+  lapply(seq_along(depth), FUN = function(x) {
+    lines(years, depth[ , x], col = x, lwd = 2)
+  })
+
+  legend('top', lty = 1, lwd = 3, col = seq_along(depth),
+         legend = names(depth), ncol = ncol(depth), bty = 'n', cex = 0.7)
+}
+
+#--------------------------
+#age_class_plot
+#--------------------------
+
+#' @title Plot median growth rate or other parameters per age class
+#' @description Plot median growth rate or other parameters per age class to
+#'   evaluate trends in tree ring data and data composition.
+#' @param dat data of the investigated tree ring parameter (ring width,
+#'   earlywood width, leatewood with, ring density, etc.).
+#' @param cutoff cut the data at given year - if NULL the whole range is used.
+#' @param classborders cambial ages to set the borders of the age classes.
+#' @param main plot title.
+#' @param unit y-axis label.
+#' @export
+#'
+#' @examples #not available in development version.
+age_class_plot <- function (dat, cutoff = NULL,
+                               classborders = c(0,50,80,100,150,200,Inf),
+                               main = '', unit = '[mm]'){
+
+  if (!is.data.frame(dat)) {
+    stop('dat has to be of class data.frame')
+  }
+
+  if(!is.numeric(classborders)){
+    stop('please provide numeric classborders')
+  }
+
+  if (is.null(cutoff)) {
+    cutoff <- as.numeric(rownames(dat)[1] - 1)
+  }
+
+  dat <- dat[as.numeric(rownames(dat)) > as.numeric(cutoff[1]), ]
+
+  years <- rownames(dat)
+  cambial_age <- age_rwl(dat)
+  growthrate <- expand_apply.data.frame(dat, 'median')
+
+  #find age class
+  aclass <- lapply(seq_along(years), function(x)
+    cut(as.numeric(cambial_age[x, ]), breaks = classborders))
+
+  #calculate groth rate per class ans sample depth per class
+  growth_class <- as.data.frame(
+    Reduce('rbind', lapply(seq_along(years), function(i) {
+      tapply(as.numeric(growthrate[i, ]), aclass[i], 'median')
+    })))
+  rownames(growth_class) <- years
+
+  depth <- as.data.frame(
+    Reduce('rbind', lapply(seq_along(years), function(i) {
+      tapply(as.numeric(growthrate[i, ]), aclass[i], 'length')
+    })))
+  rownames(depth) <- years
+
+
+
+  #plot median growth per class
+  par(mfrow = c(2,1), mar = c(3,5,2,5))
+  plot(NULL, xlim = range(as.numeric(years)),
+       ylim = c(0, max(growth_class, na.rm = TRUE)), main = main, ylab = unit)
+
+  lapply(seq_along(growth_class), FUN = function(x) {
+    lines(years, growth_class[ , x], col = x, lwd = 2)
+  })
+
+  legend('top', lty = 1, lwd = 3,col = seq_along(growth_class),
+         legend = names(growth_class), ncol = ncol(growth_class),
+         bty = 'n', cex = 0.7)
+
+
+  #plot sample depth per class
+  plot(NULL, xlim = range(as.numeric(years)), ylim  = c(0, max(depth, na.rm=T)),
+       ylab = 'count')
+  title('sample depth', cex.main = 0.8)
+
+  lapply(seq_along(depth), FUN = function(x) {
+    lines(years, depth[ , x], col = x, lwd = 2)
+  })
+
+  legend('top', lty = 1, lwd = 3, col = seq_along(depth),
+         legend = names(depth), ncol = ncol(depth), bty = 'n', cex = 0.7)
+  }
