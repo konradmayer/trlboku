@@ -1,8 +1,8 @@
 #--------------------------
-#yr.range
+#yr_range
 #--------------------------
-#' @title yr.range
-#' @description function yr.range from dplR, extracts the first and last year in
+#' @title yr_range
+#' @description function yr_range from dplR, extracts the first and last year in
 #'   yr.vec where the corresponding numeric vector shows a value different to NA
 #' @param x a numeric vector
 #' @param yr.vec a character- or numeric vector containing years with the same
@@ -11,10 +11,10 @@
 #' @examples
 #' library(dplR)
 #' data(ca533)
-#' yr.range(ca533[ ,1], rownames(ca533))
+#' yr_range(ca533[ ,1], rownames(ca533))
 #' #[1] "1530" "1983"
 
-yr.range <- function (x, yr.vec = as.numeric(names(x))) {
+yr_range <- function (x, yr.vec = as.numeric(names(x))) {
   na.flag <- is.na(x)
   if (all(na.flag)) {
     res <- rep(NA, 2)
@@ -47,7 +47,11 @@ first_last <- function(x) {
     stop('please provide a data.frame/rwl object')
   }
 
-  tmp <- sapply(seq_along(x), FUN=function(i) as.double(yr.range(gp.rwl[ , i],
+  if(any(is.na(suppressWarnings(as.integer(rownames(x)))))){
+    stop('please provide an input object with correct rownames')
+  }
+
+  tmp <- sapply(seq_along(x), FUN=function(i) as.double(yr_range(x[ , i],
                                                                  rownames(x))))
   out <- data.frame(names(x), t(tmp))
   names(out) <- c('series', 'first', 'last')
@@ -85,6 +89,10 @@ series_length <- function(x) {
 #' truncate_rwl(subset) #rows start with 1720
 truncate_rwl <- function(x) {
 
+  if(!is.data.frame(x)) {
+    stop('x must be of class data.frame')
+  }
+
   while (all(is.na(x[1, ]))) {
     x=x[-1, ]
   }
@@ -95,38 +103,47 @@ truncate_rwl <- function(x) {
   return(x)
 }
 
+
 #--------------------------
-#expand_apply.numeric
+#expand_apply generic
 #--------------------------
 #' @title expand_apply
 #' @description Apply function on expanding window.
-#' @param x a numeric vector, NA is allowed and will be omitted.
+#' @param x a numeric vector (NA is allowed and will be omitted)
+#'   or a data.frame/rwl object
 #' @param FUN character, name of a function e.g. 'median'.
+#' @return The form of the value depends on the class of its argument. vector
+#'   for default method, data.frame for data.frame method.
 #' @export
 #' @examples
+#' #example for numeric method:
 #' x <- c(NA, NA, 1, 3, 2, 3, NA)
-#' expand_apply.numeric(x, 'median')
+#' expand_apply(x, 'median')
 
-expand_apply.numeric <- function(x, FUN = 'median') {
-out <- sapply(seq_along(x), function(y) do.call(FUN, list(na.omit(x[seq_len(y)]))))
-out[is.na(x)] <- NA
-return(out)
+#' #example for data.frame method:
+#' library('dplR')
+#' data('ca533')
+#' expand_apply(ca533, 'median')
+
+expand_apply <- function(x, ...) UseMethod('expand_apply', x)
+
+#--------------------------
+#expand_apply.numeric
+#--------------------------
+expand_apply.default <- expand_apply.numeric <- expand_apply.integer <- function(x, FUN = 'median') {
+  if(!is.numeric(x)) {
+    stop('x must be numeric or integer')
+  }
+
+  out <- sapply(seq_along(x), function(y) do.call(FUN, list(na.omit(x[seq_len(y)]))))
+  out[is.na(x)] <- NA
+  return(out)
 }
 #--------------------------
 #expand_apply.data.frame
 #--------------------------
-#' @title expand_apply for data frames
-#' @description Apply a function on expanding window for each column of a data frame.
-#' @param x a data.frame/rwl object
-#' @param FUN character, name of a function e.g. 'median'.
-#' @export
-#' @examples
-#' library('dplR')
-#' data('ca533')
-#' expand_apply.data.frame(ca533, 'median')
-
 expand_apply.data.frame <- function(x, FUN = 'median') {
-  x[] <- lapply(x, function(y) expand_apply.numeric(y, FUN))
+  x[] <- lapply(x, function(y) trlboku:::expand_apply.numeric(as.vector(y), FUN))
   return(x)
 }
 
@@ -156,7 +173,7 @@ radius_rwl <- function(rwl) {
 
   expand_apply.data.frame(rwl, 'sum')
 
-  }
+}
 #--------------------------
 #age_rwl
 #--------------------------
