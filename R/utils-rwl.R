@@ -217,7 +217,7 @@ age_rwl <- function(rwl) {
 #' avg_trees(gp.rwl, stc = c(0,2,1))
 avg_trees <- function(rwl, stc = c(3, 4, 1)) {
   #argument checks:
-  if(!any(class(gp.rwl) %in% c('rwl', 'data.frame'))) {
+  if(!any(class(rwl) %in% c('rwl', 'data.frame'))) {
     stop('please provide an object of class rwl or data.frame')
   }
 
