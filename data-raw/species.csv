@@ -1,0 +1,19 @@
+species,german,english,idshort,idlong,color
+Acer spp.,Ahorn,maple,A,AC,purple
+Fagus spp.,Buche,beech,B,FS,#b70505
+Taxus baccata,Eibe,yew,C,TB,gold3
+Fraxinus spp.,Esche,ash,E,FE,olivedrab2
+Picea abies,Fichte,spruce,F,PA,#056608
+Larix decidua,Lärche,larch,L,LD,firebrick2
+Gymnosperm,Nadelholz,softwood,N,NH,#9FA91F
+Populus spp.,Pappel,poplar,P,PP,mediumseagreen
+Quercus spp.,Eiche,oak,Q,QS,#967117
+Alnus spp.,Erle,alder,R,AG,slategray3
+Sorbus spp.,Holzarten des Genus Sorbus,species of genus Sorbus,S,SO,palevioletred3
+Abies alba,Tanne,fir,T,AA,#0018A8
+Salix spp.,Weide,willow,W,SA,darkturquoise
+Angiospern,Laubholz,hardwood,H,LH,peachpuff3
+Ulmus spp.,Ulme,elm,U,UL,#5e245e
+Tilia spp.,Linde,linden,G,TL,deeppink3
+Pinus cembra,Zirbe,stone pine,Z,PC,#FFEF00
+Pinus sylvestris,Kiefer,pine,K,PN,#FF7E00
