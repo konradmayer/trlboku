@@ -31,7 +31,7 @@ agegrowthplot <- function(rwl, po, subset = NULL, subset.color = 'violet', main 
          and pith offset as integer values in the second')
   }
 
-  rwl.ord <- apply(rwl, 2, sortByIndex)
+  rwl.ord <- apply(rwl, 2, sort_by_index)
   col.names <- names(rwl)
   n.col=ncol(rwl)
   seq.cols <- seq_len(n.col)
@@ -88,6 +88,10 @@ stand_depth <- function(crn, rwl, stand = c(1, 3)) {
 
   if(!all(rownames(crn) %in% rownames(rwl))) {
     stop('rwl provided has less years than crn')
+  }
+
+  if(!is.numeric(stand) || (length(stand) != 2)) {
+    stop('stand needs to be a numeric vector of length 2')
   }
 
   rwl.sub <- rwl[rownames(rwl) %in% rownames(crn), ]

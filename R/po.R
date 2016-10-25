@@ -120,20 +120,23 @@ po_find <- function(rwl, rc, maxpo = NULL, nyrs = NULL, f = 0.5, make.plot = TRU
 }
 
 #------------------------------
-#sortByIndex
+#sort_by_index
 #------------------------------
-#' @title sortByIndex
-#' @description sortByIndex from package dplR, shifts series to start with index 1,
-#'   maintaining the same vector length by adding NA values to the end.
+#' @title sort_by_index
+#' @description internal function sortByIndex from package dplR, shifts
+#'   series to start with index 1, maintaining the same vector length by
+#'   adding NA values to the end. Code copied and not imported to make function
+#'   name consistent to naming convention in package trlboku and to provide
+#'   documentation.
 #' @param x a numeric vector, representing an individual rwl series,
 #'   potentially containing NA values.
-#'
+#' @export
 #' @return a numeric vector with the same length as x.
 #' @examples
 #' x <- c(NA,NA,NA,1,2,3,4,5, NA, NA)
-#' sortByIndex(x)
+#' sort_by_index(x)
 #' #[1]  1  2  3  4  5 NA NA NA NA NA
-sortByIndex <- function (x) {
+sort_by_index <- function (x) {
   lowerBound <- which.min(is.na(x))
   c(x[lowerBound:length(x)], rep(NA, lowerBound - 1))
 }
