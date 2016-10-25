@@ -17,19 +17,23 @@
 po_transform <- function(po, rwl, nyrs = 4) {
 
   #checking arguments:
+  if(!(is.data.frame(po) && is.data.frame(rwl))) {
+    stop('po and rwl must be data frames')
+  }
+
   if(!setequal(po[ , 1], names(rwl))) {
     stop('series names in po are not the same as provided in rwl')
   }
 
   for (p in as.character(po[ , 1])) {
-    meanrw <- mean(na.omit(rwl[p])[1:nyrs, ])
+    meanrw <- mean(na.omit(rwl[p])[seq_len(nyrs), ])
     po$meanrw[po$series == p] <- meanrw
   }
 
-  po$po.new <- round(po[ ,2] / po$meanrw) + 1
-  out <- po[,c(1,4)]
+  po$po.new <- round(po[ , 2] / po$meanrw) + 1
+  out <- po[ , c(1,4)]
   out[ , 1] <- as.character(out[ , 1])
-  out[ , 1] <- as.integer(out[ , 2])
+  out[ , 2] <- as.integer(out[ , 2])
   return(out)
 }
 
@@ -161,9 +165,27 @@ sort_by_index <- function (x) {
 #' to_cambial_age(gp.rwl, gp.po)
 to_cambial_age <- function(rwl, po = NULL) {
   #check arguments
+
+  if(!is.data.frame(rwl)) {
+    stop('rwl must be of class data.frame')
+  }
+
+  if(!(is.data.frame(po) || is.null(po))) {
+    stop('po must be of class data.frame or NULL')
+  }
+
   if (is.null(po)) {
     po <- data.frame(series = names(rwl), po = 1)
   }
+
+
+  if(!(nrow(po) > 2 && is.numeric(po[, 2]))) {
+    stop('please provide a po object with two columns and pith offset as numeric
+         values (cambial age of innermost ring) in the second column')
+  }
+
+  if(!all(po[, 2] > 0)) {stop('please provide po as cambial age of the first ring -
+    this has to be > 0')}
 
   if(!setequal(po[ , 1], names(rwl))) {
     stop('series names in po are not the same as provided in rwl')
@@ -175,7 +197,7 @@ to_cambial_age <- function(rwl, po = NULL) {
   lengths <- (series_length(rwl) + po[ , 2]) - 1
   rows <- max(lengths)
   out <- data.frame(matrix(NA, ncol = length(rwl), nrow = rows))
-  for (i in 1:length(rwl)){
+  for (i in seq_along(rwl)){
     start <- (po.ordered[i,2])
     out[start:lengths[i], i] <- na.omit(rwl[ , i])
   }

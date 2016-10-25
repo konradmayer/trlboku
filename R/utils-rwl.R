@@ -51,8 +51,9 @@ first_last <- function(x) {
     stop('please provide an input object with correct rownames')
   }
 
-  tmp <- sapply(seq_along(x), FUN=function(i) as.double(yr_range(x[ , i],
-                                                                 rownames(x))))
+  tmp <- sapply(seq_along(x), FUN=function(i) {
+    as.double(yr_range(x[ , i], as.numeric(rownames(x))))
+  })
   out <- data.frame(names(x), t(tmp))
   names(out) <- c('series', 'first', 'last')
   out$series <- as.character(out$series) #not elegant but works
