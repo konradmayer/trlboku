@@ -19,4 +19,5 @@ Imports:
     pointRes (>= 1.1.2),
     scales
 RoxygenNote: 5.0.1
-Suggests: testthat
+Suggests: testthat,
+    sp
