@@ -69,15 +69,15 @@ po_transform <- function(po, rwl, nyrs = 4) {
 #' @examples #no examples added in the current development version - will be
 #'   added in future
 
-po_find <- function(rwl, rc, maxpo = NULL, nyrs = NULL, f = 0.5, make.plot = TRUE){
+po_find <- function(rwl, rc, maxpo = NULL, min.overlap = 10, nyrs = NULL, f = 0.5, make.plot = TRUE){
   #argument checks:
 
-  if(!all(class(rwl) == c('rwl', 'data.frame'))) {
-    stop('provide input object of class rwl')
+  if(!is.data.frame(rwl)) {
+    stop('rwl must be a data.frame')
   }
 
   if (!(is.numeric(rc) && length(rc) > 1)) {
-    stof('provide valid regional curve (rc)')
+    stop('rc needs to be a numeric vector')
   }
 
   rc <- na.omit(rc)
@@ -93,30 +93,31 @@ po_find <- function(rwl, rc, maxpo = NULL, nyrs = NULL, f = 0.5, make.plot = TRU
       nyrs <- nyr / 2
     }
 
-    profspline <- ffcsaps(prof, nyrs = nyrs, f = f)
+    profspline <- dplR::ffcsaps(prof, nyrs = nyrs, f = f)
     names(profspline) <- seq_along(profspline)
-
-    out <- c()
 
     if(is.null(maxpo)) {
       maxpo <- (length(rc) - 1)
     }
 
-    for (s in 0:(maxpo - 1)) {
+    out <- c()
+
+    for (s in seq_len(maxpo)-1) {
       names(profspline) <- (seq_along(profspline)) + s
       is <- intersect(names(rc), names(profspline))
-      if(length(is) > 20) {
+      if(length(is) > min.overlap) {
         # lines(names(profspline),profspline, col=s+2)
         res <- rc[is] - profspline[is]
         residsq <- sum(res ^ 2)
-        out[s + 1] <- residsq
+        out[s + 1] <- residsq #growing vector is bad practise but this function is not optimized as its rarely used
       }
     }
 
     po.new <- min(which(out == min(out)))
     if(make.plot == TRUE) {
-      plot(rc, type = 'l', lwd = 3, main = paste0(names(rwl)[p], ' -new po'))
-      lines(po.new:(length(profspline) + po.new - 1), profspline)
+      plot(rc, type = 'l', lwd = 3, main = paste0(names(rwl)[p], ' - new po'))
+      lines(po.new:(length(profspline) + po.new - 1), profspline,
+            col = 'orange', lwd = 2)
     }
     outdf[p, 2] <- po.new
   }
