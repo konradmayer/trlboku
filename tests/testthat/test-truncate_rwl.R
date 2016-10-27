@@ -12,6 +12,10 @@ test_that('truncate_rwl works as expected', {
   expect_that(truncate_rwl(dat), equals(out))
 })
 
+test_that('truncate_rwl handles data.frames with one column', {
+  expect_that(truncate_rwl(dat[1]), equals(dat[as.character(1603:1612), 1, drop=FALSE]))
+})
+
 test_that('truncate_rwl handles input of wrong class', {
   expect_that(truncate_rwl(as.factor(1)),
               throws_error('x must be of class data.frame'))

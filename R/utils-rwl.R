@@ -94,12 +94,12 @@ truncate_rwl <- function(x) {
     stop('x must be of class data.frame')
   }
 
-  while (all(is.na(x[1, ]))) {
-    x=x[-1, ]
+  while (all(is.na(x[1, , drop=FALSE]))) {
+    x=x[-1, , drop=FALSE]
   }
 
-  while (all(is.na(x[nrow(x), ]))) {
-    x=x[-nrow(x), ]
+  while (all(is.na(x[nrow(x), , drop=FALSE]))) {
+    x=x[-nrow(x), , drop=FALSE]
   }
   return(x)
 }
