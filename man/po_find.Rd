@@ -4,7 +4,8 @@
 \alias{po_find}
 \title{po_find}
 \usage{
-po_find(rwl, rc, maxpo = NULL, nyrs = NULL, f = 0.5, make.plot = TRUE)
+po_find(rwl, rc, maxpo = NULL, min.overlap = 10, nyrs = NULL, f = 0.5,
+  make.plot = TRUE)
 }
 \arguments{
 \item{rwl}{rwl/data.frame object containing the tree ring series.}
