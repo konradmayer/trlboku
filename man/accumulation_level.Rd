@@ -3,7 +3,8 @@
 \name{accumulation_level}
 \alias{accumulation_level}
 \alias{plot.accumulation_level}
-\title{Correlation of a chronology at different accumulation levels}
+\title{Correlation between a chronology and climate data at different
+  accumulation levels}
 \usage{
 accumulation_level(crn, climate.data, accumulation, accumfun = sum,
   months = c(-2:10), method = "spearman")

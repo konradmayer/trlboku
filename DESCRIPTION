@@ -20,4 +20,6 @@ Imports:
     scales
 RoxygenNote: 5.0.1
 Suggests: testthat,
-    sp
+    sp,
+    boot,
+    plotrix
