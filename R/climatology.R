@@ -29,7 +29,8 @@
 #' @return a data frame with following names:
 ##'   \describe{
 ##'    \item{coef}{spearmans rho}
-##'    \item{p_value}{p-values from calling \code{\link[stats]{cor.test}}}
+##'    \item{p_value}{p-values from calling \code{\link[stats]{cor.test}} - that
+##'      is without taking multiplicity into account}
 ##'    \item{ci_lower}{lower bound of bootstrapped confidence interval}
 ##'    \item{ci_upper}{upper bound of bootstrapped confidence interval}
 ##'   }
@@ -58,7 +59,7 @@ dcc_spear <- function(crn, clim, months = c(-2:10),
     stop('months need to be within -11:12')
   }
 
-  if(!is.wholenumber(replicates) || !(replicates < 1)) {
+  if(!is.wholenumber(replicates) || (replicates < 1)) {
     stop('replicates must be a positive integer')
   }
 
@@ -144,8 +145,9 @@ plot.dcc_spear <- function(dcc_spear_object, ...) {
                   li = dcc_spear_object$ci_lower,
                   ui = dcc_spear_object$ci_upper,
                   slty = 1, xaxt = 'n', pch = 19,
-                  col = ifelse(dcc_spear_object$p_value <= 0.5 , "red",
-                               "darkblue"),
+                  col = ifelse((dcc_spear_object$ci_lower *
+                                  dcc_spear_object$ci_upper) > 0 ,
+                               "darkblue", "red"),
                   add = T, lwd = 2, sfrac = 0.01)
   axis(1, at = seq_len(nrow(dcc_spear_object)),
   labels = rownames(dcc_spear_object),

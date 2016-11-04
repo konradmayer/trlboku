@@ -44,7 +44,8 @@ and the bootstrapped confidence interval computation).}
 a data frame with following names:
   \describe{
    \item{coef}{spearmans rho}
-   \item{p_value}{p-values from calling \code{\link[stats]{cor.test}}}
+   \item{p_value}{p-values from calling \code{\link[stats]{cor.test}} - that
+     is without taking multiplicity into account}
    \item{ci_lower}{lower bound of bootstrapped confidence interval}
    \item{ci_upper}{upper bound of bootstrapped confidence interval}
   }
