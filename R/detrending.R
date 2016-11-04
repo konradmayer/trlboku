@@ -3,6 +3,28 @@
 #-------------------------
 detrend_given_rc <- function(rwl, rc, po) {
 
+  if(!is.data.frame(rwl)) {
+    stop('rwl must be of class data.frame')
+  }
+
+  if(!(is.data.frame(po))) {
+    stop('po must be of class data.frame')
+  }
+
+  if(!setequal(po[ , 1], names(rwl))) {
+    stop('series names in po are not the same as provided in rwl')
+  }
+
+  if(!is.numeric(rc)){
+    stop('rc must be a numeric vector')
+  }
+
+  if(length(na.omit(rc)) < max(series_length(rwl))) {
+    greater <- series_length(rwl) > length(na.omit(rc))
+    warning(paste0('rc is shorter than series: ', paste0(names(rwl)[greater],
+                  collapse = ', ')))
+  }
+
   n.col <- ncol(rwl)
   col.names <- names(rwl)
   seq.cols <- seq_len(n.col)
@@ -66,6 +88,22 @@ detrend_given_rc <- function(rwl, rc, po) {
 #'
 #' @examples #not available in development version
 sf_rcs <- function (rwl, po, maxit = Inf) {
+
+  if(!is.data.frame(rwl)) {
+    stop('rwl must be of class data.frame')
+  }
+
+  if(!(is.data.frame(po))) {
+    stop('po must be of class data.frame')
+  }
+
+  if(!setequal(po[ , 1], names(rwl))) {
+    stop('series names in po are not the same as provided in rwl')
+  }
+
+  if(!is.numeric(maxit) || length(maxit) != 1) {
+    stop('maxit must be an integer')
+  }
 
   sf.m <- rwl
   sf.crn <- data.frame(sf.chron = rep(1, nrow(rwl)))
