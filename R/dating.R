@@ -120,6 +120,6 @@ rwl_subout <- function(rwl.file, subset, header = FALSE, out.nam = NULL,
   remaining <- dat[!(nam %in% subsetdf[ ,1])]
 
   #write files
-  dplR::write.tucson(subs, paste0("subset of - \'",on,"\' .rwl"), long.names = TRUE)
-  dplR::write.tucson(remaining, paste0("all except - \'",on,"\' .rwl"), long.names = TRUE)
+  dplR::write.tucson(subs, paste0("subset of - ",on," .rwl"), long.names = TRUE)
+  dplR::write.tucson(remaining, paste0("all except - ",on," .rwl"), long.names = TRUE)
 }
