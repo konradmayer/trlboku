@@ -1,6 +1,4 @@
-#--------------------------
-#trl_palette
-#--------------------------
+#trl_palette--------------------------------------------------------------------
 #' @title trl_palette
 #' @description manipulate the color palette to contain a set of 25 colors
 #' @export
@@ -21,9 +19,7 @@ trl_palette <- function() {
   palette(c25)
 }
 
-#--------------------------
-#round_up
-#--------------------------
+#round_up-----------------------------------------------------------------------
 #' @title round_up
 #' @description round up a number to the nearest multiple of the argument "to"
 #' @param x numeric or integer
@@ -41,9 +37,7 @@ round_up <- function(x, to = 1000) {
   to * (x %/% to + as.logical(x %% to))
 }
 
-#--------------------------
-#round_down
-#--------------------------
+#round_down---------------------------------------------------------------------
 #' @title round_down
 #' @description round down a number to the nearest multiple of the argument "to"
 #' @param x numeric or integer
@@ -61,17 +55,13 @@ round_down <- function(x, to = 1000) {
   to * (x %/% to)
 }
 
-#--------------------------
-#is.wholenumber
-#--------------------------
+#is.wholenumber-----------------------------------------------------------------
 is.wholenumber <- function(x) {
   if(is.factor(x)) { stop('x needs to be numeric') }
   x %% 1 == 0
 }
 
-#--------------------------
-#mgsub
-#--------------------------
+#mgsub--------------------------------------------------------------------------
 #' @title generalization of gsub
 #' @description a generalization of gsub which allows to do multiple
 #'   replacements at once as described in
@@ -101,9 +91,7 @@ mgsub <- function(myrepl, mystring) {
 }
 
 
-#--------------------------
-#intersect_all
-#--------------------------
+#intersect_all------------------------------------------------------------------
 #' @title intersect_all
 #' @description a generalization of intersect() to take more than two vectors as
 #'   input

@@ -1,6 +1,4 @@
-#-------------------------
-#agegrowthplot
-#-------------------------
+#agegrowthplot------------------------------------------------------------------
 #' @title agegrowthplot
 #' @description Plots mean annual growth rate in a common interval (shown in
 #'   first plot) over tree age - a subset (eg. historic vs. recent trees,
@@ -54,10 +52,8 @@ agegrowthplot <- function(rwl, po, subset = NULL, subset.color = 'violet', main 
   abline(lm(mzuw ~ alter[ ,2]))
 }
 
-#-------------------------
-#stand_depth
-#-------------------------
 
+#stand_depth--------------------------------------------------------------------
 #' @title stand_depth
 #' @description This function adds a column containing the "stand_depth" to
 #'   an existing crn object.
@@ -104,9 +100,7 @@ stand_depth <- function(crn, rwl, stand = c(1, 3)) {
   return(out)
 }
 
-#-------------------------
-#stand_depth_plot
-#-------------------------
+#stand_depth_plot---------------------------------------------------------------
 #' @title stand_depth_plot
 #' @description Plots a chronology with underlaying sample depth and
 #'   "stand depth" information.
@@ -183,10 +177,8 @@ stand_depth_plot <- function(stand_depth_object, chrono = "crn",
   lines(rownames(stand_depth_object), stand_depth_object[ ,chrono])
 }
 
-#--------------------------
-#radius_class_plot
-#--------------------------
 
+#radius_class_plot--------------------------------------------------------------
 #' @title Plot median growth rate or other parameters per radius class
 #' @description Plot median growth rate or other parameters per radius class to
 #'   evaluate trends in tree ring data and data composition.
@@ -278,10 +270,7 @@ included in calculations:", series_not_in_rwdata, collapse = ', ')
          legend = names(depth), ncol = ncol(depth), bty = 'n', cex = 0.7)
 }
 
-#--------------------------
-#age_class_plot
-#--------------------------
-
+#age_class_plot-----------------------------------------------------------------
 #' @title Plot median growth rate or other parameters per age class
 #' @description Plot median growth rate or other parameters per age class to
 #'   evaluate trends in tree ring data and data composition.

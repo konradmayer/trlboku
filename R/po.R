@@ -1,6 +1,4 @@
-#------------------------------
-#po_transform
-#------------------------------
+#po_transform-------------------------------------------------------------------
 #' @title po_transform
 #' @description Estimates no. of missing rings by estimated distance to pith.
 #'
@@ -37,10 +35,7 @@ po_transform <- function(po, rwl, nyrs = 4) {
   return(out)
 }
 
-
-#------------------------------
-#po_find
-#------------------------------
+#po_find------------------------------------------------------------------------
 #' @title po_find
 #' @description Estimates pith offset of series by finding the position with
 #'   minimum RSS to existing regional curve.
@@ -124,9 +119,7 @@ po_find <- function(rwl, rc, maxpo = NULL, min.overlap = 10, nyrs = NULL, f = 0.
   return(outdf)
 }
 
-#------------------------------
-#sort_by_index
-#------------------------------
+#sort_by_index------------------------------------------------------------------
 #' @title sort_by_index
 #' @description internal function sortByIndex from package dplR, shifts
 #'   series to start with index 1, maintaining the same vector length by
@@ -145,9 +138,8 @@ sort_by_index <- function (x) {
   lowerBound <- which.min(is.na(x))
   c(x[lowerBound:length(x)], rep(NA, lowerBound - 1))
 }
-#------------------------------
-#to_cambial_age
-#------------------------------
+
+#to_cambial_age-----------------------------------------------------------------
 #' @title to_cambial_age
 #' @description This function aligns tree ring series to match their cambial ages,
 #'   taking pith offset into account if provided.

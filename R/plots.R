@@ -1,7 +1,4 @@
-#---------------------------
-#custom barplots
-#---------------------------
-
+#custom barplots----------------------------------------------------------------
 #' @title custom barplots
 #' @description  A custom barplot separated in in one init function and two
 #'   different barplot functions so it can easily be added to other plots or

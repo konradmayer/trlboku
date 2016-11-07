@@ -12,7 +12,4 @@ series_length(x)
 \value{
 a numeric vector
 }
-\description{
-series length
-}
 

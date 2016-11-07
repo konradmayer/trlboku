@@ -1,6 +1,4 @@
-#--------------------------
-#yr_range
-#--------------------------
+#yr_range-----------------------------------------------------------------------
 #' @title yr_range
 #' @description function yr_range from dplR, extracts the first and last year in
 #'   yr.vec where the corresponding numeric vector shows a value different to NA
@@ -26,9 +24,7 @@ yr_range <- function (x, yr.vec = as.numeric(names(x))) {
   }
 }
 
-#--------------------------
-#first_last
-#--------------------------
+#first_last---------------------------------------------------------------------
 #' @title first_last
 #' @description function to return the first and the last year of a tree ring series
 #' @param x a data.frame/rwl object
@@ -60,10 +56,8 @@ first_last <- function(x) {
   return(out)
 }
 
-#--------------------------
-#series_length
-#--------------------------
-#' series length
+#series_length------------------------------------------------------------------
+#' @title series length
 #'
 #' @param x a data.frame/rwl object
 #'
@@ -72,9 +66,8 @@ first_last <- function(x) {
 series_length <- function(x) {
   sapply(x, FUN = function(y) length(na.omit(y)))
 }
-#--------------------------
-#truncate_rwl
-#--------------------------
+
+#truncate_rwl-------------------------------------------------------------------
 #' @title truncate_rwl
 #' @description This function removes lines at the beginning and end of a
 #'   data.frame/rwl object only containing NA values (as present after subsetting etc.).
@@ -105,9 +98,7 @@ truncate_rwl <- function(x) {
 }
 
 
-#--------------------------
-#expand_apply generic
-#--------------------------
+#expand_apply generic-----------------------------------------------------------
 #' @title expand_apply
 #' @description Apply function on expanding window.
 #' @param x a numeric vector (NA is allowed and will be omitted)
@@ -128,9 +119,7 @@ truncate_rwl <- function(x) {
 
 expand_apply <- function(x, ...) UseMethod('expand_apply', x)
 
-#--------------------------
-#expand_apply.numeric
-#--------------------------
+#expand_apply.numeric-----------------------------------------------------------
 expand_apply.default <- expand_apply.numeric <- expand_apply.integer <- function(x, FUN = 'median') {
   if(!is.numeric(x)) {
     stop('x must be numeric or integer')
@@ -140,17 +129,14 @@ expand_apply.default <- expand_apply.numeric <- expand_apply.integer <- function
   out[is.na(x)] <- NA
   return(out)
 }
-#--------------------------
-#expand_apply.data.frame
-#--------------------------
+
+#expand_apply.data.frame--------------------------------------------------------
 expand_apply.data.frame <- function(x, FUN = 'median') {
   x[] <- lapply(x, function(y) trlboku:::expand_apply.numeric(as.vector(y), FUN))
   return(x)
 }
 
-#--------------------------
-#radius_rwl
-#--------------------------
+#radius_rwl---------------------------------------------------------------------
 #' @title radius_rwl
 #' @description A function to get the cumulated tree ring widths
 #'   (approx. radius of the tree in the given year).
@@ -175,9 +161,8 @@ radius_rwl <- function(rwl) {
   expand_apply.data.frame(rwl, 'sum')
 
 }
-#--------------------------
-#age_rwl
-#--------------------------
+
+#age_rwl------------------------------------------------------------------------
 #' @title age_rwl
 #' @description A function returning an rwl/data.frame object with the same
 #'   dimensions as rwl with showing the cambial age instead of tree ring width
@@ -202,9 +187,7 @@ age_rwl <- function(rwl) {
   expand_apply.data.frame(rwl, 'length')
 }
 
-#--------------------------
-#avg_trees
-#--------------------------
+#avg_trees----------------------------------------------------------------------
 #' @title avg_trees
 #' @description Averages series from multiple cores taken from the same tree/object.
 #' @param rwl a data.frame/rwl object.

@@ -1,3 +1,4 @@
+#combine_fragments--------------------------------------------------------------
 #' @title combine fragments
 #' @description combine multiple fragments of a series as from measuring parts
 #'   of densitometry samples in WinDENDRO according to set rules - this function

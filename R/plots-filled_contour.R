@@ -1,3 +1,4 @@
+#filled_contour-----------------------------------------------------------------
 #' @title filled_contour
 #' @description mostly the same as \code{\link[graphics]{filled.contour}},
 #'   \code{border = 0} is set in \code{rect()} as adviced at \url{http://stackoverflow.com/questions/8068366/removing-lines-within-filled-contour-legend}

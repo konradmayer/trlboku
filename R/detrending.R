@@ -1,6 +1,4 @@
-#-------------------------
-#detrend_given_rc
-#-------------------------
+#detrend_given_rc---------------------------------------------------------------
 detrend_given_rc <- function(rwl, rc, po) {
 
   if(!is.data.frame(rwl)) {
@@ -54,9 +52,8 @@ detrend_given_rc <- function(rwl, rc, po) {
   return(rwi)
 }
 
-#-------------------------
-#sf_rcs
-#-------------------------
+
+#sf_rcs-------------------------------------------------------------------------
 #' @title signal free rcs
 #' @description signal free rcs detrending as described in
 #'   \href{http://dx.doi.org/10.1016/j.dendro.2013.06.002}{Melvin (2013)} using

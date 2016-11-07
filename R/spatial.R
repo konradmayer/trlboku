@@ -1,6 +1,4 @@
-#------------------------------
-#transform_projection
-#------------------------------
+#transform_projection-----------------------------------------------------------
 #' @title transform_projection
 #' @description Transforms to different projection by supplying an EPSG code.
 #'   If object has no proj4string defined, old projection can be specified by

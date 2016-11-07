@@ -1,3 +1,4 @@
+#plot_bericht-------------------------------------------------------------------
 #' @title plot_bericht
 #' @description Produces a segment plot used in standard dating reports of the
 #'   BOKU tree ring lab based on the overview excel table.
@@ -71,7 +72,7 @@ plot_bericht <- function(filename, encoding = 'WINDOWS-1252', set_lwd = 50,
 
   dat <- dat[order(dat$letztes.Jahr+dat$unmeasured), ]
 
-  #PLOT----------------------
+  ######plot
   makeplot <- function() {
     xlim <- c(min(dat[3]) - 10, max(dat[ , 4] + dat[ , 8], na.rm = TRUE) + 10)
     ylim <- c(0, nrow(dat) + 1)

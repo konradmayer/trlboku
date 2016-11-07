@@ -1,6 +1,4 @@
-#--------------------------
-#new_date_end
-#--------------------------
+#new_date_end-------------------------------------------------------------------
 #' @title new_date_end
 #' @description Batch adjust the date end of multiple series.
 #' @param rwl a data.frame/rwl object.
@@ -50,9 +48,7 @@ new_date_end <- function(rwl, date.end) {
 }
 
 
-#--------------------------
-#rwl_subout
-#--------------------------
+#rwl_subout---------------------------------------------------------------------
 #' @title rwl_subout
 #' @description This function takes an rwl object as well as a csv as input and
 #'   subsets the rwl by the identifiers given in the first column of the csv.

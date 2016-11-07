@@ -1,7 +1,5 @@
-#-------------------------
-#dcc_spear
-#-------------------------
 
+#dcc_spear----------------------------------------------------------------------
 #' @title correlation analysis for tree ring chronologies and climate data
 #' @description A function similar to \code{\link[treeclim]{dcc}}; without moving
 #'   windows, but spearman correlations used.
@@ -128,9 +126,7 @@ dcc_spear <- function(crn, clim, months = c(-2:10),
   return(out)
 }
 
-#-------------------------
-#plot.dcc_spear
-#-------------------------
+#plot.dcc_spear-----------------------------------------------------------------
 #' @describeIn dcc_spear plot method for object of class "dcc_spear"
 #' @param dcc_spear_object an output object from function dcc_spear()
 #' @export
@@ -155,10 +151,8 @@ plot.dcc_spear <- function(dcc_spear_object, ...) {
 }
 
 
-#-------------------------
-#accumulation_level
-#-------------------------
 
+#accumulation_level-------------------------------------------------------------
 #' @title Correlation between a chronology and climate data at different
 #'   accumulation levels
 #' @description The climate data is accumulated (eg. summed or averaged) over
@@ -242,9 +236,7 @@ accumulation_level <- function(crn, climate.data, accumulation, accumfun = sum,
   cat
 }
 
-#-------------------------
-#plot.accumulation_level
-#-------------------------
+#plot.accumulation_level--------------------------------------------------------
 #' @describeIn accumulation_level plot the output of accumulation_level()
 #'   as contour plot.
 #'
