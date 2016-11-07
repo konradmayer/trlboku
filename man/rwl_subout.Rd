@@ -5,7 +5,7 @@
 \title{rwl_subout}
 \usage{
 rwl_subout(rwl.file, subset, header = FALSE, out.nam = NULL,
-  write.missing = FALSE, site.only = FALSE, stc = NULL)
+  write.missing = FALSE, site.only = FALSE, stc = c(3, 4, 1))
 }
 \arguments{
 \item{rwl.file}{a path to an rwl file (tucson format).}
