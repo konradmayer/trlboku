@@ -124,4 +124,35 @@ rect_barplot <- function(x = names(y), y, width = 0.7, col = 'black'){
     rect(x2[z] - wh, 0, x2[z] + wh, y[z], col = col, border = NA))
 }
 
+#error_bar----------------------------------------------------------------------
+#' @title error bar
+#' @description add a single error bar to a plot
+#' @param x x coordinate
+#' @param y y coordinate - a point gets drawn there
+#' @param ll lower limit - position of the lower whisker
+#' @param ul upper limit - position of the upper whisker
+#' @param width width of the whisker ends
+#' @export
+#'
+#' @examples
+#' #single:
+#' plot(NULL, xlim = c(0, 2), ylim = c(0, 5))
+#' error_bar(1, 2.5, 1, 4.5, 1)
+#'
+#' #multiple:
+#' percentile <- do.call('rbind', lapply(list(c(1:4), c(2:5), c(3:6)), quantile))
+#' plot(NULL, xlim = c(0, 4), ylim = c(0, 7))
+#' lapply(seq_len(nrow(percentile)),
+#'        FUN = function(x) error_bar(x,
+#'                                    percentile[x, 3],
+#'                                    percentile[x, 2],
+#'                                    percentile[x, 4],
+#'                                    width = 0.5))
 
+error_bar <- function(x, y, ll, ul, width) {
+  w <- width/2
+  lines(rep(x, 2), c(ll, ul))
+  points(x, y, pch = 20)
+  lines(c(x - w, x + w), rep(ul, 2))
+  lines(c(x - w, x + w), rep(ll, 2))
+}
