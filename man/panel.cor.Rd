@@ -14,7 +14,7 @@ panel.cor(w, z, ...)
 \item{...}{additional arguments}
 }
 \description{
-adds a bubble plot panel to a correlation matrix
+adds a bubble plot panel to a plot produced by pairs()
 }
 \examples{
 pairs(mtcars, upper.panel=panel.cor)

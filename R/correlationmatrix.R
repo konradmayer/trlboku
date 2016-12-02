@@ -1,6 +1,6 @@
 #panel.cor----------------------------------------------------------------------
 #' @title panel.cor
-#' @description adds a bubble plot panel to a correlation matrix
+#' @description adds a bubble plot panel to a plot produced by pairs()
 #' @param w variable
 #' @param z variable
 #' @param ... additional arguments
