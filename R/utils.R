@@ -105,3 +105,43 @@ intersect_all <- function(a,b,...){
   Reduce('intersect', list(a,b,...))
 }
 
+#seq_range ---------------------------------------------------------------------
+#' @title seq_range
+#' @description This function is a user friendly wrapper around seq() and
+#'    calculates a sequence by a given range
+#' @param x a range, numeric vector of lenth 2
+#' @param by numeric of length 1
+#'
+#' @return a numeric vector
+#' @export
+#'
+#' @examples seq_range(c(2, 4), by = 1)
+seq_range <- function(x, by = 1) {
+  if(x != 2 && !is.numeric(x)){stop('please supply a range')}
+  seq(x[1], x[2], by)
+}
+
+#tidy_series -------------------------------------------------------------------
+#' @title tidy_series
+#' @description transforms an rwl object to tidy data
+#'
+#' @param rwl
+#'
+#' @return a tibble
+#' @export
+#'
+#' @examples
+#' library(dplR)
+#' data("ca533")
+#' tidy_series(ca533)
+tidy_series <- function(rwl) {
+
+  if(!is.data.frame(rwl)) {
+    stop('rwl must be of class data.frame or rwl')
+  }
+
+    out_tidy <- tibble::as_tibble(rwl) %>%
+    dplyr::mutate(year = as.integer(rownames(.))) %>%
+    tidyr::gather(series, value, -year)
+  return(out_tidy)
+}
