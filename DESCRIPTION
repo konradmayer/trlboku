@@ -17,7 +17,10 @@ Imports:
     dplR (>= 1.6.4),
     treeclim (>= 1.0.16),
     pointRes (>= 1.1.2),
-    scales
+    scales,
+    dplyr,
+    tibble,
+    tidyr
 RoxygenNote: 5.0.1
 Suggests: testthat,
     sp,

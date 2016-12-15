@@ -12,7 +12,7 @@ test_that('series_length works with valid input without NA', {
 })
 
 
-test_that('first_last works with NA', {
+test_that('series_length works with NA', {
   dat[1:3,'x'] <- NA
   dat[8:10, 'y'] <- NA
   out <- c(y = 7, x = 7)
