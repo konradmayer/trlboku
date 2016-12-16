@@ -1,5 +1,9 @@
 #detrend_given_rc---------------------------------------------------------------
-detrend_given_rc <- function(rwl, rc, po) {
+detrend_given_rc <- function(rwl, rc, po, method = c('quotient', 'difference')) {
+
+  if(!method %in% c('quotient', 'difference')) {
+    stop("please choose either 'quotient' or 'difference' as method")
+  }
 
   if(!is.data.frame(rwl)) {
     stop('rwl must be of class data.frame')
@@ -20,7 +24,7 @@ detrend_given_rc <- function(rwl, rc, po) {
   if(length(na.omit(rc)) < max(series_length(rwl))) {
     greater <- series_length(rwl) > length(na.omit(rc))
     warning(paste0('rc is shorter than series: ', paste0(names(rwl)[greater],
-                  collapse = ', ')))
+                                                         collapse = ', ')))
   }
 
   n.col <- ncol(rwl)
@@ -36,7 +40,12 @@ detrend_given_rc <- function(rwl, rc, po) {
     rwca[yrs2pith:(yrs2pith + nrow.m1), i] <- rwl.ord[ , i]
   }
 
-  rwica <- rwca / rc
+  if (method == 'quotient'){
+    rwica <- rwca / rc[seq_len(nrow(rwca))]
+  } else if (method == 'difference') {
+    rwica <- rwca - rc[seq_len(nrow(rwca))]
+  }
+
   rwi <- rwl2
   yrs <- as.numeric(row.names(rwl2))
   for (i in seq.cols) {
