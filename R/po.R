@@ -1,6 +1,6 @@
 #po_transform-------------------------------------------------------------------
 #' @title po_transform
-#' @description Estimates no. of missing rings by estimated distance to pith.
+#' @description Estimates no. of missing rings from distance to pith estimations.
 #'
 #' @param po \code{data.frame} of measured distance po (in the same unit as rwl!)
 #'   with series names in the first column and po in the second.
