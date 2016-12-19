@@ -187,7 +187,7 @@ to_cambial_age <- function(rwl, po = NULL) {
  #execute function
   po.ordered <- po[po[ , 1] %in% names(rwl), ]
 
-  lengths <- (series_length(rwl) + po[ , 2]) - 1
+  lengths <- (series_length(rwl) + po.ordered[ , 2]) - 1
   rows <- max(lengths)
   out <- data.frame(matrix(NA, ncol = length(rwl), nrow = rows))
   for (i in seq_along(rwl)){
