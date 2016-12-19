@@ -1,6 +1,6 @@
 #trl_palette--------------------------------------------------------------------
 #' @title trl_palette
-#' @description manipulate the color palette to contain a set of 25 colors
+#' @description change the color palette to contain a set of 25 colors
 #' @export
 trl_palette <- function() {
   c25 <- c("dodgerblue2","#E31A1C", # red
