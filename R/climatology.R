@@ -1,8 +1,8 @@
 
 #dcc_spear----------------------------------------------------------------------
 #' @title correlation analysis for tree ring chronologies and climate data
-#' @description A function similar to \code{\link[treeclim]{dcc}}; without moving
-#'   windows, but spearman correlations used.
+#' @description A function similar to the functionality of \code{\link[treeclim]{dcc}}; 
+#'   without moving windows, but spearman correlations used.
 #' @param crn A chronology - the first column is used by the function, make
 #'   sure to give the right input (in case multiple chronologies are in one
 #'   object, e.g. as for AR-chronologies).
@@ -11,7 +11,7 @@
 #' @param months an integer sequence selecting the end months of the windows to
 #'   use. 1:5 selects jan to may of the "current" years as end months. to select
 #'   months of the "previous" years use negative integers - c(-2:10) selects last
-#'   years october to current years october as end months. Selection needs to be
+#'   years October to current years October as end months. Selection needs to be
 #'   within c(-11:12).
 #' @param method a character string, 'range', 'mean' or 'sum', selecting whether
 #'   to calculate the correlation with individual months, or with means or sums
