@@ -1,8 +1,8 @@
 #combine_fragments--------------------------------------------------------------
 #' @title combine fragments
 #' @description combine multiple fragments of a series as from measuring parts
-#'   of densitometry samples in WinDENDRO according to set rules - this function
-#'   also averages overlapping measurements.
+#'   of densitometry samples in WinDENDRO according to given combining rules - this 
+#'   function also averages overlapping measurements.
 #' @param rwl a rwl/data.frame object.
 #' @param stc numeric, parameter as defined in \code{\link[dplR]{read.ids}}.
 #' @param rules combining rules as a vector of named regular expressions -
