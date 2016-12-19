@@ -55,7 +55,7 @@ detrend_given_rc <- function(rwl, rc, po) {
 
 #sf_rcs-------------------------------------------------------------------------
 #' @title signal free rcs
-#' @description signal free rcs detrending as described in
+#' @description signal free rcs detrending as described by
 #'   \href{http://dx.doi.org/10.1016/j.dendro.2013.06.002}{Melvin (2013)} using
 #'   parts of the code of \code{\link[dplR]{rcs}} as well as the whole function
 #'   internally.
