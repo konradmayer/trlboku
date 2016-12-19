@@ -26,7 +26,8 @@ yr_range <- function (x, yr.vec = as.numeric(names(x))) {
 
 #first_last---------------------------------------------------------------------
 #' @title first_last
-#' @description function to return the first and the last year of a tree ring series
+#' @description function to return the first and the last year of tree ring series
+#'  in an rwl object
 #' @param x a data.frame/rwl object
 #'
 #' @return a data.frame with series names in the first column as character strings,
