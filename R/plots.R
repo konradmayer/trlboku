@@ -1,14 +1,14 @@
 #custom barplots----------------------------------------------------------------
 #' @title custom barplots
-#' @description  A custom barplot separated in in one init function and two
+#' @description  A custom barplot separated into one init function and two
 #'   different barplot functions so it can easily be added to other plots or
 #'   used in combination with points, lines and so on.
 #'@describeIn init_barplot draws an empty plot for rect_barplot and
 #'  lines_barplot
-#' @param x,y double, x also character possible, if only one argument is provided
-#'  it is taken as y and its names as x. If x can be converted to double it is
+#' @param x,y double, for x also a character vector is allowed, if only one argument 
+#'  is provided it is taken as y and its names as x. If x can be converted to double it is
 #'  used as x, if not it is only used as labels.
-#' @param xlim,ylim limits for bith axis; if \code{NULL} they will be calculated
+#' @param xlim,ylim limits for both axes; if \code{NULL} they will be calculated
 #'   by the function. if \code{include0 == TRUE}, ylim[1] will be overwritten
 #'   with 0.
 #' @param include0 logic, if TRUE y axis includes origin
