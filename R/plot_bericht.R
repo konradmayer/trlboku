@@ -10,9 +10,9 @@
 #' @export
 #' @example 
 #' #use the following line to select the file interactively:
-#' ## Not run:
+#' \dontrun{
 #' plot_bericht(file.choose())
-#' ## End(**Not run**)
+#' }
 
 
 plot_bericht <- function(filename, encoding = 'WINDOWS-1252', set_lwd = 50,
