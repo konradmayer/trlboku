@@ -8,6 +8,12 @@
 #' @param set_lwd width of the segments
 #' @param multi adjusts the height of the output png image
 #' @export
+#' @example 
+#' #use the following line to select the file interactively:
+#' \dontrun{
+#' plot_bericht(file.choose())
+#' }
+
 
 plot_bericht <- function(filename, encoding = 'WINDOWS-1252', set_lwd = 50,
                          multi = 0.7) {

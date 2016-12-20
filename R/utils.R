@@ -1,6 +1,6 @@
 #trl_palette--------------------------------------------------------------------
 #' @title trl_palette
-#' @description manipulate the color palette to contain a set of 25 colors
+#' @description change the color palette to contain a set of 25 colors
 #' @export
 trl_palette <- function() {
   c25 <- c("dodgerblue2","#E31A1C", # red
@@ -21,7 +21,7 @@ trl_palette <- function() {
 
 #round_up-----------------------------------------------------------------------
 #' @title round_up
-#' @description round up a number to the nearest multiple of the argument "to"
+#' @description round a number up to the nearest multiple of the argument "to"
 #' @param x numeric or integer
 #' @param to numeric or integer
 #' @export
@@ -39,7 +39,7 @@ round_up <- function(x, to = 1000) {
 
 #round_down---------------------------------------------------------------------
 #' @title round_down
-#' @description round down a number to the nearest multiple of the argument "to"
+#' @description round a number down to the nearest multiple of the argument "to"
 #' @param x numeric or integer
 #' @param to numeric or integer
 #' @export

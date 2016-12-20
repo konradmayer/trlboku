@@ -26,7 +26,8 @@ yr_range <- function (x, yr.vec = as.numeric(names(x))) {
 
 #first_last---------------------------------------------------------------------
 #' @title first_last
-#' @description function to return the first and the last year of a tree ring series
+#' @description function to return the first and the last year of tree ring series
+#'  in an rwl object
 #' @param x a data.frame/rwl object
 #'
 #' @return a data.frame with series names in the first column as character strings,
@@ -100,12 +101,12 @@ truncate_rwl <- function(x) {
 
 #expand_apply generic-----------------------------------------------------------
 #' @title expand_apply
-#' @description Apply function on expanding window.
+#' @description Apply a function on an expanding window.
 #' @param x a numeric vector (NA is allowed and will be omitted)
 #'   or a data.frame/rwl object
 #' @param FUN character, name of a function e.g. 'median'.
-#' @return The form of the value depends on the class of its argument. vector
-#'   for default method, data.frame for data.frame method.
+#' @return The form of the value depends on the class of x. returns a vector
+#'   for default method, a data.frame for data.frame method.
 #' @export
 #' @examples
 #' #example for numeric method:

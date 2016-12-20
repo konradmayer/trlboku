@@ -1,6 +1,6 @@
 #po_transform-------------------------------------------------------------------
 #' @title po_transform
-#' @description Estimates no. of missing rings by estimated distance to pith.
+#' @description Estimates no. of missing rings from distance to pith estimations.
 #'
 #' @param po \code{data.frame} of measured distance po (in the same unit as rwl!)
 #'   with series names in the first column and po in the second.
@@ -40,14 +40,14 @@ po_transform <- function(po, rwl, nyrs = 4) {
 #' @description Estimates pith offset of series by finding the position with
 #'   minimum RSS to existing regional curve.
 #' @param rwl rwl/data.frame object containing the tree ring series.
-#' @param rc existing "regional curve".
+#' @param rc existing "regional curve" as numeric.
 #' @param maxpo maximal po until which RSS gets calculated.
-#' @param nyrs setting for the ffcsaps function used to smooth the series:
-#'   a number greater than 1, affecting the rigidity of the
+#' @param nyrs setting for the \code{\link[dplR]{ffcsaps}} function used to 
+#'   smooth the series: a number greater than 1, affecting the rigidity of the
 #'   spline.  When \code{\var{f}} is kept constant, a larger
-#'  \code{\var{nyrs}} produces a more rigid spline.  Defaults to
-#'  \code{length(\var{y})/2}.
-#' @param f  setting for the ffcsaps function used to smooth the series:
+#'   \code{\var{nyrs}} produces a more rigid spline.  Defaults to
+#'   \code{length(\var{y})/2}.
+#' @param f  setting for the \code{\link[dplR]{ffcsaps}} function used to smooth the series:
 #'   a number between 0 and 1 giving the frequency response at a
 #'   wavelength of \code{\var{nyrs}} years.  When \code{\var{nyrs}} is
 #'   kept constant, a smaller \code{\var{f}} produces a more rigid
@@ -56,9 +56,9 @@ po_transform <- function(po, rwl, nyrs = 4) {
 #'   other extreme, \code{\var{f} = 1} results in the natural spline,
 #'   i.e. the function outputs \code{\var{y}}.  The default value is
 #'   0.5.
-#' @param make.plot a \code{logical} indicating if a plot should be drawn.
+#' @param make.plot a \code{logical} indicating whether a plot should be drawn.
 #'
-#' @return a \code{data.frane} with the columns "series" and "po", containing
+#' @return a \code{data.frame} with the columns "series" and "po", containing
 #'   the series names and po estimations.
 #' @export
 #' @examples #no examples added in the current development version - will be
@@ -187,7 +187,7 @@ to_cambial_age <- function(rwl, po = NULL) {
  #execute function
   po.ordered <- po[po[ , 1] %in% names(rwl), ]
 
-  lengths <- (series_length(rwl) + po[ , 2]) - 1
+  lengths <- (series_length(rwl) + po.ordered[ , 2]) - 1
   rows <- max(lengths)
   out <- data.frame(matrix(NA, ncol = length(rwl), nrow = rows))
   for (i in seq_along(rwl)){

@@ -1,8 +1,8 @@
-#agegrowthplot------------------------------------------------------------------
-#' @title agegrowthplot
+#age_growth_plot----------------------------------------------------------------
+#' @title age_growth_plot
 #' @description Plots mean annual growth rate in a common interval (shown in
 #'   first plot) over tree age - a subset (eg. historic vs. recent trees,
-#'   a different site ect.) can be specified to get a different color in the plot.
+#'   a different site etc.) can be specified to get a different color in the plot.
 #' @param rwl an rwl object.
 #' @param po a data frame with series names in the first and pith offset values
 #'   (number of rings) in the second column.
@@ -17,8 +17,8 @@
 #' data("gp.po")
 #' gp.po[ ,1] <- as.character(gp.po[ ,1])
 #' sub <- names(gp.rwl)[substr(names(gp.rwl), 3, 3) == "B"]
-#' agegrowthplot(gp.rwl, gp.po, subset = sub, main = 'my age-growth-plot')
-agegrowthplot <- function(rwl, po, subset = NULL, subset.color = 'violet', main = '') {
+#' age_growth_plot(gp.rwl, gp.po, subset = sub, main = 'my age-growth-plot')
+age_growth_plot <- function(rwl, po, subset = NULL, subset.color = 'violet', main = '') {
   #check arguments
   if (!is.data.frame(rwl)) {
     stop("'rwl' must be a data.frame")
