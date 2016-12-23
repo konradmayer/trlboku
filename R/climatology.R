@@ -1,7 +1,7 @@
 
 #dcc_spear----------------------------------------------------------------------
 #' @title correlation analysis for tree ring chronologies and climate data
-#' @description A function similar to the functionality of \code{\link[treeclim]{dcc}}; 
+#' @description A function similar to the functionality of \code{\link[treeclim]{dcc}};
 #'   without moving windows, but spearman correlations used.
 #' @param crn A chronology - the first column is used by the function, make
 #'   sure to give the right input (in case multiple chronologies are in one
@@ -128,25 +128,26 @@ dcc_spear <- function(crn, clim, months = c(-2:10),
 
 #plot.dcc_spear-----------------------------------------------------------------
 #' @describeIn dcc_spear plot method for object of class "dcc_spear"
-#' @param dcc_spear_object an output object from function dcc_spear()
+#' @param x an output object from function dcc_spear()
+#' @param ... optional plotting arguments
 #' @export
-plot.dcc_spear <- function(dcc_spear_object, ...) {
+plot.dcc_spear <- function(x, ...) {
 
-  plot(NULL, xlim = c(0, nrow(dcc_spear_object) + 1), ylim = c(-1, 1),
+  plot(NULL, xlim = c(0, nrow(x) + 1), ylim = c(-1, 1),
        xaxt = 'n', xlab = '', ylab = 'Spearman Correlation', ...)
   grid()
   abline(h = 0, col = 'red')
-  plotrix::plotCI(x = seq_len(nrow(dcc_spear_object)),
-                  y = dcc_spear_object$coef,
-                  li = dcc_spear_object$ci_lower,
-                  ui = dcc_spear_object$ci_upper,
+  plotrix::plotCI(x = seq_len(nrow(x)),
+                  y = x$coef,
+                  li = x$ci_lower,
+                  ui = x$ci_upper,
                   slty = 1, xaxt = 'n', pch = 19,
-                  col = ifelse((dcc_spear_object$ci_lower *
-                                  dcc_spear_object$ci_upper) > 0 ,
+                  col = ifelse((x$ci_lower *
+                                  x$ci_upper) > 0 ,
                                "darkblue", "red"),
                   add = T, lwd = 2, sfrac = 0.01)
-  axis(1, at = seq_len(nrow(dcc_spear_object)),
-  labels = rownames(dcc_spear_object),
+  axis(1, at = seq_len(nrow(x)),
+  labels = rownames(x),
   las = 3)
 }
 

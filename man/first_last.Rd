@@ -15,7 +15,8 @@ a data.frame with series names in the first column as character strings,
   third column
 }
 \description{
-function to return the first and the last year of a tree ring series
+function to return the first and the last year of tree ring series
+ in an rwl object
 }
 \examples{
 library('dplR')

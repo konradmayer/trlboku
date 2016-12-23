@@ -1,7 +1,7 @@
 #combine_fragments--------------------------------------------------------------
 #' @title combine fragments
 #' @description combine multiple fragments of a series as from measuring parts
-#'   of densitometry samples in WinDENDRO according to given combining rules - this 
+#'   of densitometry samples in WinDENDRO according to given combining rules - this
 #'   function also averages overlapping measurements.
 #' @param rwl a rwl/data.frame object.
 #' @param stc numeric, parameter as defined in \code{\link[dplR]{read.ids}}.
@@ -17,7 +17,7 @@
 #'                   'AbcAA01g' = c(NA, NA, 1, 1, NA),
 #'                   'AbcAA01h' = c(NA, NA, NA, NA, 1),
 #'                   'AbcAA01m' = c(2, 2, 2, NA, NA),
-#'                   'AbcAA01n' = c(NA, NA, NA, 2, 2),
+#'                   'AbcAA01n' = c(NA, NA, NA, 2, 2))
 #' combine_fragments(rwl)
 combine_fragments <- function(rwl, stc = c(3, 4, 1),
                               rules = c('a' = '[af-l]$',

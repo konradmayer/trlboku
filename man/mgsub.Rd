@@ -19,7 +19,7 @@ a character string
 \description{
 a generalization of gsub which allows to do multiple
   replacements at once as described in
- \link{http://stackoverflow.com/questions/15253954/replace-multiple-arguments-with-gsub}
+ \href{http://stackoverflow.com/questions/15253954/replace-multiple-arguments-with-gsub}{stackoverflow}
 }
 \examples{
 mystring = 'This is good'

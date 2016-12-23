@@ -5,7 +5,7 @@
 #'   used in combination with points, lines and so on.
 #'@describeIn init_barplot draws an empty plot for rect_barplot and
 #'  lines_barplot
-#' @param x,y double, for x also a character vector is allowed, if only one argument 
+#' @param x,y double, for x also a character vector is allowed, if only one argument
 #'  is provided it is taken as y and its names as x. If x can be converted to double it is
 #'  used as x, if not it is only used as labels.
 #' @param xlim,ylim limits for both axes; if \code{NULL} they will be calculated
@@ -159,6 +159,8 @@ error_bar <- function(x, y, ll, ul, width) {
 
 #panel.hist---------------------------------------------------------------------
 #' @title Add a histogram to diagonal panel in pairs()
+#' @description This function can be used inside pairs() function to show
+#'   histograms in the diagonal cells of the matrix.
 #' @param x vector
 #' @param ... additional arguments
 #' @export

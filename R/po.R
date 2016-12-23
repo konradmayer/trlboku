@@ -10,7 +10,7 @@
 #'
 #' @return A \code{data.frame} just as the input "po" with po as no. of tree rings.
 #' @export
-#' @examples no examples available in the development version
+#' @examples #no examples available in the development version
 
 po_transform <- function(po, rwl, nyrs = 4) {
 
@@ -42,7 +42,9 @@ po_transform <- function(po, rwl, nyrs = 4) {
 #' @param rwl rwl/data.frame object containing the tree ring series.
 #' @param rc existing "regional curve" as numeric.
 #' @param maxpo maximal po until which RSS gets calculated.
-#' @param nyrs setting for the \code{\link[dplR]{ffcsaps}} function used to 
+#' @param min.overlap minimum overlap of the curve with the rc curve for a
+#'   potential po to be mentioned.
+#' @param nyrs setting for the \code{\link[dplR]{ffcsaps}} function used to
 #'   smooth the series: a number greater than 1, affecting the rigidity of the
 #'   spline.  When \code{\var{f}} is kept constant, a larger
 #'   \code{\var{nyrs}} produces a more rigid spline.  Defaults to
@@ -61,8 +63,7 @@ po_transform <- function(po, rwl, nyrs = 4) {
 #' @return a \code{data.frame} with the columns "series" and "po", containing
 #'   the series names and po estimations.
 #' @export
-#' @examples #no examples added in the current development version - will be
-#'   added in future
+#' @examples #no examples added in the current development version - will be added in future
 
 po_find <- function(rwl, rc, maxpo = NULL, min.overlap = 10, nyrs = NULL, f = 0.5, make.plot = TRUE){
   #argument checks:

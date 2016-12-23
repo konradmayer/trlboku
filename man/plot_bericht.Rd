@@ -21,4 +21,10 @@ tree ring lab.}
 Produces a segment plot used in standard dating reports of the
   BOKU tree ring lab based on the overview excel table.
 }
+\examples{
+#use the following line to select the file interactively:
+\dontrun{
+plot_bericht(file.choose())
+}
+}
 

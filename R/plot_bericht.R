@@ -8,7 +8,7 @@
 #' @param set_lwd width of the segments
 #' @param multi adjusts the height of the output png image
 #' @export
-#' @example 
+#' @examples
 #' #use the following line to select the file interactively:
 #' \dontrun{
 #' plot_bericht(file.choose())
@@ -24,7 +24,7 @@ plot_bericht <- function(filename, encoding = 'WINDOWS-1252', set_lwd = 50,
   #                                 '#FF7E00', '#9FA91F', '#5e245e', '#b70505'),
   #                         stringsAsFactors = FALSE)
 
-  data('species')
+  data('species', envir = environment())
   rownames(species) <- species[ ,'german']
 
   #read in files
@@ -32,7 +32,7 @@ plot_bericht <- function(filename, encoding = 'WINDOWS-1252', set_lwd = 50,
                              fileEncoding = encoding)
   header <- header[1:3, 4:5]
 
-  df <-  read.xls (filename, sheet = 1, header = TRUE, pattern='Nr.',
+  df <-  gdata::read.xls(filename, sheet = 1, header = TRUE, pattern='Nr.',
                    fileEncoding=encoding)
   columns <- c(2, 3, 4, 5, 7)
   df[,columns] <- lapply(df[ ,columns], FUN = function(x) as.character(x))

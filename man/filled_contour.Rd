@@ -13,10 +13,10 @@ filled_contour(x = seq(0, 1, length.out = nrow(z)), y = seq(0, 1, length.out
   frame.plot = axes, ...)
 }
 \arguments{
-\item{x, y, z, xlim, ylim, zlim, levels, nlevels, color.palette, col, plot.title, plot.axes, key.title, key.axes, asp, xaxs, yaxs, las, axes, frame.plot, ...}{refer to the documantation of the original function \code{\link[graphics]{filled.contour}}.}
+\item{x, y, z, xlim, ylim, zlim, levels, nlevels, color.palette, col, plot.title, plot.axes, key.title, key.axes, asp, xaxs, yaxs, las, axes, frame.plot, ...}{refer to the documentation of the original function \code{\link[graphics]{filled.contour}}.}
 }
 \description{
 mostly the same as \code{\link[graphics]{filled.contour}},
-  \code{border = 0} is set in \code{rect()} as adviced at \url{http://stackoverflow.com/questions/8068366/removing-lines-within-filled-contour-legend}
+  \code{border = 0} is set in \code{rect()} as advised at \url{http://stackoverflow.com/questions/8068366/removing-lines-within-filled-contour-legend}
 }
 

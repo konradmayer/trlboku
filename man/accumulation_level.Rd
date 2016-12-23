@@ -29,7 +29,7 @@ within the window.}
 \item{months}{an integer sequence selecting the end months of the windows to
 use. 1:5 selects jan to may of the "current" years as end months. to select
 months of the "previous" years use negative integers - c(-2:10) selects last
-years october to current years october as end months. Selection needs to be
+years October to current years October as end months. Selection needs to be
 within c(-11:12).}
 
 \item{method}{method to calculate correlations - "pearson", "kendall"
@@ -41,11 +41,11 @@ or "spearman".}
 }
 \value{
 a matrix with the same number of rows as selected aggregation levels
-  (argument "aggregation") and colums as the selection of endmonths.
+  (argument "aggregation") and columns as the selection of end-months.
 }
 \description{
 The climate data is accumulated (eg. summed or averaged) over
-  variing window sizes (from 1 to window size set with "accumulation")
+  varying window sizes (from 1 to window size set with "accumulation")
   and correlations with a given chronology are calculated ("spearman" by
   default, but can be set).
 }

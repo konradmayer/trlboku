@@ -7,10 +7,12 @@
 #'   length as x
 #' @return a character vector of length 2 containing the first and last year
 #' @examples
+#' \dontrun{
 #' library(dplR)
 #' data(ca533)
 #' yr_range(ca533[ ,1], rownames(ca533))
 #' #[1] "1530" "1983"
+#' }
 
 yr_range <- function (x, yr.vec = as.numeric(names(x))) {
   na.flag <- is.na(x)
@@ -59,7 +61,8 @@ first_last <- function(x) {
 
 #series_length------------------------------------------------------------------
 #' @title series length
-#'
+#' @description returns the series length of the series within a data.frame/rwl
+#'   object.
 #' @param x a data.frame/rwl object
 #'
 #' @return a numeric vector
@@ -104,6 +107,7 @@ truncate_rwl <- function(x) {
 #' @description Apply a function on an expanding window.
 #' @param x a numeric vector (NA is allowed and will be omitted)
 #'   or a data.frame/rwl object
+#' @param ... additional arguments
 #' @param FUN character, name of a function e.g. 'median'.
 #' @return The form of the value depends on the class of x. returns a vector
 #'   for default method, a data.frame for data.frame method.
@@ -112,16 +116,16 @@ truncate_rwl <- function(x) {
 #' #example for numeric method:
 #' x <- c(NA, NA, 1, 3, 2, 3, NA)
 #' expand_apply(x, 'median')
-
 #' #example for data.frame method:
 #' library('dplR')
 #' data('ca533')
 #' expand_apply(ca533, 'median')
 
-expand_apply <- function(x, ...) UseMethod('expand_apply', x)
+expand_apply <- function(x, FUN) UseMethod('expand_apply', x)
 
 #expand_apply.numeric-----------------------------------------------------------
-expand_apply.default <- expand_apply.numeric <- expand_apply.integer <- function(x, FUN = 'median') {
+#' @export
+expand_apply.default <- function(x, FUN = 'median') {
   if(!is.numeric(x)) {
     stop('x must be numeric or integer')
   }
@@ -132,8 +136,10 @@ expand_apply.default <- expand_apply.numeric <- expand_apply.integer <- function
 }
 
 #expand_apply.data.frame--------------------------------------------------------
+#' @export
+#' @method expand_apply data.frame
 expand_apply.data.frame <- function(x, FUN = 'median') {
-  x[] <- lapply(x, function(y) trlboku:::expand_apply.numeric(as.vector(y), FUN))
+  x[] <- lapply(x, function(y) expand_apply.default(as.vector(y), FUN))
   return(x)
 }
 

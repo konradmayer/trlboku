@@ -21,15 +21,15 @@ a data.frame.
 }
 \description{
 combine multiple fragments of a series as from measuring parts
-  of densitometry samples in WinDENDRO according to set rules - this function
-  also averages overlapping measurements.
+  of densitometry samples in WinDENDRO according to given combining rules - this
+  function also averages overlapping measurements.
 }
 \examples{
 rwl <- data.frame('AbcAA01f' = c(1, 1, NA, NA, NA),
                   'AbcAA01g' = c(NA, NA, 1, 1, NA),
                   'AbcAA01h' = c(NA, NA, NA, NA, 1),
                   'AbcAA01m' = c(2, 2, 2, NA, NA),
-                  'AbcAA01n' = c(NA, NA, NA, 2, 2),
+                  'AbcAA01n' = c(NA, NA, NA, 2, 2))
 combine_fragments(rwl)
 }
 

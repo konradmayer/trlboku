@@ -126,7 +126,7 @@ sf_rcs <- function (rwl, po, maxit = Inf) {
     sf.m <- sf.m / sf.crn[ , 1]
     sf.rcs <- dplR::rcs(sf.m, po, biweight = FALSE, rc.out = TRUE,
                         make.plot = FALSE)
-    sf.crn <- chron(sf.rcs$rwi, biweight=FALSE)
+    sf.crn <- dplR::chron(sf.rcs$rwi, biweight=FALSE)
     res <- abs(1 - sf.crn[ , 1])
     crn <- crn * sf.crn[ , 1]
     it <- it + 1

@@ -44,7 +44,7 @@ age_growth_plot <- function(rwl, po, subset = NULL, subset.color = 'violet', mai
   title(main, line = 2.5)
 
   mzuw <- colMeans(ci, na.rm = T)
-  alter <- rwl.stats(rwl)[rwl.stats(rwl)[ ,1] %in% names(ci), c(1, 4)]
+  alter <- dplR::rwl.stats(rwl)[dplR::rwl.stats(rwl)[ ,1] %in% names(ci), c(1, 4)]
 
   plot(mzuw ~ alter[ ,2], ylim = c(0, 4), col = ifelse(names(ci) %in% subset,
                                                        'green', subset.color), pch = 19, ylab = 'mean annual growth in common interval',

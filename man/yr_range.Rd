@@ -20,9 +20,11 @@ function yr_range from dplR, extracts the first and last year in
   yr.vec where the corresponding numeric vector shows a value different to NA
 }
 \examples{
+\dontrun{
 library(dplR)
 data(ca533)
 yr_range(ca533[ ,1], rownames(ca533))
 #[1] "1530" "1983"
+}
 }
 

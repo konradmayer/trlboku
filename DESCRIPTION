@@ -13,16 +13,17 @@ Description: This package holds a collection of functions and data used
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
+Depends: R (>= 2.10)
 Imports:
     dplR (>= 1.6.4),
-    treeclim (>= 1.0.16),
-    pointRes (>= 1.1.2),
     scales,
-    dplyr,
-    tibble,
-    tidyr
 RoxygenNote: 5.0.1
 Suggests: testthat,
     sp,
     boot,
-    plotrix
+    plotrix,
+    treeclim (>= 1.0.16),
+    pointRes (>= 1.1.2),
+    gdata,
+    zoo,
+    stringr

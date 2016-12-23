@@ -12,7 +12,7 @@ round_down(x, to = 1000)
 \item{to}{numeric or integer}
 }
 \description{
-round down a number to the nearest multiple of the argument "to"
+round a number down to the nearest multiple of the argument "to"
 }
 \examples{
 round_down(1412, to = 1000)

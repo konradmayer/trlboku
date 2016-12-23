@@ -14,11 +14,11 @@ lines_barplot(x = names(y), y, lwd = 3, col = "black")
 rect_barplot(x = names(y), y, width = 0.7, col = "black")
 }
 \arguments{
-\item{x, y}{double, x also character possible, if only one argument is provided
-it is taken as y and its names as x. If x can be converted to double it is
+\item{x, y}{double, for x also a character vector is allowed, if only one argument
+is provided it is taken as y and its names as x. If x can be converted to double it is
 used as x, if not it is only used as labels.}
 
-\item{xlim, ylim}{limits for bith axis; if \code{NULL} they will be calculated
+\item{xlim, ylim}{limits for both axes; if \code{NULL} they will be calculated
 by the function. if \code{include0 == TRUE}, ylim[1] will be overwritten
 with 0.}
 
@@ -39,7 +39,7 @@ with 0.}
 \item{width}{specifies the box width (with = 1 leaves no space between the bars)}
 }
 \description{
-A custom barplot separated in in one init function and two
+A custom barplot separated into one init function and two
   different barplot functions so it can easily be added to other plots or
   used in combination with points, lines and so on.
 }

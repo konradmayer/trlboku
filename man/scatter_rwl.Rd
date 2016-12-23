@@ -13,7 +13,7 @@ scatter_rwl(rwl, ...)
 }
 \description{
 Produces a scatter plot matrix with rainbow colored points as
-  well as a panel ob correlation bubbles (size corresponds to squared
+  well as a panel of correlation bubbles (size corresponds to squared
   correlation coef, blue positive, red negative)
 }
 \examples{

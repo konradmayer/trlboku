@@ -8,7 +8,7 @@
 dcc_spear(crn, clim, months = c(-2:10), method = c("range", "mean", "sum"),
   replicates = 1000, conf = 0.95, ci.type = "basic")
 
-\method{plot}{dcc_spear}(dcc_spear_object, ...)
+\method{plot}{dcc_spear}(x, ...)
 }
 \arguments{
 \item{crn}{A chronology - the first column is used by the function, make
@@ -21,7 +21,7 @@ column and monthly climate measurement in the consecutive 12 columns.}
 \item{months}{an integer sequence selecting the end months of the windows to
 use. 1:5 selects jan to may of the "current" years as end months. to select
 months of the "previous" years use negative integers - c(-2:10) selects last
-years october to current years october as end months. Selection needs to be
+years October to current years October as end months. Selection needs to be
 within c(-11:12).}
 
 \item{method}{a character string, 'range', 'mean' or 'sum', selecting whether
@@ -38,7 +38,9 @@ and the bootstrapped confidence interval computation).}
 \item{ci.type}{type of confidence interval to be computed as defined as
 "type" in \code{\link[boot]{boot.ci}}.}
 
-\item{dcc_spear_object}{an output object from function dcc_spear()}
+\item{x}{an output object from function dcc_spear()}
+
+\item{...}{optional plotting arguments}
 }
 \value{
 a data frame with following names:
@@ -51,8 +53,8 @@ a data frame with following names:
   }
 }
 \description{
-A function similar to \code{\link[treeclim]{dcc}}; without moving
-  windows, but spearman correlations used.
+A function similar to the functionality of \code{\link[treeclim]{dcc}};
+  without moving windows, but spearman correlations used.
 }
 \section{Methods (by generic)}{
 \itemize{

@@ -11,6 +11,10 @@ panel.hist(x, ...)
 
 \item{...}{additional arguments}
 }
+\description{
+This function can be used inside pairs() function to show
+  histograms in the diagonal cells of the matrix.
+}
 \examples{
 pairs(iris, diag.panel = panel.hist)
 }

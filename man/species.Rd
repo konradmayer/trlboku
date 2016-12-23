@@ -10,7 +10,7 @@
   \item{german}{species name in german}
   \item{english}{species name in english}
   \item{idshort}{species id used at stands with more than 99 series}
-  \item{idcolor}{species id used at stands with less than 99 series}
+  \item{idlong}{species id used at stands with less than 99 series}
   \item{color}{color used for plotting}
   }}
 \usage{
@@ -18,7 +18,7 @@ species
 }
 \description{
 common species in dendrochronology in central europe, their abbriviations
-used in the tree ring lab at boku and consistently used colors for plotting.
+used in the tree ring lab at BOKU and consistently used colors for plotting.
 }
 \keyword{datasets}
 

@@ -19,9 +19,9 @@ rate, default is 4.}
 A \code{data.frame} just as the input "po" with po as no. of tree rings.
 }
 \description{
-Estimates no. of missing rings by estimated distance to pith.
+Estimates no. of missing rings from distance to pith estimations.
 }
 \examples{
-no examples available in the development version
+#no examples available in the development version
 }
 

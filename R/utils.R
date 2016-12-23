@@ -65,7 +65,7 @@ is.wholenumber <- function(x) {
 #' @title generalization of gsub
 #' @description a generalization of gsub which allows to do multiple
 #'   replacements at once as described in
-#'  \link{http://stackoverflow.com/questions/15253954/replace-multiple-arguments-with-gsub}
+#'  \href{http://stackoverflow.com/questions/15253954/replace-multiple-arguments-with-gsub}{stackoverflow}
 #' @param myrepl a list containing character vectors of length two each with the
 #'   string to be replaced at the first and the replacement at the second index
 #' @param mystring a character vector where matches are sought, or an object
@@ -119,29 +119,4 @@ intersect_all <- function(a,b,...){
 seq_range <- function(x, by = 1) {
   if(x != 2 && !is.numeric(x)){stop('please supply a range')}
   seq(x[1], x[2], by)
-}
-
-#tidy_series -------------------------------------------------------------------
-#' @title tidy_series
-#' @description transforms an rwl object to tidy data
-#'
-#' @param rwl
-#'
-#' @return a tibble
-#' @export
-#'
-#' @examples
-#' library(dplR)
-#' data("ca533")
-#' tidy_series(ca533)
-tidy_series <- function(rwl) {
-
-  if(!is.data.frame(rwl)) {
-    stop('rwl must be of class data.frame or rwl')
-  }
-
-    out_tidy <- tibble::as_tibble(rwl) %>%
-    dplyr::mutate(year = as.integer(rownames(.))) %>%
-    tidyr::gather(series, value, -year)
-  return(out_tidy)
 }

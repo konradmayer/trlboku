@@ -12,4 +12,8 @@ series_length(x)
 \value{
 a numeric vector
 }
+\description{
+returns the series length of the series within a data.frame/rwl
+  object.
+}
 

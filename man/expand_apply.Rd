@@ -4,20 +4,22 @@
 \alias{expand_apply}
 \title{expand_apply}
 \usage{
-expand_apply(x, ...)
+expand_apply(x, FUN)
 }
 \arguments{
 \item{x}{a numeric vector (NA is allowed and will be omitted)
 or a data.frame/rwl object}
 
 \item{FUN}{character, name of a function e.g. 'median'.}
+
+\item{...}{additional arguments}
 }
 \value{
-The form of the value depends on the class of its argument. vector
-  for default method, data.frame for data.frame method.
+The form of the value depends on the class of x. returns a vector
+  for default method, a data.frame for data.frame method.
 }
 \description{
-Apply function on expanding window.
+Apply a function on an expanding window.
 }
 \examples{
 #example for numeric method:
