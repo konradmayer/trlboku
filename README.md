@@ -16,3 +16,8 @@ You can install trlboku from github with:
 # install.packages("devtools")
 devtools::install_github("konradmayer/trlboku")
 ```
+
+Coming soon ...
+---------------
+
+Further function implementations as well as vignettes and examples in the function documentations will be added in near future, please refer to the package history. If a needed function is missing please file an issue or write an email.
