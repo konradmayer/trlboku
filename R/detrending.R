@@ -136,7 +136,7 @@ sf_rcs <- function (rwl, po, maxit = Inf) {
   if(it == maxit){warning('max iterations reached')}
 
   rc <- rc.curves[[it]]
-  rwi <- detrend_given_rc(rwl = rwl, rc = rc, po = po)
+  rwi <- detrend_given_rc(rwl = rwl, rc = rc, po = po, method = 'quotient')
 
   list('rwi' = rwi, 'rc' = rc)
 }
