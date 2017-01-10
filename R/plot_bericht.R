@@ -28,7 +28,7 @@ plot_bericht <- function(filename, encoding = 'WINDOWS-1252', set_lwd = 50,
   rownames(species) <- species[ ,'german']
 
   #read in files
-  header <- gdata::read.xls (filename, sheet = 1, header = F,
+  header <- gdata::read.xls (filename, sheet = 1, header = FALSE,
                              fileEncoding = encoding)
   header <- header[1:3, 4:5]
 
@@ -80,7 +80,8 @@ plot_bericht <- function(filename, encoding = 'WINDOWS-1252', set_lwd = 50,
 
   ######plot
   makeplot <- function() {
-    xlim <- c(min(dat[3]) - 10, max(dat[ , 4] + dat[ , 8], na.rm = TRUE) + 10)
+    xlim <- c(min(dat[3], na.rm = TRUE) - 10,
+              max(dat[ , 4] + dat[ , 8], na.rm = TRUE) + 10)
     ylim <- c(0, nrow(dat) + 1)
 
     png(paste(header[1, 2], '.png', sep = ""), units = 'in',
