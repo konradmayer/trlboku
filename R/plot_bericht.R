@@ -15,14 +15,8 @@
 #' }
 
 
-plot_bericht <- function(filename, encoding = 'Latin-1', set_lwd = 50,
+plot_bericht <- function(filename, encoding = 'latin1', set_lwd = 50,
                          multi = 0.7) {
-  #create lookup table for allowed species and their assigned colors
-  # species <- data.frame(Baumart=c('Fichte', 'Tanne', 'L?rche', 'Eiche', 'Zirbe',
-  #                                   'Kiefer', 'Nadelholz', 'Ulme', 'Buche'),
-  #                         Farbe=c('#056608', '#0018A8', '#D3212D', '#967117', '#FFEF00',
-  #                                 '#FF7E00', '#9FA91F', '#5e245e', '#b70505'),
-  #                         stringsAsFactors = FALSE)
 
   data('species', envir = environment())
   rownames(species) <- species[ ,'german']
@@ -53,7 +47,7 @@ plot_bericht <- function(filename, encoding = 'Latin-1', set_lwd = 50,
   }
 
   #selects only dated series
-  df <- df[!(df[4] %in% c('nicht datiert', 'nicht bearbeitbar')), ]
+  df <- df[grep('\\d{4}', df[,4]), ]
 
   #separate date end and unmeasured years from string
   date.end <- as.data.frame(as.numeric(stringr::str_extract(df[ ,4], '-?\\d{1,4}')))
