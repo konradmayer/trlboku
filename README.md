@@ -21,3 +21,12 @@ Coming soon ...
 ---------------
 
 Further function implementations as well as vignettes and examples in the function documentations will be added in near future, please refer to the package history. If a needed function is missing please file an issue or write an email.
+
+Updating
+--------
+
+subsequent implementations and bug fixes require regular updating, to keep your installation up to date type:
+
+``` r
+devtools::update_packages("trlboku")
+```
