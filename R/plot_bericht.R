@@ -4,7 +4,7 @@
 #'   BOKU tree ring lab based on the overview excel table.
 #' @param filename a path to a .xls file used for dating overview in the BOKU
 #'   tree ring lab.
-#' @param encoding encoding of the .xls file, defaults to 'WINDOWS-1252'
+#' @param encoding encoding of the .xls file
 #' @param set_lwd width of the segments
 #' @param multi adjusts the height of the output png image
 #' @export
@@ -15,7 +15,7 @@
 #' }
 
 
-plot_bericht <- function(filename, encoding = 'WINDOWS-1252', set_lwd = 50,
+plot_bericht <- function(filename, encoding = 'Latin-1', set_lwd = 50,
                          multi = 0.7) {
   #create lookup table for allowed species and their assigned colors
   # species <- data.frame(Baumart=c('Fichte', 'Tanne', 'L?rche', 'Eiche', 'Zirbe',
@@ -33,7 +33,7 @@ plot_bericht <- function(filename, encoding = 'WINDOWS-1252', set_lwd = 50,
   header <- header[1:3, 4:5]
 
   df <-  gdata::read.xls(filename, sheet = 1, header = TRUE, pattern='Nr.',
-                   fileEncoding=encoding)
+                   encoding=encoding)
   columns <- c(2, 3, 4, 5, 7)
   df[,columns] <- lapply(df[ ,columns], FUN = function(x) as.character(x))
 
