@@ -1,7 +1,7 @@
 Package: trlboku
 Type: Package
 Title: Tree Ring Lab BOKU - a lab internal R function collection
-Version: 0.0.0.9003
+Version: 0.0.0.9004
 Authors@R: person("Konrad", "Mayer", email = "konrad.mayer@boku.ac.at",
   role = c("aut", "cre"))
 Description: This package holds a collection of functions and data used
