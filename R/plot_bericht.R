@@ -29,7 +29,7 @@ plot_bericht <- function(filename, encoding = 'Latin-1', set_lwd = 50,
 
   #read in files
   header <- gdata::read.xls (filename, sheet = 1, header = FALSE,
-                             fileEncoding = encoding)
+                             encoding = encoding)
   header <- header[1:3, 4:5]
 
   df <-  gdata::read.xls(filename, sheet = 1, header = TRUE, pattern='Nr.',
