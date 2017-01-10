@@ -26,4 +26,5 @@ Suggests: testthat,
     pointRes (>= 1.1.2),
     gdata,
     zoo,
-    stringr
+    stringr,
+    maptools
