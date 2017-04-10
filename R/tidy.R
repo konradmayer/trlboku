@@ -1,3 +1,6 @@
+
+# tidyrwl -----------------------------------------------------------------
+
 #' @title tidy and untidy ring width data
 #' @description little helper functions to convert dataframes from the data
 #'   format used in multiple dendro-related R packages such as \pkg{dplR} to

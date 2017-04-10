@@ -1,3 +1,4 @@
+# res_comp ---------------------------------------------------------------------
 
 #' @title resilience components
 #' @description The function calculates resilience components on a data.frame of
@@ -37,7 +38,7 @@ res_comp <- function(rwl, nyrs_pre = 4, nyrs_post = 4) {
 }
 
 
-# res_comp vector functions -----------------------------------------------
+# res_comp vector functions ----------------------------------------------------
 
 resistance_vector <- function(x, nyrs_pre = 1) {
   pre <- zoo::rollapplyr(x, by = 1, width = nyrs_pre, FUN = 'mean', fill = NA)
