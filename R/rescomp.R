@@ -4,15 +4,19 @@
 #'  tree-ring series after Lloret et al. (2011), similar to function
 #'  \code{\link[pointRes]{res.comp}}. This function also accepts pre- and post-
 #'  disturbance periods of 1 in contrast to the above mentioned function.
-#' @param rwl a data frame of tree ring measures
-#' @param nyrs_pre number of years defining the pre disturbance performance
-#' @param nyrs_post number of years defining the post disturbance performance
+#' @param rwl a data frame of tree ring measures.
+#' @param nyrs_pre number of years defining the pre disturbance performance.
+#' @param nyrs_post number of years defining the post disturbance performance.
 #'
-#' @return
+#' @return a list of data frames with the members resistance, recovery,
+#'   resilience and rel_resilience. Each data frame consists of the same series
+#'   as supplied with rwl row numbers reduced by nyrs_pre and nyrs_post.
 #' @export
 #'
 #' @examples
-#'
+#' library('dplR')
+#' data('ca533')
+#' res_comp(ca533)
 res_comp <- function(rwl, nyrs_pre = 4, nyrs_post = 4) {
   if (nyrs_pre < 1 || nyrs_post < 1 || !is.wholenumber(nyrs_pre) || is.wholenumber(nyrs_post)) {
     stop('nyrs_pre and nyrs_post need to be integers >= 1')
