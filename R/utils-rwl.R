@@ -237,3 +237,23 @@ avg_trees <- function(rwl, stc = c(3, 4, 1)) {
   class(rwl.2) <- c('rwl', 'data.frame')
   return(rwl.2)
 }
+
+# internal NA_series -----------------------------------------------------------
+#code stolen from dplR function
+internalNA_series <- function(x) {
+  x.na <- is.na(x)
+  x.ok <- which(!x.na)
+  n.ok <- length(x.ok)
+  if (n.ok <= 1) {
+    return(x)
+  }
+  first.ok <- x.ok[1]
+  last.ok <- x.ok[n.ok]
+  return(last.ok - first.ok + 1 > n.ok)
+}
+
+# internal NA_rwl --------------------------------------------------------------
+
+internalNA_rwl <- function(x) {
+  vapply(rw, internalNA_series, logical(1))
+}
