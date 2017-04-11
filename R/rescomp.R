@@ -1,3 +1,4 @@
+# res_comp ---------------------------------------------------------------------
 
 #' @title resilience components
 #' @description The function calculates resilience components on a data.frame of
@@ -18,10 +19,10 @@
 #' data('ca533')
 #' res_comp(ca533)
 res_comp <- function(rwl, nyrs_pre = 4, nyrs_post = 4) {
-  if (nyrs_pre < 1 || nyrs_post < 1 || !is.wholenumber(nyrs_pre) || is.wholenumber(nyrs_post)) {
+  if ((nyrs_pre < 1) || (nyrs_post < 1) || (!is.wholenumber(nyrs_pre)) || (!is.wholenumber(nyrs_post))) {
     stop('nyrs_pre and nyrs_post need to be integers >= 1')
   }
-  if(!is.data.frame(x)) {
+  if(!is.data.frame(rwl)) {
     stop('x must be of class data.frame')
   }
   common_years <- rownames(rwl)[(nyrs_pre + 1):(nrow(rwl)-nyrs_post)]
@@ -37,7 +38,7 @@ res_comp <- function(rwl, nyrs_pre = 4, nyrs_post = 4) {
 }
 
 
-# res_comp vector functions -----------------------------------------------
+# res_comp vector functions ----------------------------------------------------
 
 resistance_vector <- function(x, nyrs_pre = 1) {
   pre <- zoo::rollapplyr(x, by = 1, width = nyrs_pre, FUN = 'mean', fill = NA)

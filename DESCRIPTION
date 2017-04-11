@@ -1,7 +1,7 @@
 Package: trlboku
 Type: Package
 Title: Tree Ring Lab BOKU - a lab internal R function collection
-Version: 0.0.0.9005
+Version: 0.0.0.9006
 Authors@R: person("Konrad", "Mayer", email = "konrad.mayer@boku.ac.at",
   role = c("aut", "cre"))
 Description: This package holds a collection of functions and data used
@@ -17,6 +17,7 @@ Depends: R (>= 2.10)
 Imports:
     dplR (>= 1.6.4),
     scales,
+    dplyr
 RoxygenNote: 5.0.1
 Suggests: testthat,
     sp,
@@ -27,4 +28,8 @@ Suggests: testthat,
     gdata,
     zoo,
     stringr,
-    maptools
+    maptools,
+    lazyeval,
+    purrr,
+    tibble,
+    tidyr
