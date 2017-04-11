@@ -17,6 +17,7 @@ Depends: R (>= 2.10)
 Imports:
     dplR (>= 1.6.4),
     scales,
+    dplyr
 RoxygenNote: 5.0.1
 Suggests: testthat,
     sp,
@@ -27,4 +28,8 @@ Suggests: testthat,
     gdata,
     zoo,
     stringr,
-    maptools
+    maptools,
+    lazyeval,
+    purrr,
+    tibble,
+    tidyr

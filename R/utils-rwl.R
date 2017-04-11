@@ -255,5 +255,5 @@ internalNA_series <- function(x) {
 # internal NA_rwl --------------------------------------------------------------
 
 internalNA_rwl <- function(x) {
-  vapply(rw, internalNA_series, logical(1))
+  vapply(x, internalNA_series, logical(1))
 }

@@ -12,8 +12,10 @@
 #' @param tidy_rwl tidy ring width data as obtained from \code{\link{tidy_rwl}}
 #' @param value_col column name of the value column in the tidy tibble of the
 #'   input resp output object
+#' @importFrom dplyr %>%
 #' @return data frames or tibbles
 NULL
+globalVariables(".")
 
 #' @rdname tidyrwl
 #' @export
@@ -36,7 +38,7 @@ tidy_rwl <- function(rwl, value_col = 'rwl') {
     tibble::rownames_to_column('year') %>%
     tibble::as_tibble() %>%
     dplyr::mutate_(.dots = setNames(list(lazyeval::interp(~as.numeric(var), var = as.name('year'))), 'year')) %>%
-    tidyr::gather_("series", value_col, select_vars_(names(.),names(.), exclude = "year")) %>%
+    tidyr::gather_("series", value_col, dplyr::select_vars_(names(.),names(.), exclude = "year")) %>%
     dplyr::filter_(lazyeval::interp(~(!is.na(nam)), nam = as.name('rwl')))
 }
 
