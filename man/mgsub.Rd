@@ -26,4 +26,3 @@ mystring = 'This is good'
 myrepl = list(c('o', 'a'), c('i', 'n'))
 mgsub(myrepl, mystring)
 }
-

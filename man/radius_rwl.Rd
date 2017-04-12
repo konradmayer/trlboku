@@ -22,4 +22,3 @@ library("dplR")
 data("gp.rwl")
 radius_rwl(gp.rwl)
 }
-

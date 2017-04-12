@@ -28,4 +28,3 @@ Plot median growth rate or other parameters per radius class to
 \examples{
 #not available in development version.
 }
-

@@ -33,4 +33,3 @@ gp.po[ ,1] <- as.character(gp.po[ ,1])
 sub <- names(gp.rwl)[substr(names(gp.rwl), 3, 3) == "B"]
 age_growth_plot(gp.rwl, gp.po, subset = sub, main = 'my age-growth-plot')
 }
-

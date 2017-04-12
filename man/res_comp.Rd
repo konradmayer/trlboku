@@ -29,4 +29,3 @@ library('dplR')
 data('ca533')
 res_comp(ca533)
 }
-

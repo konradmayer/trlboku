@@ -18,4 +18,3 @@ This function can be used inside pairs() function to show
 \examples{
 pairs(iris, diag.panel = panel.hist)
 }
-

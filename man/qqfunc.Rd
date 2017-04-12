@@ -20,4 +20,3 @@ try to spot the qqplot of your data within 8 other qqplots,
 \examples{
 qqfunc(lm(speed ~ dist, data = cars))
 }
-

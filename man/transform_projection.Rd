@@ -55,4 +55,3 @@ spatpoints_lambert2 <- spTransform(spatpoints, CRS.new)
 identical(spatpoints_lambert, spatpoints_lambert2)
 }
 }
-

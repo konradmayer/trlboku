@@ -22,4 +22,3 @@ library("dplR")
 data("gp.rwl")
 avg_trees(gp.rwl, stc = c(0,2,1))
 }
-

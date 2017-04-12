@@ -25,4 +25,3 @@ x <- c(NA,NA,NA,1,2,3,4,5, NA, NA)
 sort_by_index(x)
 #[1]  1  2  3  4  5 NA NA NA NA NA
 }
-

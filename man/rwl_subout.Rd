@@ -33,4 +33,3 @@ This function takes an rwl object as well as a csv as input and
   using the basename of the path provided with argument subset or as
   specified by out.nam.
 }
-

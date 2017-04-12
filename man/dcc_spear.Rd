@@ -60,7 +60,7 @@ A function similar to the functionality of \code{\link[treeclim]{dcc}};
 \itemize{
 \item \code{plot}: plot method for object of class "dcc_spear"
 }}
+
 \examples{
 #not available in development version
 }
-

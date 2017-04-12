@@ -22,4 +22,3 @@ data("gp.rwl")
 subset <- gp.rwl[ ,1:10] #first value 1720, but rows start with 1570
 truncate_rwl(subset) #rows start with 1720
 }
-

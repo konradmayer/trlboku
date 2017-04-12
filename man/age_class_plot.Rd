@@ -26,4 +26,3 @@ Plot median growth rate or other parameters per age class to
 \examples{
 #not available in development version.
 }
-
