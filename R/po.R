@@ -169,11 +169,11 @@ to_cambial_age <- function(rwl, po = NULL) {
   }
 
   if (is.null(po)) {
-    po <- data.frame(series = names(rwl), po = 1)
+    po <- data.frame(series = names(rwl), po = 1, stringsAsFactors = FALSE)
   }
 
 
-  if(!(nrow(po) > 2 && is.numeric(po[, 2]))) {
+  if( ncol(po) > 2 || !is.numeric(po[, 2])) {
     stop('please provide a po object with two columns and pith offset as numeric
          values (cambial age of innermost ring) in the second column')
   }
