@@ -6,7 +6,7 @@
 #'
 #'   EPSG of common projections:
 #'   \itemize{
-#'     \item{WG84: 4326}
+#'     \item{WGS84: 4326}
 #'     \item{Lambert Austria: 31287}
 #'   }
 #' @param spatial_object an object of class "Spatial".
@@ -63,10 +63,10 @@ transform_projection <- function(spatial_object, epsg_new, epsg_old = NULL) {
 #'   a catchment covered by digHAO (digital version of the hydrological atlas of
 #'   austria)
 #' @param rivers_digHAO a SpatialLinesDataFrame imported with
-#'   \code{link[maptools]{readShapeLines}}, data covered by the digital version
+#'   \code{\link[maptools]{readShapeLines}}, data covered by the digital version
 #'   of the hydrological atlas of austria
 #' @param catchments_digHAO a SpatialPolygonsDataFrame imported with
-#'   \code{link[maptools]{readShapePoly}}, data covered by the digital version
+#'   \code{\link[maptools]{readShapePoly}}, data covered by the digital version
 #'   of the hydrological atlas of austria
 #' @param lonlat a numeric vector of length 2 with the longitue and latitude of a mappoint
 #' @param proj4string the proj4string of the provided lonlat

@@ -26,7 +26,7 @@ Transforms to different projection by supplying an EPSG code.
 
   EPSG of common projections:
   \itemize{
-    \item{WG84: 4326}
+    \item{WGS84: 4326}
     \item{Lambert Austria: 31287}
   }
 }
