@@ -20,4 +20,3 @@ a generalization of intersect() to take more than two vectors as
 \examples{
 intersect_all(c(1,2,3,4), c(3,4,5), c(3,4,6,7))
 }
-

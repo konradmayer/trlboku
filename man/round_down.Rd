@@ -18,4 +18,3 @@ round a number down to the nearest multiple of the argument "to"
 round_down(1412, to = 1000)
 # [1] 1000
 }
-

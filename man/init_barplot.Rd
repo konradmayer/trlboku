@@ -52,6 +52,7 @@ lines_barplot
 
 \item \code{rect_barplot}: is a plotting function based on \code{\link[graphics]{rect}}
 }}
+
 \examples{
 x <- 10 + rnorm(40)
 names(x) <- 1901:1940
@@ -64,4 +65,3 @@ rect_barplot(x, width = 0.5)
 init_barplot(x)
 lines_barplot(x, lwd = 3)
 }
-

@@ -25,4 +25,3 @@ This function adds a column containing the "stand_depth" to
 \examples{
 # no example available in the development version
 }
-

@@ -46,4 +46,3 @@ Estimates pith offset of series by finding the position with
 \examples{
 #no examples added in the current development version - will be added in future
 }
-

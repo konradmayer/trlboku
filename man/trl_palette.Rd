@@ -9,4 +9,3 @@ trl_palette()
 \description{
 change the color palette to contain a set of 25 colors
 }
-

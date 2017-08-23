@@ -35,4 +35,10 @@
 #' @docType package
 #' @name trlboku
 #'
+#'
+#' @import stats
+#' @import graphics
+#' @import grDevices
+#' @import utils
+#'
 NULL

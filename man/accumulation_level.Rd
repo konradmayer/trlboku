@@ -54,7 +54,7 @@ The climate data is accumulated (eg. summed or averaged) over
 \item \code{plot}: plot the output of accumulation_level()
 as contour plot.
 }}
+
 \examples{
 # not available in development version
 }
-

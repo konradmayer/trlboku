@@ -44,4 +44,3 @@ Thomas M. Melvin, Keith R. Briffa, CRUST: Software for the
   1 October 2008, Pages 71-86, ISSN 1125-7865,
   \url{http://dx.doi.org/10.1016/j.dendro.2007.12.001}.
 }
-

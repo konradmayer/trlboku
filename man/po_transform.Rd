@@ -24,4 +24,3 @@ Estimates no. of missing rings from distance to pith estimations.
 \examples{
 #no examples available in the development version
 }
-

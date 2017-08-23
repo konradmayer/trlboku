@@ -33,4 +33,3 @@ Plots a chronology with underlaying sample depth and
 \examples{
 #will be added later
 }
-

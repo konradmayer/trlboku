@@ -21,4 +21,3 @@ common species in dendrochronology in central europe, their abbriviations
 used in the tree ring lab at BOKU and consistently used colors for plotting.
 }
 \keyword{datasets}
-

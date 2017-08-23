@@ -40,4 +40,3 @@ Fürst, J. (2008): Der digitale Hydrologische Atlas Österreichs.
   Der Hydrologische Atlas Österreichs: Anwendung in Wasserwirtschaft und
   Umweltschutz, 1. Juli 2008, Universität für Bodenkultur Wien
 }
-

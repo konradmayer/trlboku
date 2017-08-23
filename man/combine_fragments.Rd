@@ -32,4 +32,3 @@ rwl <- data.frame('AbcAA01f' = c(1, 1, NA, NA, NA),
                   'AbcAA01n' = c(NA, NA, NA, 2, 2))
 combine_fragments(rwl)
 }
-

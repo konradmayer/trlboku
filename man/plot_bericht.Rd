@@ -26,4 +26,3 @@ Produces a segment plot used in standard dating reports of the
 plot_bericht(file.choose())
 }
 }
-

@@ -22,4 +22,3 @@ library("dplR")
 data("gp.rwl")
 age_rwl(gp.rwl)
 }
-

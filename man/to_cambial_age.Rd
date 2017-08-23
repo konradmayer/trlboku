@@ -26,4 +26,3 @@ data("gp.po")
 gp.po$series <- as.character(gp.po$series)
 to_cambial_age(gp.rwl, gp.po)
 }
-

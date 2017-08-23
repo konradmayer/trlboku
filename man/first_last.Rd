@@ -23,4 +23,3 @@ library('dplR')
 data('gp.rwl')
 first_last(gp.rwl)
 }
-

@@ -9,7 +9,7 @@ catchment(catchments_digHAO, lonlat, proj4string = sp::CRS("+init=epsg:4326"),
 }
 \arguments{
 \item{catchments_digHAO}{a SpatialPolygonsDataFrame imported with
-\code{link[maptools]{readShapePoly}}, data covered by the digital version
+\code{\link[maptools]{readShapePoly}}, data covered by the digital version
 of the hydrological atlas of austria}
 
 \item{lonlat}{a numeric vector of length 2 with the longitue and latitude of a mappoint}
@@ -19,7 +19,7 @@ of the hydrological atlas of austria}
 \item{make.plot}{logic}
 
 \item{rivers_digHAO}{a SpatialLinesDataFrame imported with
-\code{link[maptools]{readShapeLines}}, data covered by the digital version
+\code{\link[maptools]{readShapeLines}}, data covered by the digital version
 of the hydrological atlas of austria}
 
 \item{...}{additional plotting arguments such as plot title etc.}
@@ -54,4 +54,3 @@ Fürst, J. (2008): Der digitale Hydrologische Atlas Österreichs.
   Der Hydrologische Atlas Österreichs: Anwendung in Wasserwirtschaft und
   Umweltschutz, 1. Juli 2008, Universität für Bodenkultur Wien
 }
-

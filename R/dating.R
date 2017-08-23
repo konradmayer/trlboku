@@ -38,7 +38,7 @@ new_date_end <- function(rwl, date.end) {
     series <- rwl[,seriesname]
     series <- na.exclude(series)
     rownames <- (dateend - length(series) + 1):dateend
-    series.df <- as.data.frame(series, row.names = rownames)
+    series.df <- data.frame(series, row.names = as.character(rownames))
     names(series.df) <- seriesname
 
     tmp[[i]] <- series.df

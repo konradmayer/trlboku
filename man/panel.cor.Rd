@@ -19,4 +19,3 @@ adds a bubble plot panel to a plot produced by pairs()
 \examples{
 pairs(mtcars, upper.panel=panel.cor)
 }
-

@@ -21,4 +21,3 @@ This function is a user friendly wrapper around seq() and
 \examples{
 seq_range(c(2, 4), by = 1)
 }
-

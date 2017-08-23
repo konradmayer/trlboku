@@ -21,4 +21,3 @@ library('dplR')
 data('gp.rwl')
 scatter_rwl(gp.rwl[1:6], main = 'example plot', pch=19)
 }
-

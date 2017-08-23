@@ -213,7 +213,7 @@ included in calculations:", series_not_in_rwdata, collapse = ', ')
   }
 
   if (is.null(cutoff)) {
-    cutoff <- as.numeric(rownames(dat)[1] - 1)
+    cutoff <- as.numeric(rownames(dat))[1] - 1
   }
 
   dat <- dat[as.numeric(rownames(dat)) > as.numeric(cutoff[1]), these_series]
@@ -296,7 +296,7 @@ age_class_plot <- function (dat, cutoff = NULL,
   }
 
   if (is.null(cutoff)) {
-    cutoff <- as.numeric(rownames(dat)[1] - 1)
+    cutoff <- as.numeric(rownames(dat))[1] - 1
   }
 
   dat <- dat[as.numeric(rownames(dat)) > as.numeric(cutoff[1]), ]

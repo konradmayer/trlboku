@@ -30,4 +30,3 @@ library('dplR')
 data('ca533')
 expand_apply(ca533, 'median')
 }
-

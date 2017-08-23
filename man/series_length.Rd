@@ -16,4 +16,3 @@ a numeric vector
 returns the series length of the series within a data.frame/rwl
   object.
 }
-

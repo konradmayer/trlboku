@@ -25,4 +25,3 @@ de <- dplR::rwl.stats(gp.rwl)[ , c(1,3)] #construct a data frame of current date
 de[1:4, 2] <- 1600 #changing the date end of the first 4 series to 1600
 seg.plot(new_date_end(gp.rwl, de))
 }
-
