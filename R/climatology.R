@@ -37,7 +37,7 @@
 #' @examples #not available in development version
 dcc_spear <- function(crn, clim, months = c(-2:10),
                       method = c('range', 'mean', 'sum'), replicates = 1000,
-                      conf = 0.95, ci.type = "basic") {
+                      conf = 0.95, ci.type = "perc") {
 
     #argchecks:
   method <- method[1]
