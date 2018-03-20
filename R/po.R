@@ -25,7 +25,7 @@ po_transform <- function(po, rwl, nyrs = 4) {
 
   for (p in as.character(po[ , 1])) {
     meanrw <- mean(na.omit(rwl[p])[seq_len(nyrs), ])
-    po$meanrw[po$series == p] <- meanrw
+    po$meanrw[po[ , 1] == p] <- meanrw
   }
 
   po$po.new <- round(po[ , 2] / po$meanrw) + 1

@@ -6,7 +6,7 @@
 \title{correlation analysis for tree ring chronologies and climate data}
 \usage{
 dcc_spear(crn, clim, months = c(-2:10), method = c("range", "mean", "sum"),
-  replicates = 1000, conf = 0.95, ci.type = "basic")
+  replicates = 1000, conf = 0.95, ci.type = "perc")
 
 \method{plot}{dcc_spear}(x, ...)
 }
