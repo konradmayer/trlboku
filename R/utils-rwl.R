@@ -257,3 +257,135 @@ internalNA_series <- function(x) {
 internalNA_rwl <- function(x) {
   vapply(x, internalNA_series, logical(1))
 }
+
+# rwl_problems --------------------------------------------------------------
+
+rwl_problems <- function(x, message = FALSE) {
+
+  a <- !is.data.frame(x)
+  if (a) {
+    message("your tree-ring data must be provided as a data.frame")
+  }
+
+  b <- !all(vapply(x, purrr::possibly(is.numeric, TRUE), FALSE, USE.NAMES = FALSE))
+  if (b) {
+    message("your tree-ring data must have numeric columns")
+  }
+
+  c <- any(internalNA_rwl(x))
+  if(c) {
+    message(paste0("your tree-ring data must not have internal NAs - Problems appear at series: ", paste0(names(which(internalNA_rwl(x))), collapse = ', ')))  }
+
+  if (any(a, b, c)) {
+    return(TRUE)
+  }else{
+    if(message){
+      message('your data looks fine - no problems detected')
+    }
+    return(FALSE)
+  }
+}
+
+
+# test_rwl_set ----------------------------------------------------------
+all_identical <- function(l) all(mapply(identical, head(l, 1), tail(l, -1)))
+
+rwl_set_problems <- function(rw = NULL, ew = NULL, lw = NULL, ewp = NULL,
+                             lwp = NULL, rd = NULL, ed = NULL, ld = NULL,
+                             maxd = NULL, mind = NULL, tolerance = 0.01,
+                             tolerance.percentage = 0.05, logic.output = FALSE) {
+
+  dat <- purrr::compact(list(rw = rw, ew = ew, lw = lw, ewp = ewp, lwp = lwp,
+                             rd = rd, ed = ed, ld = ld, maxd = maxd, mind = mind))
+
+
+  # compute min mean and max per dataset
+  smry <- function(x) {
+    funs <- c(min, mean, max)
+    sapply(funs, function(f) round(f(as.matrix(x), na.rm = TRUE), 2))
+  }
+  tmp <- purrr::reduce(purrr::map(dat, smry), rbind)
+  if(is.null(nrow(tmp))){
+    smry_table <- as.data.frame(t(as.data.frame(c(names(dat), tmp))))
+  }else{
+    smry_table <- as.data.frame(cbind(names(dat), tmp))
+  }
+  names(smry_table) <- c('parameter', 'min', 'mean', 'max')
+  rownames(smry_table) <- NULL
+
+
+  # TESTS
+
+  # if only one dataset provided, run rwl_problems() on it:
+  if (length(dat) == 1) {
+    message('you only provided a single object - only the checks of test_rwl() will be done')
+    a <- rwl_problems(dat[[1]])
+    if(a) {
+      message("the object you provided has a problem - use test_rwl() to get details")
+    }
+    x <- b <- c <- d <- e  <- NULL
+  }else{
+
+    # test for dimensions
+    x <- !all_identical(purrr::map(dat, dim))
+    if(x) {
+      message("objects have differing dimensions")
+      return(TRUE)
+    }
+
+    # test if individual rwls are fine (object type, data type, internal NAs):
+    a <- any(unlist(purrr::map(dat, rwl_problems)))
+    if(a) {
+      message("at least one of the individual object has a problem - use test_rwl() to find it")
+    }
+
+    # test if names are equal:
+    b <- !all_identical(purrr::map(dat, names))
+    if(b){
+      message("the objects have series with differing names or wrong series order")
+    }
+
+
+    # test if first and last years are equal:
+    c <- !all_identical(purrr::map(dat, function(z) first_last(z)[2:3]))
+    if(c){
+      message("the objects have differing fist or last years")
+    }
+
+    # test if sum of ew and lw equals rw:
+    d <- NULL
+    if(all(c('rw', 'ew', 'lw') %in% names(dat)) && !x) {
+      d <- !isTRUE(all.equal(dat[['rw']],  (dat[['ew']] + dat[['lw']]),
+                             check.attributes = FALSE, use.names = TRUE,
+                             tolerance = tolerance))
+      if(d){
+        message("sum of ew and lw differs to rw")
+      }
+    }
+
+    # test if sum of ewp and lwp equals 1:
+    e <- NULL
+    if(all(c('ewp', 'lwp') %in% names(dat)) && !x) {
+      e <- !all(na.omit(as.logical(abs((dat[['ewp']] + dat[['lwp']]) - 1) < tolerance.percentage)))
+      if(e){
+        message("ewp and lwp doesn't sum up to 1")
+      }
+    }
+
+
+  #ADD TESTS HERE FOR DENSITY (MAXD > MIND, ED < LD, LD < MAXD...) IN FUTURE!!!
+
+  }
+  # output summary table
+  message(paste0("Summary:\n", paste0(capture.output(smry_table), collapse = "\n")))
+
+
+  # output true if there is at minimum one problem detected
+  all_returns <- purrr::compact(c(x, a, b, c, d, e))
+  if(logic.output){
+    any(all_returns)
+  }else{
+    if(any(all_returns)){stop('there are some problems existing')}
+  }
+
+}
