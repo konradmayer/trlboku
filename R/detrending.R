@@ -65,7 +65,7 @@ detrend_given_rc <- function(rwl, rc, po, method = c('quotient', 'difference')) 
 #sf_rcs-------------------------------------------------------------------------
 #' @title signal free rcs
 #' @description signal free rcs detrending as described by
-#'   \href{http://dx.doi.org/10.1016/j.dendro.2013.06.002}{Melvin (2013)} using
+#'   \href{http://dx.doi.org/10.1016/j.dendro.2013.06.002}{Melvin (2014)} using
 #'   parts of the code of \code{\link[dplR]{rcs}} as well as the whole function
 #'   internally.
 #' @param rwl a rwl/data.frame object
@@ -73,7 +73,7 @@ detrend_given_rc <- function(rwl, rc, po, method = c('quotient', 'difference')) 
 #'   data as nr. of years in the second column.
 #' @param maxit maximal number of iterations to take - the iterations stop if
 #'   the all values of the SF residual chronology are below 0.002 as suggested
-#'   by \href{http://dx.doi.org/10.1016/j.dendro.2013.06.002}{Melvin (2013)} or
+#'   by \href{http://dx.doi.org/10.1016/j.dendro.2013.06.002}{Melvin (2014)} or
 #'   reach maxit - default to \code{Inf}
 #' @references
 #'   Thomas M. Melvin, Keith R. Briffa, CRUST: Software for the

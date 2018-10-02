@@ -91,14 +91,16 @@ truncate_rwl <- function(x) {
     stop('x must be of class data.frame')
   }
 
-  while (all(is.na(x[1, , drop=FALSE]))) {
-    x=x[-1, , drop=FALSE]
-  }
+  skip_idx <- apply(x, 1, function(x) all(is.na(x)))
 
-  while (all(is.na(x[nrow(x), , drop=FALSE]))) {
-    x=x[-nrow(x), , drop=FALSE]
+  if(all(skip_idx)) {
+    return(x[NULL,NULL])
+    warning("empty rwl/dataframe returned")
+  } else {
+    first_false <- which.min(skip_idx)
+    last_false <- length(skip_idx) - which.min(rev(skip_idx)) + 1
+    x[first_false:last_false, , drop = FALSE]
   }
-  return(x)
 }
 
 
@@ -373,7 +375,7 @@ rwl_set_problems <- function(rw = NULL, ew = NULL, lw = NULL, ewp = NULL,
     }
 
 
-  #ADD TESTS HERE FOR DENSITY (MAXD > MIND, ED < LD, LD < MAXD...) IN FUTURE!!!
+    #ADD TESTS HERE FOR DENSITY (MAXD > MIND, ED < LD, LD < MAXD...) IN FUTURE!!!
 
   }
   # output summary table
