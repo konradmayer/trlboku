@@ -47,7 +47,7 @@ plot_bericht <- function(filename, encoding = 'latin1', set_lwd = 50,
   }
 
   #selects only dated series
-  df <- df[grep('\\d{4}', df[,4]), ]
+  df <- df[grep('[0-9]{1,4}', df[,4]), ]
 
   #separate date end and unmeasured years from string
   date.end <- as.data.frame(as.numeric(stringr::str_extract(df[ ,4], '-?\\d{1,4}')))
