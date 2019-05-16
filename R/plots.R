@@ -1,3 +1,25 @@
+# plot_species_table -----------------------------------------------------------
+#' @title Plot species table
+#' @description  Plots the information contained in the species dataset.
+#' @return nothing, produces a side effect.
+#' @export
+#'
+#' @examples
+#' plot_species_table()
+#'
+
+plot_species_table <- function(variables) {
+  plot(gridExtra::tableGrob(species,
+                            theme = gridExtra::ttheme_default(
+                              core = list(
+                                bg_params = list(fill = species$color)
+                              )
+                            )
+  )
+  )
+}
+
+
 #custom barplots----------------------------------------------------------------
 #' @title custom barplots
 #' @description  A custom barplot separated into one init function and two
@@ -43,7 +65,7 @@ init_barplot <- function(x = names(y), y, xlim = NULL, ylim = NULL,
     stop('y must be numeric')
   }
 
- #main function
+  #main function
 
 
   x2 <- x
@@ -53,11 +75,11 @@ init_barplot <- function(x = names(y), y, xlim = NULL, ylim = NULL,
   }
 
   if(is.null(xlim)){
-  xlim <- range(as.double(x2), na.rm = TRUE)
+    xlim <- range(as.double(x2), na.rm = TRUE)
   }
 
   if(is.null(ylim)){
-  ylim <- range(y, na.rm = TRUE)
+    ylim <- range(y, na.rm = TRUE)
   }
 
   if(include0 == TRUE){ylim[1] <- 0}
