@@ -8,11 +8,11 @@
 #' plot_species_table()
 #'
 
-plot_species_table <- function(variables) {
-  plot(gridExtra::tableGrob(species,
+plot_species_table <- function() {
+  plot(gridExtra::tableGrob(trlboku::species,
                             theme = gridExtra::ttheme_default(
                               core = list(
-                                bg_params = list(fill = species$color)
+                                bg_params = list(fill = trlboku::species$color)
                               )
                             )
   )

@@ -4,7 +4,7 @@
 \alias{plot_species_table}
 \title{Plot species table}
 \usage{
-plot_species_table(variables)
+plot_species_table()
 }
 \value{
 nothing, produces a side effect.
