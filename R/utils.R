@@ -117,6 +117,6 @@ intersect_all <- function(a,b,...){
 #'
 #' @examples seq_range(c(2, 4), by = 1)
 seq_range <- function(x, by = 1) {
-  if(x != 2 && !is.numeric(x)){stop('please supply a range')}
+  if(length(x) != 2 && !is.numeric(x)){stop('please supply a range')}
   seq(x[1], x[2], by)
 }

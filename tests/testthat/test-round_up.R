@@ -15,7 +15,7 @@ test_that('round_up manages negative numbers', {
 test_that('round_up gives correct output with wrong input', {
   expect_that(round_up('a', 10), throws_error('non-numeric argument to binary operator'))
   expect_that(round_up(NULL, 10), equals(numeric(0)))
-  expect_that(is.na(round_up(NA, 10)), is_true())
+  expect_true(is.na(round_up(NA, 10)))
   expect_that(round_up(as.factor(1), 10), throws_error('input must be numeric'))
   })
 
@@ -25,7 +25,7 @@ test_that('round_up works for vectors', {
 
 
 test_that('round_up handles wrong input for to', {
-  expect_that(is.na(round_up(1, NA)), is_true())
+  expect_true(is.na(round_up(1, NA)))
   expect_that(round_up(1, 'a'), throws_error('non-numeric argument to binary operator'))
   expect_that(round_up(1, NULL), throws_error('input must be numeric'))
   expect_that(round_up(1, as.factor(1)), throws_error('input must be numeric'))

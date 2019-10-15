@@ -4,13 +4,13 @@
 \alias{filled_contour}
 \title{filled_contour}
 \usage{
-filled_contour(x = seq(0, 1, length.out = nrow(z)), y = seq(0, 1, length.out
-  = ncol(z)), z, xlim = range(x, finite = TRUE), ylim = range(y, finite =
-  TRUE), zlim = range(z, finite = TRUE), levels = pretty(zlim, nlevels),
-  nlevels = 20, color.palette = cm.colors,
-  col = color.palette(length(levels) - 1), plot.title, plot.axes, key.title,
-  key.axes, asp = NA, xaxs = "i", yaxs = "i", las = 1, axes = TRUE,
-  frame.plot = axes, ...)
+filled_contour(x = seq(0, 1, length.out = nrow(z)), y = seq(0, 1,
+  length.out = ncol(z)), z, xlim = range(x, finite = TRUE),
+  ylim = range(y, finite = TRUE), zlim = range(z, finite = TRUE),
+  levels = pretty(zlim, nlevels), nlevels = 20,
+  color.palette = cm.colors, col = color.palette(length(levels) - 1),
+  plot.title, plot.axes, key.title, key.axes, asp = NA, xaxs = "i",
+  yaxs = "i", las = 1, axes = TRUE, frame.plot = axes, ...)
 }
 \arguments{
 \item{x, y, z, xlim, ylim, zlim, levels, nlevels, color.palette, col, plot.title, plot.axes, key.title, key.axes, asp, xaxs, yaxs, las, axes, frame.plot, ...}{refer to the documentation of the original function \code{\link[graphics]{filled.contour}}.}

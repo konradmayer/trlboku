@@ -20,7 +20,7 @@ Imports:
     dplyr,
     stats,
     graphics
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
 Suggests: testthat,
     sp,
     boot,
