@@ -7,7 +7,7 @@ dat <-  within(data.frame(row.names = seq.int(1601, length.out = n)),
 po <- data.frame(series = names(dat), po = c(8*3, 7*3, 3*3, 5*3), stringsAsFactors = FALSE)
 
 test_that('po_transform gives correct output values', {
-  expect_that(po_transform(po, dat)$po.new, equals(rep(4, 4)))
+  expect_that(po_transform(po, dat)$po.new, equals(rep(3, 4)))
 })
 
 test_that('po_transform handles wrong input classes', {

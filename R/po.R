@@ -28,7 +28,7 @@ po_transform <- function(po, rwl, nyrs = 4) {
     po$meanrw[po[ , 1] == p] <- meanrw
   }
 
-  po$po.new <- round(po[ , 2] / po$meanrw) + 1
+  po$po.new <- round(po[ , 2] / po$meanrw)
   out <- po[ , c(1,4)]
   out[ , 1] <- as.character(out[ , 1])
   out[ , 2] <- as.integer(out[ , 2])
