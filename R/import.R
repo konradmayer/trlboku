@@ -77,6 +77,11 @@ read_windendro <- function(file, encoding = 'latin1',
   series_ids_list <- split(series_ids, data_type)
   lapply(names(rwl_list), function(.x) colnames(rwl_list[[.x]]) <- series_ids_list[[.x]])
 
+
+  out <- sapply(names(rwl_list), function(.x) setNames(rwl_list[[.x]], series_ids_list[[.x]]),
+                USE.NAMES = TRUE, simplify = FALSE)
+
+
   #check for duplicated series names
   check_duplicated_names <- sapply(out, function(.x) check_names(names(.x)), simplify = FALSE)
   if (any(sapply(check_duplicated_names, function(.x) length(.x) > 0))) {
@@ -88,9 +93,7 @@ read_windendro <- function(file, encoding = 'latin1',
                                       '\n', sep = '')))
   }
 
-  out <- sapply(names(rwl_list), function(.x) setNames(rwl_list[[.x]], series_ids_list[[.x]]),
-                USE.NAMES = TRUE, simplify = FALSE)
-
+  # return object
   out
 }
 
