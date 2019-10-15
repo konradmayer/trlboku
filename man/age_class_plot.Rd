@@ -4,8 +4,8 @@
 \alias{age_class_plot}
 \title{Plot median growth rate or other parameters per age class}
 \usage{
-age_class_plot(dat, cutoff = NULL, classborders = c(0, 60, 80, 100, 150,
-  Inf), main = "", unit = "[mm]")
+age_class_plot(dat, cutoff = NULL, classborders = c(0, 60, 80, 100,
+  150, Inf), main = "", unit = "[mm]")
 }
 \arguments{
 \item{dat}{data of the investigated tree ring parameter (ring width,

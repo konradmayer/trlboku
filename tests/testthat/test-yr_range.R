@@ -10,7 +10,8 @@ test_that('yr_range handles input of wrong class', {
   expect_that(yr_range(NA),
               equals(as.double(c(NA, NA))))
   expect_that(yr_range(NULL),
-              gives_warning())
+              equals(as.double(c(NA, NA))))
+
 })
 
 

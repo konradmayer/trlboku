@@ -4,8 +4,8 @@
 \alias{radius_class_plot}
 \title{Plot median growth rate or other parameters per radius class}
 \usage{
-radius_class_plot(dat, rwdata, cutoff = NULL, classborders = c(0, 50, 80,
-  100, 150, 200, Inf), main = "", unit = "[mm]")
+radius_class_plot(dat, rwdata, cutoff = NULL, classborders = c(0, 50,
+  80, 100, 150, 200, Inf), main = "", unit = "[mm]")
 }
 \arguments{
 \item{dat}{data of the investigated tree ring parameter (ring width,

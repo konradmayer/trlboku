@@ -16,6 +16,6 @@ CRS.new <- sp::CRS("+init=epsg:31287")
 spatpoints_lambert2 <- sp::spTransform(spatpoints, CRS.new)
 
 test_that('transform_projection has same output as manual approach', {
-  expect_that(identical(spatpoints_lambert, spatpoints_lambert2), is_true())
+  expect_true(identical(spatpoints_lambert, spatpoints_lambert2))
 })
 
