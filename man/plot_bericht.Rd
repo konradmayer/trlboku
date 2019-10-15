@@ -4,7 +4,8 @@
 \alias{plot_bericht}
 \title{plot_bericht}
 \usage{
-plot_bericht(filename, encoding = "latin1", set_lwd = 50, multi = 0.7)
+plot_bericht(filename, encoding = "latin1", set_lwd = 50,
+  multi = 0.7)
 }
 \arguments{
 \item{filename}{a path to a .xls file used for dating overview in the BOKU
