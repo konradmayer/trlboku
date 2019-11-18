@@ -178,8 +178,8 @@ to_cambial_age <- function(rwl, po = NULL) {
          values (cambial age of innermost ring) in the second column')
   }
 
-  if(!all(po[, 2] > 0)) {stop('please provide po as cambial age of the first ring -
-    this has to be > 0')}
+  if(!all(po[, 2] >= 0)) {stop('please provide po as cambial age of the first ring -
+    this has to be >= 0')}
 
   if(!setequal(po[ , 1], names(rwl))) {
     stop('series names in po are not the same as provided in rwl')
@@ -188,11 +188,11 @@ to_cambial_age <- function(rwl, po = NULL) {
  #execute function
   po.ordered <- po[po[ , 1] %in% names(rwl), ]
 
-  lengths <- (series_length(rwl) + po.ordered[ , 2]) - 1
+  lengths <- (series_length(rwl) + po.ordered[ , 2])
   rows <- max(lengths)
   out <- data.frame(matrix(NA, ncol = length(rwl), nrow = rows))
   for (i in seq_along(rwl)){
-    start <- (po.ordered[i,2])
+    start <- (po.ordered[i,2]) + 1
     out[start:lengths[i], i] <- na.omit(rwl[ , i])
   }
   names(out) <- names(rwl)
