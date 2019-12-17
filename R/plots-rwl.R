@@ -51,6 +51,18 @@ quantile_crn_plot <- function(rwl) {
 
 
 # segment plot ------------------------------------------------------------
+#' @title segment plot
+#' @description produces a segment plot of tree-ring data.
+#' @param rwl a data frame resp. object of class `rwl` of ring width series
+#' @param col color vector with length 1 or the number of series in rwl
+#' @param lwd line width of the segments
+#' @param cex size of the axis label and tick labels
+#' @param xlab character - x axis label
+#' @param order order of the tree-ring series - according to the year of the first or last ring
+#' @param ... additional parameters for the call of plot()
+#'
+#' @return side effect - a plot
+#' @export
 
 seg_plot <- function (rwl, col = 1, lwd = 4, cex = 1, xlab = '', order = c('first', 'last'), ...)
 {
@@ -63,8 +75,8 @@ seg_plot <- function (rwl, col = 1, lwd = 4, cex = 1, xlab = '', order = c('firs
   if(length(col) == 1) {col <- rep(col, ncol(rwl))}
 
   yr <- as.numeric(row.names(rwl))
-  first.year <- as.matrix(apply(rwl, 2, dplR:::yr.range, yr.vec = yr))[1, ]
-  last.year <- as.matrix(apply(rwl, 2, dplR:::yr.range, yr.vec = yr))[2, ]
+  first.year <- as.matrix(apply(rwl, 2, yr_range, yr.vec = yr))[1, ]
+  last.year <- as.matrix(apply(rwl, 2, yr_range, yr.vec = yr))[2, ]
   neworder1 <- order(first.year, decreasing = FALSE)
   segs <- rwl[, neworder1, drop = FALSE]
 
@@ -72,7 +84,7 @@ seg_plot <- function (rwl, col = 1, lwd = 4, cex = 1, xlab = '', order = c('firs
     cols = col[neworder1]
   }
   if(order == 'first') {
-    last.year <- as.matrix(apply(segs, 2, dplR:::yr.range, yr.vec = yr))[2, ]
+    last.year <- as.matrix(apply(segs, 2, yr_range, yr.vec = yr))[2, ]
     neworder2 <- order(last.year, decreasing = FALSE)
     segs <- segs[, neworder2, drop = FALSE]
     cols <- col[neworder1][neworder2]
