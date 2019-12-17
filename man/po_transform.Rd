@@ -16,7 +16,7 @@ with series names in the first column and po in the second.}
 rate, default is 4.}
 }
 \value{
-A \code{data.frame} just as the input "po" with po as no. of tree rings.
+A \code{data.frame} just as the input "po" with po as no. of tree rings (specifying the cambial age of the first ring, just as used in dplR).
 }
 \description{
 Estimates no. of missing rings from distance to pith estimations.

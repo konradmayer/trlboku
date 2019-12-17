@@ -10,7 +10,7 @@ to_cambial_age(rwl, po = NULL)
 \item{rwl}{a data frame/rwl object.}
 
 \item{po}{optional, a data frame containing series names in the first and po
-data as nr. of years in the second column.}
+data as nr. of years in the second column (as cambial age of the first ring).}
 }
 \value{
 A data.frame with aligned series
