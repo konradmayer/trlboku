@@ -8,7 +8,7 @@
 #' @param nyrs the first \code{1:nyrs} years will be used to calculate the mean growth
 #'   rate, default is 4.
 #'
-#' @return A \code{data.frame} just as the input "po" with po as no. of tree rings.
+#' @return A \code{data.frame} just as the input "po" with po as no. of tree rings (specifying the cambial age of the first ring, just as used in dplR).
 #' @export
 #' @examples #no examples available in the development version
 
@@ -28,7 +28,7 @@ po_transform <- function(po, rwl, nyrs = 4) {
     po$meanrw[po[ , 1] == p] <- meanrw
   }
 
-  po$po.new <- round(po[ , 2] / po$meanrw)
+  po$po.new <- round(po[ , 2] / po$meanrw) + 1
   out <- po[ , c(1,4)]
   out[ , 1] <- as.character(out[ , 1])
   out[ , 2] <- as.integer(out[ , 2])
@@ -61,7 +61,7 @@ po_transform <- function(po, rwl, nyrs = 4) {
 #' @param make.plot a \code{logical} indicating whether a plot should be drawn.
 #'
 #' @return a \code{data.frame} with the columns "series" and "po", containing
-#'   the series names and po estimations.
+#'   the series names and po estimations (as cambial age of the first ring).
 #' @export
 #' @examples #no examples added in the current development version - will be added in future
 
@@ -146,7 +146,7 @@ sort_by_index <- function (x) {
 #'   taking pith offset into account if provided.
 #' @param rwl a data frame/rwl object.
 #' @param po optional, a data frame containing series names in the first and po
-#'   data as nr. of years in the second column.
+#'   data as nr. of years in the second column (as cambial age of the first ring).
 #'
 #' @return A data.frame with aligned series
 #' @export

@@ -37,7 +37,7 @@ i.e. the function outputs \code{\var{y}}.  The default value is
 }
 \value{
 a \code{data.frame} with the columns "series" and "po", containing
-  the series names and po estimations.
+  the series names and po estimations (as cambial age of the first ring).
 }
 \description{
 Estimates pith offset of series by finding the position with
