@@ -407,9 +407,10 @@ fh_write_header <- function(header_keycode, header_datebegin, header_dateend,
       paste0('Length=', header_length),
       paste0('DataFormat=', header_dataformat),
       paste0('Unit=', header_unit),
-      paste(names(header_meta), header_meta,
-            sep = '=', collapse = line_termination),
       file = file, sep = line_termination)
+  cat(paste(names(header_meta), header_meta,
+            sep = '=', collapse = line_termination),
+      sep = "") #last item separate call to cat, to avoid a newline after header
 }
 
 fh_write_data <- function(series, prec, file, line_termination) {
@@ -457,9 +458,9 @@ fh_write_data <- function(series, prec, file, line_termination) {
 
 write_fh <- write.fh <- function(rwl, path,
                                  data.format = c("Tree", "HalfChrono", "Chrono"),
-                                 prec = c(0.01, 0.001),
+                                 prec = 0.01,
                                  meta = NULL, append = FALSE) {
-  line_termination <- "\r\n"
+  line_termination <- "\n"
   # input validation
   header_dataformat <- match.arg(data.format)
   if (length(prec) > 1 | !any(prec %in% c(0.01, 0.001))) {

@@ -71,7 +71,7 @@ read_windendro <- function(file, encoding = 'latin1',
 
   # split into list of datatypes
   column_ids_list <- split(seq_len(ncol(rwl)), data_type)
-  rwl_list <- lapply(column_ids_list, function(.x) rwl[ , .x])
+  rwl_list <- lapply(column_ids_list, function(.x) rwl[ , .x, drop = FALSE])
 
   #name series
   series_ids_list <- split(series_ids, data_type)
