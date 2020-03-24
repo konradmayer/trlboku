@@ -391,3 +391,132 @@ rwl_set_problems <- function(rw = NULL, ew = NULL, lw = NULL, ewp = NULL,
   }
 
 }
+
+
+
+# write_fh ----------------------------------------------------------------
+
+# helpers
+fh_write_header <- function(header_keycode, header_datebegin, header_dateend,
+                            header_length, header_dataformat, header_unit,
+                            header_meta, file, line_termination) {
+  cat("HEADER:",
+      paste0('KeyCode=', header_keycode),
+      paste0('DateBegin=', header_datebegin),
+      paste0('DateEnd=', header_dateend),
+      paste0('Length=', header_length),
+      paste0('DataFormat=', header_dataformat),
+      paste0('Unit=', header_unit),
+      paste(names(header_meta), header_meta,
+            sep = '=', collapse = line_termination),
+      file = file, sep = line_termination)
+}
+
+fh_write_data <- function(series, prec, file, line_termination) {
+  values_series <- na.omit(series / prec)
+  #  full_lines <- length(values_series) %/% 10 # number of complete line
+  n_pad <- 10 - (length(values_series) %% 10) # how many values are missing for a full line?
+  #  n_lines <- ifelse(n_pad == 0, full_lines, full_lines + 1)
+  values_out <- c(sprintf("%06s", as.character(values_series)), # padded values
+                  rep(sprintf("%06s", '0'), n_pad)) # 0 to fill to full line
+
+  cat("DATA:Single", file = file, sep = line_termination)
+  for (i in seq_along(values_out)) {
+    cat(values_out[[i]], file = file, sep = "")
+    if (i %% 10 == 0)
+      cat(line_termination, file = file, sep = "")
+  }
+}
+
+# main function
+
+#' Write to a file in Heidelberg format
+#'
+#' @description \code{write_fh}, just as its \link[dplR]{dplR} consistent
+#' equivalent \code{write.fh}, writes an rwl object to a file in Heidelberg
+#' (.fh) format. It currently only supports "Single format".
+#' @param rwl a data.frame/rwl object such as returned e.g. by
+#' \code{\link[dplR]{as.rwl}}.
+#' @param path a character vector specifying the path to the file where the
+#' data will be written, usually ending with ".fh".
+#' @param data.format DataFormat as specified by the definition of the
+#' Heidelberg format (either Tree, HalfChrono or Chrono). This is used
+#' for all series within the written object.
+#' @param prec numeric, indicating the precision of the output file. This must
+#' be equal to either 0.01 or 0.001 (units are in mm). This is used
+#' for all series within the written object.
+#' @param meta optional additional meta data. If a named vector is supplied,
+#' name value pairs are used as metadata for all series. Supply a list of named
+#' vectors to use different metadata for each individual series.
+#' @param append logical, indicating whether data should be appended to an
+#' existing file. Defaults to create a new file, overwriting a file in case
+#' it already exists.
+#' @aliases write.fh
+#'
+#' @export
+
+write_fh <- write.fh <- function(rwl, path,
+                                 data.format = c("Tree", "HalfChrono", "Chrono"),
+                                 prec = c(0.01, 0.001),
+                                 meta = NULL, append = FALSE) {
+  line_termination <- "\r\n"
+  # input validation
+  header_dataformat <- match.arg(data.format)
+  if (length(prec) > 1 | !any(prec %in% c(0.01, 0.001))) {
+    stop("prec needs to be a numeric vector of length 1 with a value of 0.01 or 0.001")
+  }
+  if (rwl_problems(rwl)) {
+    stop("please fix your rwl object")
+  }
+
+  if (is.list(meta)) {
+    if (length(meta) != ncol(rwl)) {
+      stop("please provide meta data as a list of the same length as the number of series in rwl or provide a single named vector to use the same metadata for all series.")
+    }
+  }
+
+  # derive intrinsic metadata
+  firstlast <- first_last(rwl)
+  header_keycode <- firstlast[[1]]
+  header_datebegin <- firstlast[[2]]
+  header_dateend <- firstlast[[3]]
+  header_length <- as.vector(series_length(rwl))
+
+
+  unit <- switch(as.character(prec),
+                 "0.01" = "1/100 mm",
+                 "0.001" = "1/1000 mm")
+
+  if (append) {
+    if (!file.exists(path)) {
+      warning(gettextf("file %s does not exist, therefore data is not appended but written to a new file",
+                       path))
+    }
+    rwl_out <- file(path, "a")
+  }
+  else {
+    rwl_out <- file(path, "w")
+  }
+  on.exit(close(rwl_out))
+
+  # loop over series
+  for (i in seq_along(header_keycode)) {
+    # meta can be supplied either as an atomic named vector if it is the same
+    # for all series, or as a list of named vectors if different for each series
+    meta_tmp <- if (is.atomic(meta)) {
+      meta
+    }else{
+      meta[[i]]
+    }
+
+    # write header
+    fh_write_header(header_keycode[[i]],  header_datebegin[[i]],
+                    header_dateend[[i]], header_length[[i]],
+                    header_dataformat, unit, meta_tmp,
+                    rwl_out, line_termination)
+
+    # write data
+    fh_write_data(rwl[, i], prec, rwl_out, line_termination)
+
+  }
+}
