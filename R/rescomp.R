@@ -29,8 +29,8 @@ res_comp <- function(rwl, nyrs_pre = 4, nyrs_post = 4) {
   resistance <- recovery <- resilience <- rel_resilience <- rwl
   resistance[] <- purrr::map(rwl, resistance_vector, nyrs_pre)
   recovery[] <- purrr::map(rwl, recovery_vector, nyrs_post)
-  resilience <- resistance * recovery
-  rel_resilience <- resilience - resistance
+  resilience[] <- purrr::map(rwl, resilience_vector, nyrs_pre, nyrs_post)
+  rel_resilience[] <- purrr::map(rwl, rel_resilience_vector, nyrs_pre, nyrs_post)
   list(resistance = resistance[common_years, ],
        recovery = recovery[common_years, ],
        resilience = resilience[common_years, ],
@@ -56,42 +56,21 @@ recovery_vector <- function(x, nyrs_post = 1) {
 }
 
 resilience_vector <- function(x, nyrs_pre = 1, nyrs_post = 1) {
-  resistance <- resistance_vector(x, nyrs_pre)
-  recovery <- recovery_vector(x, nyrs_post)
-  resilience <- resistance * recovery
+  pre <- zoo::rollapplyr(x, by = 1, width = nyrs_pre, FUN = 'mean', fill = NA)
+  shifted_pre <- c(NA, pre[-length(pre)])
+  post <- zoo::rollapply(x, by = 1, width = nyrs_post, FUN = 'mean', fill = NA,
+                         align = 'left')
+  shifted_post <- c(post[-1], NA)
+  resilience <- shifted_post/shifted_pre
   resilience
 }
 
 rel_resilience_vector <- function(x, nyrs_pre = 1, nyrs_post = 1) {
-  resistance <- resistance_vector(x, nyrs_pre)
-  recovery <- recovery_vector(x, nyrs_post)
-  resilience <- resistance * recovery
-  rel_resilience <- resilience - resistance
+  pre <- zoo::rollapplyr(x, by = 1, width = nyrs_pre, FUN = 'mean', fill = NA)
+  shifted_pre <- c(NA, pre[-length(pre)])
+  post <- zoo::rollapply(x, by = 1, width = nyrs_post, FUN = 'mean', fill = NA,
+                         align = 'left')
+  shifted_post <- c(post[-1], NA)
+  rel_resilience <- (shifted_post - x) / shifted_pre
   rel_resilience
 }
-
-
-
-# resilience_vector2 <- function(x, nyrs_pre = 1, nyrs_post = 1) {
-#   pre <- zoo::rollapplyr(x, by = 1, width = nyrs_pre, FUN = 'mean', fill = NA)
-#   shifted_pre <- c(NA, pre[-length(pre)])
-#
-#   post <- zoo::rollapply(x, by = 1, width = nyrs_post, FUN = 'mean', fill = NA,
-#                          align = 'left')
-#   shifted_post <- c(post[-1], NA)
-#
-#   resilience <- shifted_post/shifted_pre
-#   resilience
-# }
-#
-# rel_resilience_vector2 <- function(x, nyrs_pre = 1, nyrs_post = 1) {
-#   pre <- zoo::rollapplyr(x, by = 1, width = nyrs_pre, FUN = 'mean', fill = NA)
-#   shifted_pre <- c(NA, pre[-length(pre)])
-#
-#   post <- zoo::rollapply(x, by = 1, width = nyrs_post, FUN = 'mean', fill = NA,
-#                          align = 'left')
-#   shifted_post <- c(post[-1], NA)
-#
-#   rel_resilience <- (shifted_post-x)/shifted_pre
-#   rel_resilience
-# }

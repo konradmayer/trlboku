@@ -5,8 +5,14 @@
 \alias{write.fh}
 \title{Write to a file in Heidelberg format}
 \usage{
-write_fh(rwl, path, data.format = c("Tree", "HalfChrono", "Chrono"),
-  prec = 0.01, meta = NULL, append = FALSE)
+write_fh(
+  rwl,
+  path,
+  data.format = c("Tree", "HalfChrono", "Chrono"),
+  prec = 0.01,
+  meta = NULL,
+  append = FALSE
+)
 }
 \arguments{
 \item{rwl}{a data.frame/rwl object such as returned e.g. by

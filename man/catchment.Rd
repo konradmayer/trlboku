@@ -4,9 +4,14 @@
 \alias{catchment}
 \title{find upstream catchments}
 \usage{
-catchment(catchments_digHAO, lonlat,
-  proj4string = sp::CRS("+init=epsg:4326"), make.plot = TRUE,
-  rivers_digHAO, ...)
+catchment(
+  catchments_digHAO,
+  lonlat,
+  proj4string = sp::CRS("+init=epsg:4326"),
+  make.plot = TRUE,
+  rivers_digHAO,
+  ...
+)
 }
 \arguments{
 \item{catchments_digHAO}{a SpatialPolygonsDataFrame imported with

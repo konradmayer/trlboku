@@ -3,7 +3,6 @@
 \docType{package}
 \name{trlboku}
 \alias{trlboku}
-\alias{trlboku-package}
 \title{trlboku - tree ring lab boku - is a development version package for R}
 \description{
 This package holds a collection of functions and data used at the tree ring

@@ -4,8 +4,11 @@
 \alias{combine_fragments}
 \title{combine fragments}
 \usage{
-combine_fragments(rwl, stc = c(3, 4, 1), rules = c(a = "[af-l]$", b =
-  "[bm-w]$", c = "[c]$", d = "[dx-z]$"))
+combine_fragments(
+  rwl,
+  stc = c(3, 4, 1),
+  rules = c(a = "[af-l]$", b = "[bm-w]$", c = "[c]$", d = "[dx-z]$")
+)
 }
 \arguments{
 \item{rwl}{a rwl/data.frame object.}
