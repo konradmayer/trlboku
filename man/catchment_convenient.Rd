@@ -4,8 +4,13 @@
 \alias{catchment_convenient}
 \title{find upstream catchments}
 \usage{
-catchment_convenient(path_digHAO, lonlat,
-  proj4string = sp::CRS("+init=epsg:4326"), make.plot = TRUE, ...)
+catchment_convenient(
+  path_digHAO,
+  lonlat,
+  proj4string = sp::CRS("+init=epsg:4326"),
+  make.plot = TRUE,
+  ...
+)
 }
 \arguments{
 \item{path_digHAO}{path to the digHAO directory as character string}

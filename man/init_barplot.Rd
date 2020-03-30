@@ -6,9 +6,17 @@
 \alias{rect_barplot}
 \title{custom barplots}
 \usage{
-init_barplot(x = names(y), y, xlim = NULL, ylim = NULL,
-  include0 = TRUE, ylab = "", xlab = "", main = "barplot",
-  las = 2)
+init_barplot(
+  x = names(y),
+  y,
+  xlim = NULL,
+  ylim = NULL,
+  include0 = TRUE,
+  ylab = "",
+  xlab = "",
+  main = "barplot",
+  las = 2
+)
 
 lines_barplot(x = names(y), y, lwd = 3, col = "black")
 

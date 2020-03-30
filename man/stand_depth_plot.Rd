@@ -4,9 +4,15 @@
 \alias{stand_depth_plot}
 \title{stand_depth_plot}
 \usage{
-stand_depth_plot(stand_depth_object, chrono = "crn",
-  sample.depth = "samp.depth", stand.depth = "stand.depth",
-  main = "", col1 = "red", col2 = "orange")
+stand_depth_plot(
+  stand_depth_object,
+  chrono = "crn",
+  sample.depth = "samp.depth",
+  stand.depth = "stand.depth",
+  main = "",
+  col1 = "red",
+  col2 = "orange"
+)
 }
 \arguments{
 \item{stand_depth_object}{an object derived from \code{\link{stand_depth}}.}

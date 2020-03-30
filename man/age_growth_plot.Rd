@@ -4,8 +4,7 @@
 \alias{age_growth_plot}
 \title{age_growth_plot}
 \usage{
-age_growth_plot(rwl, po, subset = NULL, subset.color = "violet",
-  main = "")
+age_growth_plot(rwl, po, subset = NULL, subset.color = "violet", main = "")
 }
 \arguments{
 \item{rwl}{an rwl object.}

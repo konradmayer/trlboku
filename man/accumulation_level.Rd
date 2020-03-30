@@ -6,11 +6,16 @@
 \title{Correlation between a chronology and climate data at different
   accumulation levels}
 \usage{
-accumulation_level(crn, climate.data, accumulation, accumfun = sum,
-  months = c(-2:10), method = "spearman")
+accumulation_level(
+  crn,
+  climate.data,
+  accumulation,
+  accumfun = sum,
+  months = c(-2:10),
+  method = "spearman"
+)
 
-\method{plot}{accumulation_level}(accumulation_level_object,
-  main = "accumulation level")
+\method{plot}{accumulation_level}(accumulation_level_object, main = "accumulation level")
 }
 \arguments{
 \item{crn}{A chronology - the first column is used by the function, make

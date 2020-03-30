@@ -4,7 +4,8 @@
 \name{species}
 \alias{species}
 \title{species}
-\format{A data.frame with 18 rows and 6 variables:
+\format{
+A data.frame with 18 rows and 6 variables:
 \describe{
   \item{species}{scientific species name}
   \item{german}{species name in german}
@@ -12,7 +13,8 @@
   \item{idshort}{species id used at stands with more than 99 series}
   \item{idlong}{species id used at stands with less than 99 series}
   \item{color}{color used for plotting}
-  }}
+  }
+}
 \usage{
 species
 }

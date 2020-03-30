@@ -4,8 +4,15 @@
 \alias{seg_plot}
 \title{segment plot}
 \usage{
-seg_plot(rwl, col = 1, lwd = 4, cex = 1, xlab = "",
-  order = c("first", "last"), ...)
+seg_plot(
+  rwl,
+  col = 1,
+  lwd = 4,
+  cex = 1,
+  xlab = "",
+  order = c("first", "last"),
+  ...
+)
 }
 \arguments{
 \item{rwl}{a data frame resp. object of class `rwl` of ring width series}
