@@ -414,7 +414,7 @@ fh_write_header <- function(header_keycode, header_datebegin, header_dateend,
 }
 
 fh_write_data <- function(series, prec, file, line_termination) {
-  values_series <- na.omit(series / prec)
+  values_series <- round(na.omit(series / prec))
   #  full_lines <- length(values_series) %/% 10 # number of complete line
   n_pad <- 10 - (length(values_series) %% 10) # how many values are missing for a full line?
   #  n_lines <- ifelse(n_pad == 0, full_lines, full_lines + 1)
